@@ -17,33 +17,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_dashboard"
-            android:title="Home" />
+            android:id="@+id/rd_all"
+            android:icon="@mipmap/ic_dashboard_grey600"
+            android:title="@string/all_record" />
         <item
-            android:id="@+id/nav_messages"
-            android:icon="@drawable/ic_event"
-            android:title="Messages" />
+            android:id="@+id/rd_notify"
+            android:icon="@mipmap/ic_mic_grey600"
+            android:title="@string/notify_record" />
         <item
-            android:id="@+id/nav_friends"
-            android:icon="@drawable/ic_headset"
-            android:title="Friends" />
+            android:id="@+id/rd_action"
+            android:icon="@mipmap/ic_videocam_grey600"
+            android:title="@string/action_record" />
+
         <item
-            android:id="@+id/nav_discussion"
-            android:icon="@drawable/ic_forum"
-            android:title="Discussion" />
+            android:id="@+id/rd_trash"
+            android:icon="@mipmap/ic_delete_grey600"
+            android:title="@string/trash" />
     </group>
 
-    <item android:title="Sub items">
+    <item android:title="@string/other">
         <menu>
             <item
-                android:icon="@drawable/ic_dashboard"
-                android:title="Sub item 1" />
+                android:id="@+id/set"
+                android:icon="@mipmap/ic_settings_grey600"
+                android:title="@string/setting" />
             <item
-                android:icon="@drawable/ic_forum"
-                android:title="Sub item 2" />
+                android:id="@+id/about"
+                android:icon="@mipmap/ic_info_grey600"
+                android:title="@string/about" />
         </menu>
     </item>
+
+
 
 </menu>

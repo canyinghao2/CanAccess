@@ -1,165 +1,154 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.canyinghao.canaccess.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.FrameLayout;
 
 import com.canyinghao.canaccess.R;
-import com.canyinghao.canaccess.service.MyAccessibilityService;
+import com.canyinghao.canaccess.activity.set.SetActivity;
+import com.canyinghao.canaccess.fragment.AllFragment;
+import com.canyinghao.canaccess.fragment.BaseFragment;
+import com.canyinghao.canaccess.fragment.NotifyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * TODO
  */
 public class MainActivity extends BaseActivity {
 
-    private DrawerLayout mDrawerLayout;
-    Toolbar toolbar;
+
+    @InjectView(R.id.frame)
+    FrameLayout frame;
+    @InjectView(R.id.nav_view)
+    NavigationView navView;
+    @InjectView(R.id.drawer_layout)
+    public DrawerLayout drawerLayout;
+
+
+    List<BaseFragment> list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
+        addFragment();
+        setupDrawerContent(navView);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
+    }
+
+
+    private void showFragment(int p) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        for (int i = 0; i < list.size(); i++) {
+
+            BaseFragment fragment = list.get(i);
+
+            transaction.hide(fragment);
+
         }
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        if (viewPager != null) {
-            setupViewPager(viewPager);
-        }
+        transaction.show(list.get(p));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        transaction.commit();
 
-
-            }
-        });
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sample_actions, menu);
-        return true;
+
+    private void replaceFragmet(int p){
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+
+        transaction.replace(R.id.frame,list.get(p));
+
+        transaction.commit();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-//                mDrawerLayout.openDrawer(GravityCompat.START);
 
-                Snackbar.make(toolbar, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+    private void addFragment() {
+        list = new ArrayList<>();
+        list.add(AllFragment.getInstance(null));
+        list.add(NotifyFragment.getInstance(null));
+        list.add(NotifyFragment.getInstance(null));
+        list.add(AllFragment.getInstance(null));
 
-                MyAccessibilityService.INVOKE_TYPE = MyAccessibilityService.TYPE_UNINSTALL_APP;
-                Uri packageURI = Uri.parse("package:com.canyinghao.canaccess");
-                Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
+        replaceFragmet(0);
 
-                uninstallIntent.setData(packageURI);
-                startActivity(uninstallIntent);
 
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+
+
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CheeseListFragment(), "Category 1");
-        adapter.addFragment(new CheeseListFragment(), "Category 2");
-        adapter.addFragment(new CheeseListFragment(), "Category 3");
-        viewPager.setAdapter(adapter);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.sample_actions, menu);
+//        return true;
+//    }
+
+
+
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                menuItem.setChecked(true);
-                mDrawerLayout.closeDrawers();
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
 
-                return true;
-            }
-        });
+
+                            case R.id.rd_all:
+
+                                replaceFragmet(0);
+                                break;
+                            case R.id.rd_notify:
+                                replaceFragmet(1);
+                                break;
+
+                            case R.id.rd_action:
+                                replaceFragmet(2);
+                                break;
+
+                            case R.id.rd_trash:
+                                replaceFragmet(3);
+                                break;
+
+                            case R.id.set:
+
+
+                               startActivity(new Intent(context,SetActivity.class));
+                                break;
+
+                            case R.id.about:
+                                break;
+
+                        }
+
+
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+
+                        return true;
+                    }
+                });
     }
 
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragments = new ArrayList<>();
-        private final List<String> mFragmentTitles = new ArrayList<>();
 
-        public Adapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragments.add(fragment);
-            mFragmentTitles.add(title);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitles.get(position);
-        }
-    }
 }

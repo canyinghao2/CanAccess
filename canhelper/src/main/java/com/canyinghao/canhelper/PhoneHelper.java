@@ -1,10 +1,5 @@
 package com.canyinghao.canhelper;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -32,6 +27,12 @@ import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 与电话相关功能的工具类
@@ -130,7 +131,7 @@ public class PhoneHelper {
 	 * 打电话
 	 * 
 	 * @param phone
-	 * @param context
+	 * @param
 	 */
 	public void doPhone(String phone) {
 		Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
@@ -143,7 +144,7 @@ public class PhoneHelper {
 	 * 
 	 * @param phone
 	 * @param content
-	 * @param c
+	 * @param
 	 */
 	public void doSMS(String phone, String content) {
 		Uri uri = null;
@@ -175,7 +176,7 @@ public class PhoneHelper {
 	/**
 	 * 屏幕分辨率
 	 * 
-	 * @param drame
+	 * @param
 	 * @return
 	 */
 	public float getDip() {
@@ -277,7 +278,7 @@ public class PhoneHelper {
 	/**
 	 * 调用浏览器打开
 	 * 
-	 * @param activity
+	 * @param
 	 * @param url
 	 */
 	public void openWeb(String url) {

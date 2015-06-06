@@ -15,10 +15,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.CheeseDetailActivity" />
+        <activity android:name=".activity.DetailActivity" />
+        <activity android:name=".activity.set.AppListActivity" />
+        <activity android:name=".activity.set.SetActivity" android:label="setting"
+            android:theme="@style/MaterialSettingsTheme" />
+        <activity android:name=".activity.set.SetNotifyActivity" android:label="Notifysetting"
+            android:theme="@style/MaterialSettingsTheme" />
 
 
-        <service android:label="@string/acc_service_name" android:name=".service.MyAccessibilityService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+        <service android:label="@string/acc_service_name" android:name=".service.CanAccessibilityService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.canyinghao.canaccess.R;
@@ -43,26 +42,6 @@ public class BaseActivity extends AppCompatActivity {
         if (menuItemClickListener!=null){
             toolbar.setOnMenuItemClickListener(menuItemClickListener);
 
-        }else{
-
-            toolbar.setOnMenuItemClickListener( new Toolbar.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-
-                    switch (menuItem.getItemId()) {
-                        case R.id.action_share:
-
-
-
-
-                            break;
-                    }
-
-
-                    return true;
-                }
-            });
-
         }
 
 
@@ -76,7 +55,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_base, menu);
+        getMenuInflater().inflate(R.menu.sample_actions, menu);
         return true;
     }
 

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +22,105 @@
     bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
     cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
     the big cheese.</string>
-  <string name="checkin">Checkin</string>
-  <string name="menu_settings">Settings</string>
-  <string name="accessibility_service_description">Settings</string>
+    <string name="checkin">Checkin</string>
+    <string name="menu_settings">Settings</string>
+    <string name="accessibility_service_description">Settings</string>
     <string name="acc_service_name">canaccess辅助</string>
+    <string name="can">can</string>
+    <string name="fail_text">can/faillog.txt</string>
+    <string name="error">error</string>
+
+
+
+
+    <string name="notify_record">通知记录</string>
+    <string name="action_record">动作记录</string>
+    <string name="all_record">所有记录</string>
+    <string name="trash">回收站</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+    <string name="other">其它</string>
+
+
+    <string name="set_notify">语音通知设置</string>
+
+
+    <array name="time_title" >
+
+        <item>一月内</item>
+        <item>三月内</item>
+        <item>三月前</item>
+
+
+
+    </array>
+
+    <string name="headeritem1">检查辅助服务</string>
+    <string name="headeritem2">服务设置</string>
+    <string name="headeritem3">其它</string>
+    <string name="set1">设置辅助服务</string>
+    <string name="set1a">此软件需要打开并允许辅助服务运行</string>
+    <string name="set2">语音通知设置</string>
+    <string name="set2a">此处可对语音通知进行设置</string>
+    <string name="set3">动作录制设置</string>
+    <string name="set3a">此处可对动作录制进行设置</string>
+    <string name="set4">所有记录设置</string>
+    <string name="set4a">此处可对所有记录进行设置</string>
+    <string name="set5">回收站设置</string>
+    <string name="set5a">此处可对回收站进行设置</string>
+    <string name="set6">很好用</string>
+    <string name="set6a">前往软件商店进行评分</string>
+    <string name="set7">不好用</string>
+    <string name="set7a">快速卸载</string>
+
+
+
+
+
+
+    <string name="header_notify1">基本设置</string>
+    <string name="set_notify1">语音通知开启</string>
+    <string name="set_notify1a">选中此项开启语音通知</string>
+    <string name="set_notify2">应用列表</string>
+    <string name="set_notify2a">选中的应用的通知转换成语音通知</string>
+    <string name="set_notify3">TTS设置</string>
+    <string name="set_notify3a">选择安装的TTS语音引擎</string>
+    <string name="set_notify4">听筒播放</string>
+    <string name="set_notify4_">扬声器播放</string>
+    <string name="set_notify4a">选择听筒播放语音还是扬声器播放</string>
+    <string name="set_notify5">播放Toast弹出消息</string>
+    <string name="set_notify5a">选择是否播放Toast弹出消息</string>
+    <string name="set_notify6">忽略语音通知的字段</string>
+    <string name="set_notify6a">请输入忽略播放语音的字段</string>
+    <string name="set_notify7">选择监听的手机状态</string>
+    <string name="set_notify7a">请选择哪些手机状态的变更需要提示</string>
+    <string name="header_notify2">其它设置</string>
+
+    <string name="set_notify8">测试</string>
+    <string name="set_notify8a">一会儿通知栏将会收到一条通知</string>
+    <string name="play_mode">播放模式</string>
+    <string name="instance_market">请先安装应用市场</string>
+
+
+
+    <array name="play_mode_array">
+        <item >听筒播放</item>
+        <item >扬声器播放</item>
+
+
+    </array>
+
+    <array name="notify_test">
+        <item >测试</item>
+        <item >这是一个语音通知测试</item>
+        <item >success</item>
+        <item >这虽然是一个语音通知测试，但是我还是多写了几个字</item>
+
+
+
+
+    </array>
+
+
 
 </resources>

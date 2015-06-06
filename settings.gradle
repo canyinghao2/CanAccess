@@ -1,1 +1,1 @@
-include ':app', ':canhelper'
+include ':app', ':canhelper', ':library'

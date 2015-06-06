@@ -6,12 +6,13 @@ package com.canyinghao.canaccess;
 public class Constant {
 
 
-    public static final  String history="history";
-    public static final  String local="local";
-    public static final  String playList="playList";
-    public static final  String bean="bean";
-    public static final  String savePosition="savePosition";
-    public static final  String mylove="我的最爱";
+public  static  final  String ERROR="error";
+public  static  final  String TAG="TAG";
 
-    public static final  String list="list";
+
+
+
+
+
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.canyinghao.canhelper.CanHelper;
 import com.canyinghao.canhelper.FileHelper;
 import com.canyinghao.canhelper.LogHelper;
 import com.github.anrwatchdog.ANRWatchDog;
@@ -52,11 +53,11 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
 		ANRWatchDog anrWatchDog = new ANRWatchDog(2000);
 		anrWatchDog.start();
-
+        CanHelper.init(this);
 
 
 		File file = new File(FileHelper.getInstance().getExternalStorePath(),
-				"can");
+				getText(R.string.can).toString());
 
 		
 		if (!file.exists()) {
@@ -80,10 +81,10 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 	public void uncaughtException(Thread thread, Throwable ex) {
 		
 		String eStr = getCrashReport(ex);
-		LogHelper.loge("UncaughtException", eStr);
+		LogHelper.loge(Constant.ERROR, eStr);
 		try {
 			File file = new File(FileHelper.getInstance()
-					.getExternalStorePath(), "can/faillog.txt");
+					.getExternalStorePath(), getText(R.string.fail_text).toString());
 			FileOutputStream f = new FileOutputStream(file);
 			f.write(eStr.getBytes());
 			f.close();

@@ -16,27 +16,58 @@
 
 package com.canyinghao.canaccess.bean;
 
-public class AppBean {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class AppBean implements Parcelable {
 	private String packageName, label;
 	private boolean enabled;
 
-    AppBean(String pkg, String name, boolean enable) {
+   public  AppBean(String pkg, String name, boolean enable) {
 		packageName = pkg;
 		label = name;
 		enabled = enable;
 	}
-	
 
-	
-	String getLabel() {
+
+
+    public String getLabel() {
 		return label;
 	}
 	
-	String getPackage() {
+	public String getPackage() {
 		return packageName;
 	}
-	
-	boolean getEnabled() {
+
+    public boolean getEnabled() {
 		return enabled;
 	}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.packageName);
+        dest.writeString(this.label);
+        dest.writeByte(enabled ? (byte) 1 : (byte) 0);
+    }
+
+    private AppBean(Parcel in) {
+        this.packageName = in.readString();
+        this.label = in.readString();
+        this.enabled = in.readByte() != 0;
+    }
+
+    public static final Parcelable.Creator<AppBean> CREATOR = new Parcelable.Creator<AppBean>() {
+        public AppBean createFromParcel(Parcel source) {
+            return new AppBean(source);
+        }
+
+        public AppBean[] newArray(int size) {
+            return new AppBean[size];
+        }
+    };
 }
