@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.service.CanAccessibilityService;
 import com.canyinghao.canhelper.LogHelper;
 
@@ -78,6 +79,40 @@ public class Utils {
         }
 
         return name;
+    }
+
+
+
+
+    public static int getStatusBarHeight() {
+        Class<?> c = null;
+
+        Object obj = null;
+
+        Field field = null;
+
+        int x = 0, sbar = 0;
+
+        try {
+
+            c = Class.forName("com.android.internal.R$dimen");
+
+            obj = c.newInstance();
+
+            field = c.getField("status_bar_height");
+
+            x = Integer.parseInt(field.get(obj).toString());
+
+            sbar = App.getInstance().getResources().getDimensionPixelSize(x);
+            return sbar;
+
+        } catch (Exception e1) {
+
+            e1.printStackTrace();
+
+        }
+        return sbar;
+
     }
 
 

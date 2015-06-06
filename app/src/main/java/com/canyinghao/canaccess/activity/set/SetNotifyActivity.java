@@ -1,6 +1,8 @@
 package com.canyinghao.canaccess.activity.set;
 
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -9,12 +11,10 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.canyinghao.canaccess.R;
-import com.canyinghao.canhelper.PhoneHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
 import com.kenumir.materialsettings.items.CheckboxItem;
@@ -42,7 +42,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         addItem(new HeaderItem(getFragment()).setTitle(getText(R.string.header_notify1).toString()));
 
         addNotifySwitcher();
-        addAPPList();
+
 
         addTTSSet();
 
@@ -70,10 +70,28 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
             public void onClick(TextItem v) {
 
                String[] strs=   getResources().getStringArray(R.array.notify_test);
-              NotificationCompat.Builder  builder= PhoneHelper.getInstance().getNotifyBuilder(strs[0],strs[1],strs[2],null,R.mipmap.ic_launcher,null,null, Notification.DEFAULT_ALL);
+//              NotificationCompat.Builder  builder= PhoneHelper.getInstance().getNotifyBuilder(strs[0],strs[1],strs[2],null,R.mipmap.ic_launcher,null,null, Notification.DEFAULT_ALL);
+//
+//               PhoneHelper.getInstance().showNotifyBigText(strs[0],strs[1],strs[3],builder,0);
 
-               PhoneHelper.getInstance().showNotifyBigText(strs[0],strs[1],strs[3],builder,0);
 
+                NotificationManager manager = (NotificationManager) context
+                        .getSystemService(Context.NOTIFICATION_SERVICE);
+                Notification notification = new Notification();
+
+                notification.icon = R.mipmap.ic_launcher;
+
+
+
+                notification.tickerText = strs[3];
+                notification.when = System.currentTimeMillis();
+
+
+              notification.setLatestEventInfo(context, strs[0], strs[3], null);
+
+               notification.flags = Notification.FLAG_AUTO_CANCEL; // 点击通知后自动消失
+
+                manager.notify(1001,notification);
 
             }
         }));
@@ -81,15 +99,53 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 
     private void addPhoneStaut() {
         addItem(new DividerItem(getFragment()));
+       final TextItem notify_7= new TextItem(getFragment(), "set_notify7").setTitle(getText(R.string.set_notify7).toString()).setSubtitle(getText(R.string.set_notify7a).toString());
 
+        addItem(notify_7);
 
-        addItem(new TextItem(getFragment(), "set_notify7").setTitle(getText(R.string.set_notify7).toString()).setSubtitle(getText(R.string.set_notify7a).toString()).setOnclick(new TextItem.OnClickListener() {
+        notify_7.setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
 
 
+              int wifi=  SPHepler.getInstance().getInt("set_notify7_a");
+              int gprs=  SPHepler.getInstance().getInt("set_notify7_b");
+               boolean[] bs= new boolean[2];
+
+
+                bs[0]=wifi==0?true:false;
+                bs[1]=gprs==0?true:false;
+
+
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(context);
+
+                builder.setTitle(R.string.phone_stauts);
+                int set_notify4= SPHepler.getInstance().getInt("set_notify7");
+
+                builder.setMultiChoiceItems(R.array.phone_stauts_array,bs,new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        if (i==0){
+
+                            SPHepler.getInstance().setInt("set_notify7_a",b?0:1);
+                        }else{
+                            SPHepler.getInstance().setInt("set_notify7_b",b?0:1);
+                        }
+
+
+
+
+                    }
+                });
+
+
+                builder.create().show();
+
+
             }
-        }));
+        });
+
     }
 
     private void addIgnoreText() {
@@ -124,12 +180,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 
                 builder.setTitle(R.string.play_mode);
                  int set_notify4= SPHepler.getInstance().getInt("set_notify4");
-                if (set_notify4==0){
-                    notify4.setTitle(getText(R.string.set_notify4).toString());
 
-                }else{
-                    notify4.setTitle(getText(R.string.set_notify4_).toString());
-                }
                 builder.setSingleChoiceItems(getResources().getStringArray(R.array.play_mode_array),set_notify4,new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -171,18 +222,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 
     }
 
-    private void addAPPList() {
-        addItem(new DividerItem(getFragment()));
 
-
-        addItem(new TextItem(getFragment(), "set_notify2").setTitle(getText(R.string.set_notify2).toString()).setSubtitle(getText(R.string.set_notify2a).toString()).setOnclick(new TextItem.OnClickListener() {
-            @Override
-            public void onClick(TextItem v) {
-
-            startActivity(new Intent(context,AppListActivity.class));
-            }
-        }));
-    }
 
     /**
      * notify总开关

@@ -1,18 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (C) 2015 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
--->
+<?xml version="1.0" encoding="utf-8"?>
+
 
 <resources>
     <string name="app_name">CanAccess</string>
@@ -47,9 +34,9 @@
 
     <array name="time_title" >
 
-        <item>一月内</item>
-        <item>三月内</item>
-        <item>三月前</item>
+        <item>今天</item>
+        <item>昨天</item>
+        <item>两天前</item>
 
 
 
@@ -82,7 +69,7 @@
     <string name="set_notify1">语音通知开启</string>
     <string name="set_notify1a">选中此项开启语音通知</string>
     <string name="set_notify2">应用列表</string>
-    <string name="set_notify2a">选中的应用的通知转换成语音通知</string>
+    <string name="set_notify2a">选中的应用的将不提醒不记录</string>
     <string name="set_notify3">TTS设置</string>
     <string name="set_notify3a">选择安装的TTS语音引擎</string>
     <string name="set_notify4">听筒播放</string>
@@ -99,6 +86,7 @@
     <string name="set_notify8">测试</string>
     <string name="set_notify8a">一会儿通知栏将会收到一条通知</string>
     <string name="play_mode">播放模式</string>
+    <string name="phone_stauts">状态</string>
     <string name="instance_market">请先安装应用市场</string>
 
 
@@ -106,6 +94,12 @@
     <array name="play_mode_array">
         <item >听筒播放</item>
         <item >扬声器播放</item>
+
+
+    </array>
+    <array name="phone_stauts_array">
+        <item >WIFI</item>
+        <item >移动数据</item>
 
 
     </array>

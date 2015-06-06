@@ -16,32 +16,59 @@
 
 package com.canyinghao.canaccess.bean;
 
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class AppBean implements Parcelable {
+    int id;
 	private String packageName, label;
-	private boolean enabled;
+	private int type;
+    private Drawable icon;
 
-   public  AppBean(String pkg, String name, boolean enable) {
-		packageName = pkg;
-		label = name;
-		enabled = enable;
-	}
+    public AppBean(Drawable icon, int type, String label, String packageName) {
+        this.icon = icon;
+        this.type=type;
+        this.label = label;
+        this.packageName = packageName;
+    }
 
 
+    public AppBean() {
+    }
+
+    public Drawable getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public String getLabel() {
-		return label;
-	}
-	
-	public String getPackage() {
-		return packageName;
-	}
+        return label;
+    }
 
-    public boolean getEnabled() {
-		return enabled;
-	}
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
 
     @Override
     public int describeContents() {
@@ -50,15 +77,19 @@ public class AppBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeString(this.packageName);
         dest.writeString(this.label);
-        dest.writeByte(enabled ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.type);
+
     }
 
     private AppBean(Parcel in) {
+        this.id = in.readInt();
         this.packageName = in.readString();
         this.label = in.readString();
-        this.enabled = in.readByte() != 0;
+        this.type = in.readInt();
+
     }
 
     public static final Parcelable.Creator<AppBean> CREATOR = new Parcelable.Creator<AppBean>() {

@@ -3,7 +3,7 @@
 	<!-- Base application theme. -->
 	<style name="MaterialSettingsTheme" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="msColorPrimary">@color/primary</item>
-		<item name="msColorPrimaryDark">@color/primary_dark</item>
+		<item name="msColorPrimaryDark">@color/primary</item>
 		<item name="msColorAccent">@color/accent</item>
 		<item name="msWindowBg">@color/ms_white</item>
 		<item name="msToolbarTheme">@style/MaterialSettingsTheme_Toolbar</item>

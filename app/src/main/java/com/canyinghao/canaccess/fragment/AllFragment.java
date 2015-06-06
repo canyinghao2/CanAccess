@@ -132,10 +132,12 @@ public class AllFragment extends BaseFragment {
         Adapter adapter = new Adapter(getChildFragmentManager());
 
        String[] strs= getResources().getStringArray(R.array.time_title);
-        adapter.addFragment(new AllList1Fragment(), strs[0]);
-        adapter.addFragment(new AllList1Fragment(), strs[1]);
-        adapter.addFragment(new AllList1Fragment(), strs[2]);
+
+        adapter.addFragment(AllList1Fragment.getInstance(0), strs[0]);
+        adapter.addFragment(AllList1Fragment.getInstance(1), strs[1]);
+        adapter.addFragment(AllList1Fragment.getInstance(2), strs[2]);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
     }
 
     static class Adapter extends FragmentPagerAdapter {

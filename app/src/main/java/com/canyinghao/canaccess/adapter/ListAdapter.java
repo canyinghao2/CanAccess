@@ -1,9 +1,8 @@
 package com.canyinghao.canaccess.adapter;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,9 @@ import com.canyinghao.canaccess.bean.EventBean;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by yangjian on 15/6/6.
  */
@@ -31,21 +33,27 @@ public class ListAdapter
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        public final View mView;
-        public final ImageView mImageView;
-        public final TextView mTextView;
+        @InjectView(R.id.avatar)
+        ImageView avatar;
+        @InjectView(R.id.title)
+        TextView title;
+        @InjectView(R.id.text1)
+        TextView text1;
+        @InjectView(R.id.text2)
+        TextView text2;
+        @InjectView(R.id.text3)
+        TextView text3;
+        View view;
 
         public ViewHolder(View view) {
             super(view);
-            mView = view;
-            mImageView = (ImageView) view.findViewById(R.id.avatar);
-            mTextView = (TextView) view.findViewById(android.R.id.text1);
+            this.view = view;
+            ButterKnife.inject(this, view);
+
+
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mTextView.getText();
-        }
+
     }
 
     public EventBean getValueAt(int position) {
@@ -72,31 +80,25 @@ public class ListAdapter
     public void onBindViewHolder(final RecyclerView.ViewHolder holde, int position) {
         final ViewHolder holder = (ViewHolder) holde;
         final EventBean bean = mValues.get(position);
-        holder.mTextView.setText(bean.getLabel());
+        holder.title.setText(bean.getLabel());
+        holder.text1.setText(bean.getEventTypeStr());
+        String text=bean.getText();
+        if (TextUtils.isEmpty(text)){
+            text=bean.getClassName();
+        }
+        holder.text2.setText(text);
+        holder.text3.setText(bean.getEventTimeStr());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                DetailActivity.launch((BaseActivity) context, holder.mImageView, bean);
+                DetailActivity.launch((BaseActivity) context, holder.avatar, bean);
             }
         });
 
-        try {
-            Drawable icon = context.getPackageManager().getApplicationIcon(bean
-                    .getPackageName());
-
-            ((ViewHolder) holde).mImageView.setImageDrawable(icon);
-
-
-
-
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
+        holder.avatar.setImageDrawable(bean.getIcon());
 
     }
 

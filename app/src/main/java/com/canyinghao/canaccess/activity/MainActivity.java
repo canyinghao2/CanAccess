@@ -1,5 +1,3 @@
-
-
 package com.canyinghao.canaccess.activity;
 
 import android.content.Intent;
@@ -38,12 +36,15 @@ public class MainActivity extends BaseActivity {
 
     List<BaseFragment> list;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+
 
 
         addFragment();
@@ -71,13 +72,12 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    private void replaceFragmet(int p){
+    private void replaceFragmet(int p) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 
-
-        transaction.replace(R.id.frame,list.get(p));
+        transaction.replace(R.id.frame, list.get(p));
 
         transaction.commit();
     }
@@ -93,15 +93,7 @@ public class MainActivity extends BaseActivity {
         replaceFragmet(0);
 
 
-
-
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.sample_actions, menu);
-//        return true;
-//    }
 
 
 
@@ -133,7 +125,7 @@ public class MainActivity extends BaseActivity {
                             case R.id.set:
 
 
-                               startActivity(new Intent(context,SetActivity.class));
+                                startActivity(new Intent(context, SetActivity.class));
                                 break;
 
                             case R.id.about:

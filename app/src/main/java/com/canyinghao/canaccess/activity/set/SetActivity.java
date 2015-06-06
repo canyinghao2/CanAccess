@@ -43,12 +43,29 @@ public class SetActivity extends MaterialSettingsActivity {
 
         addAll();
         addTrash();
+
+
+        addAPPList();
+
         addGoodUse();
 
         addBadUse();
 
 
 
+    }
+
+    private void addAPPList() {
+        addItem(new DividerItem(getFragment()));
+
+
+        addItem(new TextItem(getFragment(), "set_notify2").setTitle(getText(R.string.set_notify2).toString()).setSubtitle(getText(R.string.set_notify2a).toString()).setIcon(R.mipmap.ic_apps_grey600).setOnclick(new TextItem.OnClickListener() {
+            @Override
+            public void onClick(TextItem v) {
+
+                startActivity(new Intent(context,AppListActivity.class));
+            }
+        }));
     }
 
     private void addBadUse() {

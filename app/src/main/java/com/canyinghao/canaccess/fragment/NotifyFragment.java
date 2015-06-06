@@ -16,45 +16,45 @@
 
 package com.canyinghao.canaccess.fragment;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.accessibility.AccessibilityEvent;
 
+import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.activity.MainActivity;
-import com.canyinghao.canaccess.adapter.NewBaseAdapter;
+import com.canyinghao.canaccess.adapter.ListAdapter;
+import com.canyinghao.canaccess.bean.EventBean;
+import com.canyinghao.canaccess.view.ToolListView;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class NotifyFragment extends BaseFragment {
 
 
-    @InjectView(R.id.backdrop)
-    ImageView backdrop;
-    @InjectView(R.id.toolbar)
-    Toolbar toolbar;
-    @InjectView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout collapsingToolbar;
-    @InjectView(R.id.appbar)
-    AppBarLayout appbar;
-    @InjectView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @InjectView(R.id.main_content)
-    CoordinatorLayout mainContent;
 
+    @InjectView(R.id.toolListView)
+    ToolListView toolListView;
 
-    public NewBaseAdapter adapter;
+    List<EventBean> list;
 
     public static NotifyFragment getInstance(Bundle bundle) {
 
@@ -72,22 +72,23 @@ public class NotifyFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(
-                R.layout.tool_list_view, container, false);
-        ButterKnife.inject(this, v);
-        initView();
+                R.layout.fragment_notify, container, false);
 
+
+        ButterKnife.inject(this, v);
+        toolListView. recyclerView.setLayoutManager(new LinearLayoutManager(toolListView.recyclerView.getContext()));
+        initView();
+        observable();
 
         return v;
     }
 
     private void initView() {
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        if (adapter != null) {
-            recyclerView.setAdapter(adapter);
-        }
 
-        setToolbar(toolbar, R.mipmap.ic_menu_white, "", "", new View.OnClickListener() {
+
+
+        setToolbar(toolListView.toolbar, R.mipmap.ic_menu_white, "", "", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity) context).drawerLayout.openDrawer(GravityCompat.START);
@@ -97,13 +98,67 @@ public class NotifyFragment extends BaseFragment {
 
     }
 
-    public void setFragmentAdapter(NewBaseAdapter adapter) {
 
-        this.adapter = adapter;
+    private void observable() {
+        Observable<List<EventBean>> myObservable = Observable.create(
+                new Observable.OnSubscribe<List<EventBean>>() {
+                    @Override
+                    public void call(Subscriber<? super List<EventBean>> sub) {
 
 
+                        DbUtils dbUtils = App.getInstance().getDbUtils();
+
+                        try {
+                            list = dbUtils.findAll(Selector.from(EventBean.class).where("eventType","=", AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED).and("text","!=","").orderBy("eventTime",true).limit(1000));
+
+
+                            for (EventBean bean : list) {
+
+                                String pkg = bean.getPackageName();
+                                ApplicationInfo info = context.getPackageManager().getApplicationInfo(pkg, 0);
+                                bean.setIcon(info.loadIcon(context.getPackageManager()));
+
+                            }
+
+
+                        } catch (DbException e) {
+                            e.printStackTrace();
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        sub.onNext(list);
+
+                        sub.onCompleted();
+                    }
+                }
+        );
+
+        AppObservable.bindFragment(this, myObservable).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<List<EventBean>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                toolListView. recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+            }
+
+            @Override
+            public void onNext(List<EventBean> EventBeans) {
+
+
+                toolListView. recyclerView.setAdapter(new ListAdapter(context,
+                        list));
+
+                toolListView. recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+
+
+            }
+        });
     }
-
 
     @Override
     public void onDestroyView() {

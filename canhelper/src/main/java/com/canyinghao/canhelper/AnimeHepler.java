@@ -55,7 +55,7 @@ public class AnimeHepler {
 	 * 
 	 * @param context
 	 * @param lv
-	 * @param is
+	 *
 	 */
 	public void setAnimationEmptyView(Context context, AbsListView lv,
 			ProgressBar bar, String str) {

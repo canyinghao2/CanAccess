@@ -16,8 +16,12 @@
   -->
 
 <resources>
-    <dimen name="detail_backdrop_height">256dp</dimen>
+    <dimen name="detail_backdrop_height">192dp</dimen>
     <dimen name="card_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="list_item_avatar_size">40dp</dimen>
+    <dimen name="top_margin_normall">10dp</dimen>
+    <dimen name="top_margin_big">20dp</dimen>
+    <dimen name="top_margin_small">5dp</dimen>
+    <dimen name="list_item_avatar_size">50dp</dimen>
+    <dimen name="line_list">0.5dp</dimen>
 </resources>

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,9 +30,12 @@ public class ToolListView extends FrameLayout {
     @InjectView(R.id.appbar)
     public AppBarLayout appbar;
     @InjectView(R.id.recyclerView)
-    public RecyclerView recyclerView;
+    public RecyclerViewEmptySupport recyclerView;
     @InjectView(R.id.main_content)
     public  CoordinatorLayout mainContent;
+
+    @InjectView(R.id.floatButton)
+    public FloatingActionButton floatButton;
 
     public ToolListView(Context context) {
         super(context);

@@ -26,9 +26,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.bean.EventBean;
@@ -43,16 +41,10 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         bean = new EventBean();
-        ListView listView = (ListView) findViewById(R.id.listView);
 
 
-        String[] strs = new String[100];
-        for (int i = 0; i < strs.length; i++) {
 
-            strs[i] = "dfsf" + i;
 
-        }
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strs));
 
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_NAME)) {

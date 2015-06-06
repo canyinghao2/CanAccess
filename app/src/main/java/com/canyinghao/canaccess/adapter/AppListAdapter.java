@@ -1,17 +1,20 @@
 package com.canyinghao.canaccess.adapter;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.bean.AppBean;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.db.sqlite.WhereBuilder;
+import com.lidroid.xutils.exception.DbException;
 
 import java.util.List;
 
@@ -26,50 +29,118 @@ public class AppListAdapter extends NewBaseAdapter {
 
     public AppListAdapter(Context context, List list) {
         super(context, list);
+
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item, parent, false);
+                .inflate(R.layout.list_app_item, parent, false);
         view.setBackgroundResource(background);
+
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holde, int position) {
-        ViewHolder holder= (ViewHolder) holde;
+    public void onBindViewHolder(RecyclerView.ViewHolder holde, final int position) {
+        final ViewHolder holder= (ViewHolder) holde;
 
-        AppBean bean = (AppBean) list.get(position);
+        final AppBean bean = (AppBean) list.get(position);
+         holder.avatar.setImageDrawable(bean.getIcon());
+        holder.title.setText(bean.getLabel());
+        holder.text1.setText(bean.getPackageName());
+        if (bean.getType()!=0){
 
-        try {
-            Drawable icon = context.getPackageManager().getApplicationIcon(bean
-                    .getPackage());
-            holder.avatar.setImageDrawable(icon);
+            holder.cb.setChecked(true);
 
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+        }else{
+            holder.cb.setChecked(false);
+
+
+
         }
 
-        holder.text1.setText(bean.getLabel());
-        holder.text2.setText(bean.getPackage());
+
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.cb.isChecked()){
+                    holder.cb.setChecked(false);
+                    bean.setType(0);
+                    deleteItem(bean);
+                }else{
+                    holder.cb.setChecked(true);
+                    bean.setType(1);
+                    saveItem(bean);
+                }
+
+            }
+        });
+
+
+
+
+
+        holder.cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.cb.isChecked()){
+                    bean.setType(1);
+                    saveItem(bean);
+                }else{
+                    bean.setType(0);
+                    deleteItem(bean);
+                }
+            }
+        });
+
+
+
+
     }
 
+    private void deleteItem(AppBean bean) {
+        try {
+            App.getInstance().getDbUtils().delete(AppBean.class, WhereBuilder.b("packageName", "=", bean.getPackageName()));
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void saveItem(AppBean bean) {
+        try {
+          long count=  App.getInstance().getDbUtils().count(Selector.from(AppBean.class).where("packageName", "=", bean.getPackageName()));
+
+            if (count==0){
+                App.getInstance().getDbUtils().saveBindingId(bean);
+            }
+
+
+
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        AppBean bean;
         @InjectView(R.id.avatar)
         ImageView avatar;
+        @InjectView(android.R.id.title)
+        TextView title;
         @InjectView(android.R.id.text1)
         TextView text1;
-        @InjectView(android.R.id.text2)
-        TextView text2;
-
+        @InjectView(R.id.cb)
+        CheckBox cb;
+        View view;
         public ViewHolder(View view) {
             super(view);
+            this.view=view;
             ButterKnife.inject(this, view);
 
 

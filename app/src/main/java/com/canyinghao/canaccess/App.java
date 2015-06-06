@@ -119,7 +119,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
     public DbUtils getDbUtils() {
         if (null == dbUtils) {
-            dbUtils = DbUtils.create(this);
+            dbUtils = DbUtils.create(this,getText(R.string.can).toString());
         }
         return dbUtils;
     }

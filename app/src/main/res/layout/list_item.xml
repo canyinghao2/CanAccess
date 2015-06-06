@@ -4,12 +4,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:orientation="vertical"
+   >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"
@@ -25,20 +35,50 @@
         android:layout_marginLeft="10dp">
 
         <TextView
-            android:id="@android:id/text1"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+            android:textAppearance="?attr/textAppearanceSearchResultTitle"/>
+
+
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="match_parent"
+
+                android:layout_marginTop="@dimen/top_margin_small"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceListItemSmall"/>
+
         <TextView
-            android:id="@android:id/text2"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItemSmall"/>
+            android:id="@+id/text2"
+                android:layout_width="match_parent"
+
+                android:layout_marginTop="@dimen/top_margin_small"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceListItemSmall"/>
+             <TextView
+                android:id="@+id/text3"
+                android:layout_width="match_parent"
+                 android:layout_marginTop="@dimen/top_margin_small"
+                android:layout_height="wrap_content"
+                 android:gravity="right"
+                android:textAppearance="?attr/textAppearanceListItemSmall"/>
+
+
+
+
 
 
         </LinearLayout>
+    </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_list"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/blue_gray_100"/>
 
 
 </LinearLayout>

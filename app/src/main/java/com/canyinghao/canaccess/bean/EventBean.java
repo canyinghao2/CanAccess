@@ -1,5 +1,6 @@
 package com.canyinghao.canaccess.bean;
 
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -19,6 +20,7 @@ public class EventBean implements Parcelable {
 
     private String packageName="";
     private String label="";
+    private Drawable icon;
 
     private long eventTime;
     private String eventTimeStr="";
@@ -35,7 +37,16 @@ public class EventBean implements Parcelable {
 
 
 
+
     private Date date=new Date();
+
+    public Drawable getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
+    }
 
     public String getDatail() {
         return datail;

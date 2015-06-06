@@ -3,7 +3,7 @@ package com.kenumir.materialsettings;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by Kenumir on 2015-04-07.
  */
-public abstract class MaterialSettingsActivity extends ActionBarActivity {
+public abstract class MaterialSettingsActivity extends AppCompatActivity {
 
 	private static String SAVE_PREFIX = "SSI_";
 
