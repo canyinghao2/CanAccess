@@ -58,7 +58,9 @@
     <string name="set6">很好用</string>
     <string name="set6a">前往软件商店进行评分</string>
     <string name="set7">不好用</string>
-    <string name="set7a">快速卸载</string>
+    <string name="set7a">快速卸载</string>g>
+    <string name="set_lock">密码锁</string>g>
+    <string name="set_locka">设置密码锁，进入时需要密码确认</string>
 
 
 
@@ -129,6 +131,14 @@
 
     </array>
 
+
+    <string name="pwd_manage">密码管理</string>
+    <string name="pwd_switch">密码开关</string>
+    <string name="pwd_edit">修改密码</string>
+    <string name="pwd_delete">删除密码</string>
+    <string name="pwd_toast">删除密码成功</string>
+    <string name="pwd_forget">忘记密码？回答问题便能解锁</string>
+    <string name="pwd_question">最后使用此软件是什么时候？</string>
 
 
 

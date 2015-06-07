@@ -20,10 +20,10 @@ import java.util.HashMap;
 public class MaterialSettingsFragment extends Fragment {
 
 	public static enum ContentFrames {
-//		FRAME_TOP(0),
-		FRAME_TOP_INSIDE(0),
-//		FRAME_BOTTOM(2),
-		FRAME_BOTTOM_INSIDE(1);
+		FRAME_TOP(0),
+		FRAME_TOP_INSIDE(1),
+		FRAME_BOTTOM(2),
+		FRAME_BOTTOM_INSIDE(3);
 
 		private int id;
 
@@ -52,11 +52,11 @@ public class MaterialSettingsFragment extends Fragment {
 		items = new HashMap<>();
 
 		material_settings_content = (LinearLayout) root.findViewById(R.id.material_settings_content);
-		frames = new FrameLayout[2];
-//		frames[0] = (FrameLayout) root.findViewById(R.id.material_settings_top_frame);
-		frames[0] = (FrameLayout) root.findViewById(R.id.material_settings_top_frame_inside);
-		frames[1] = (FrameLayout) root.findViewById(R.id.material_settings_bottom_frame_inside);
-//		frames[3] = (FrameLayout) root.findViewById(R.id.material_settings_bottom_frame);
+		frames = new FrameLayout[4];
+		frames[0] = (FrameLayout) root.findViewById(R.id.material_settings_top_frame);
+		frames[1] = (FrameLayout) root.findViewById(R.id.material_settings_top_frame_inside);
+		frames[2] = (FrameLayout) root.findViewById(R.id.material_settings_bottom_frame_inside);
+		frames[3] = (FrameLayout) root.findViewById(R.id.material_settings_bottom_frame);
 
 		mStorageInterface = initStorageInterface();
 

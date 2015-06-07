@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.service.CanAccessibilityService;
+import com.canyinghao.canaccess.utils.PatternLockUtils;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.PhoneHelper;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
@@ -17,6 +18,8 @@ import com.kenumir.materialsettings.items.HeaderItem;
 import com.kenumir.materialsettings.items.TextItem;
 import com.kenumir.materialsettings.storage.PreferencesStorageInterface;
 import com.kenumir.materialsettings.storage.StorageInterface;
+
+import java.io.Serializable;
 
 public class SetActivity extends MaterialSettingsActivity {
 
@@ -32,7 +35,8 @@ public class SetActivity extends MaterialSettingsActivity {
         setToolbar(R.mipmap.ic_arrow_back_white,"","",new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+             onBackPressed();
+
             }
         },null);
         addAccess();
@@ -46,7 +50,7 @@ public class SetActivity extends MaterialSettingsActivity {
 
 
         addAPPList();
-
+        addLock();
         addGoodUse();
 
         addBadUse();
@@ -88,7 +92,7 @@ public class SetActivity extends MaterialSettingsActivity {
 
     private void addGoodUse() {
         addItem(new DividerItem(getFragment()));
-        addItem(new HeaderItem(getFragment()).setTitle(getText(R.string.headeritem3).toString()));
+
 
 
         addItem(new TextItem(getFragment(), "set6").setTitle(getText(R.string.set6).toString()).setSubtitle(getText(R.string.set6a).toString()).setIcon(R.mipmap.ic_thumb_up_grey600).setOnclick(new TextItem.OnClickListener() {
@@ -107,6 +111,33 @@ public class SetActivity extends MaterialSettingsActivity {
         }));
     }
 
+
+
+    private void addLock() {
+        addItem(new DividerItem(getFragment()));
+        addItem(new HeaderItem(getFragment()).setTitle(getText(R.string.headeritem3).toString()));
+
+
+        addItem(new TextItem(getFragment(), "set_lock").setTitle(getText(R.string.set_lock).toString()).setSubtitle(getText(R.string.set_locka).toString()).setIcon(R.mipmap.ic_thumb_up_grey600).setOnclick(new TextItem.OnClickListener() {
+            @Override
+            public void onClick(TextItem v) {
+
+                if (PatternLockUtils.hasPattern(context)){
+                    IntentHelper.getInstance().showIntent(context,PwdConfirmActivity.class,new String[]{"class"},new Serializable[]{SetPwdActivity.class});
+                }else{
+
+                    IntentHelper.getInstance().showIntent(context,SetPwdActivity.class);
+                }
+
+
+
+
+
+
+            }
+        }));
+    }
+
     private void addTrash() {
         addItem(new DividerItem(getFragment()));
 
@@ -114,6 +145,8 @@ public class SetActivity extends MaterialSettingsActivity {
             @Override
             public void onClick(TextItem v) {
                 Toast.makeText(SetActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+
+
             }
         }));
     }

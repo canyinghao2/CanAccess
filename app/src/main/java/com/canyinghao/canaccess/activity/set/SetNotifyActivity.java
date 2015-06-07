@@ -90,7 +90,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 
               notification.setLatestEventInfo(context, strs[0], strs[3], null);
 
-               notification.flags = Notification.FLAG_AUTO_CANCEL; // 点击通知后自动消失
+               notification.flags = Notification.FLAG_AUTO_CANCEL; // t点击通知后自动消失
 
                 manager.notify(1001,notification);
 

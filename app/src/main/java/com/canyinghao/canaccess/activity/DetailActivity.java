@@ -59,6 +59,7 @@ public class DetailActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+
             }
         },null);
 

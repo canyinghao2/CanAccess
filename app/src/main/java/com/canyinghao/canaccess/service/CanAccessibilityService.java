@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.bean.EventBean;
+import com.canyinghao.canaccess.bean.IgnoreBean;
 import com.canyinghao.canhelper.DateHelper;
 import com.canyinghao.canhelper.LogHelper;
 import com.canyinghao.canhelper.SPHepler;
@@ -168,8 +169,29 @@ public class CanAccessibilityService extends AccessibilityService {
         }
 
 
-//        不播放选择列表中的
+
+
+
+
         try {
+//            忽略的字段
+
+          List<IgnoreBean> igList=  App.getInstance().getDbUtils().findAll(IgnoreBean.class);
+
+            if (igList != null && !igList.isEmpty()) {
+                for (IgnoreBean bean1 : igList) {
+
+                    if (bean.getText().toLowerCase().contains(bean1.getText().toLowerCase())) {
+                        return;
+                    }
+                }
+            }
+
+
+
+
+
+            //        不播放选择列表中的
             List<AppBean> list = App.getInstance().getDbUtils().findAll(AppBean.class);
 
             if (list != null && !list.isEmpty()) {
