@@ -1,6 +1,8 @@
 package com.canyinghao.canaccess.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.activity.set.IgnoreTextActivity;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.bean.IgnoreBean;
 
@@ -50,6 +53,49 @@ public class IgnoreAdapter extends NewBaseAdapter {
         holder.title.setText(bean.getTitle());
         holder.text1.setText(bean.getText());
 
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(context);
+                builder.setItems(context.getResources().getStringArray(R.array.ignore_array),new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        switch (i){
+
+
+                            case 0:
+                                list.remove(position);
+                                notifyItemRemoved(position);
+                                view.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        notifyDataSetChanged();
+                                    }
+                                },500);
+
+                                break;
+                            case  1:
+
+                              IgnoreTextActivity activity= (IgnoreTextActivity) context;
+
+                                activity.showEditDialog(bean);
+
+                                break;
+                        }
+
+                    }
+                });
+
+
+
+
+                builder.show();
+
+
+            }
+        });
 
 
 

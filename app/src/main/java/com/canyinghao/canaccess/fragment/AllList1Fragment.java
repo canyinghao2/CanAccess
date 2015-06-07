@@ -20,7 +20,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.adapter.ListAdapter;
 import com.canyinghao.canaccess.bean.EventBean;
+import com.canyinghao.canaccess.view.DividerItemDecoration;
 import com.canyinghao.canaccess.view.RecyclerViewEmptySupport;
 import com.canyinghao.canhelper.LogHelper;
 import com.lidroid.xutils.DbUtils;
@@ -83,7 +86,11 @@ public class AllList1Fragment extends BaseFragment {
 
         recyclerview.setLayoutManager(new LinearLayoutManager(recyclerview.getContext()));
         recyclerview.setEmptyViewProgress(null, null);
-
+        //设置Item增加、移除动画
+        recyclerview.setItemAnimator(new DefaultItemAnimator());
+        RecyclerView.ItemDecoration itemDecoration =
+                new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST);
+        recyclerview.addItemDecoration(itemDecoration);
 
         observable();
 

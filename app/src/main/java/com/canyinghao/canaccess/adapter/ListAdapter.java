@@ -77,7 +77,7 @@ public class ListAdapter
 
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holde, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holde, final int position) {
         final ViewHolder holder = (ViewHolder) holde;
         final EventBean bean = mValues.get(position);
         holder.title.setText(bean.getLabel());
@@ -92,7 +92,8 @@ public class ListAdapter
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                 notifyItemMoved(position,position+1);
+//                notifyItemRemoved(position);
 
                 DetailActivity.launch((BaseActivity) context, holder.avatar, bean);
             }

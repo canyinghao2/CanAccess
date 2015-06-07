@@ -25,7 +25,9 @@ public abstract class NewBaseAdapter extends RecyclerView.Adapter {
         this.context=context;
         this.list=list;
 
+
     }
+
 
 
 

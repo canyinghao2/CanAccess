@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
 import com.kenumir.materialsettings.items.CheckboxItem;
@@ -155,7 +156,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         addItem(new TextItem(getFragment(), "set_notify6").setTitle(getText(R.string.set_notify6).toString()).setSubtitle(getText(R.string.set_notify6a).toString()).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
-
+                IntentHelper.getInstance().showIntent(context,IgnoreTextActivity.class);
 
             }
         }));

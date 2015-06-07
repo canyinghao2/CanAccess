@@ -77,6 +77,11 @@ public class AppListAdapter extends NewBaseAdapter {
                     saveItem(bean);
                 }
 
+//                list.remove(position);
+//                notifyItemRemoved(position);
+////                notifyDataSetChanged();
+
+
             }
         });
 

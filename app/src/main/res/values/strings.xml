@@ -116,5 +116,22 @@
     </array>
 
 
+    <string name="ignore_title">请输入要屏蔽的字段</string>
+    <string name="ignore_hint1">请输入标题</string>
+    <string name="ignore_hint2">请输入内容</string>
+    <string name="ignore_empty">内容不能为空</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
+
+    <array name="ignore_array">
+        <item>删除</item>
+        <item>编辑</item>
+
+    </array>
+
+
+
+
+
 
 </resources>

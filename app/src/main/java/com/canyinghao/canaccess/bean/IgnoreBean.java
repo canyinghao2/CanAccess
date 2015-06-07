@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class IgnoreBean implements Parcelable {
 
-
+         int id;
     private String title;
     private String text;
     private Date date=new Date();
