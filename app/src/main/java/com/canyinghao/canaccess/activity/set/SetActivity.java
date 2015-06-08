@@ -93,7 +93,7 @@ public class SetActivity extends MaterialSettingsActivity {
     private void addGoodUse() {
         addItem(new DividerItem(getFragment()));
 
-
+        addItem(new HeaderItem(getFragment()).setTitle(getText(R.string.headeritem3).toString()));
 
         addItem(new TextItem(getFragment(), "set6").setTitle(getText(R.string.set6).toString()).setSubtitle(getText(R.string.set6a).toString()).setIcon(R.mipmap.ic_thumb_up_grey600).setOnclick(new TextItem.OnClickListener() {
             @Override
@@ -115,10 +115,10 @@ public class SetActivity extends MaterialSettingsActivity {
 
     private void addLock() {
         addItem(new DividerItem(getFragment()));
-        addItem(new HeaderItem(getFragment()).setTitle(getText(R.string.headeritem3).toString()));
 
 
-        addItem(new TextItem(getFragment(), "set_lock").setTitle(getText(R.string.set_lock).toString()).setSubtitle(getText(R.string.set_locka).toString()).setIcon(R.mipmap.ic_thumb_up_grey600).setOnclick(new TextItem.OnClickListener() {
+
+        addItem(new TextItem(getFragment(), "set_lock").setTitle(getText(R.string.set_lock).toString()).setSubtitle(getText(R.string.set_locka).toString()).setIcon(R.mipmap.ic_lock_outline_grey600).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
 

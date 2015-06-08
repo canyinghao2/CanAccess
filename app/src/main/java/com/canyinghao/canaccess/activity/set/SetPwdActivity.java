@@ -55,6 +55,17 @@ public class SetPwdActivity extends MaterialSettingsActivity {
 
 
 
+        addQuestion();
+
+        for (int i=0;i<9;i++){
+
+
+        TextItem  textItem=   new TextItem(getFragment(),"");
+        addItem(textItem);
+
+
+        }
+
 
 
 
@@ -64,7 +75,7 @@ public class SetPwdActivity extends MaterialSettingsActivity {
     private void addPwdSwitcher() {
         addItem(new HeaderItem(getFragment()).setTitle(getText(R.string.pwd_manage).toString()));
 
-        final CheckboxItem notify1=   new SwitcherItem(getFragment(), "pwd_switch").setTitle(getText(R.string.pwd_switch).toString());
+        final CheckboxItem notify1=   new SwitcherItem(getFragment(), "pwd_switch").setTitle(getString(R.string.pwd_switch)).setSubtitle(getString(R.string.pwd_switch_a));
         addItem(notify1);
 
        int lock= SPHepler.getInstance().getInt("lock");
@@ -94,7 +105,7 @@ public class SetPwdActivity extends MaterialSettingsActivity {
 
 
 
-        addItem(new TextItem(getFragment(), "pwd_edit").setTitle(getText(R.string.pwd_edit).toString()).setOnclick(new TextItem.OnClickListener() {
+        addItem(new TextItem(getFragment(), "pwd_edit").setTitle(getString(R.string.pwd_edit)).setSubtitle(getString(R.string.pwd_edit_a)).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
 
@@ -111,16 +122,34 @@ public class SetPwdActivity extends MaterialSettingsActivity {
 
 
 
-        addItem(new TextItem(getFragment(), "pwd_delete").setTitle(getText(R.string.pwd_delete).toString()).setOnclick(new TextItem.OnClickListener() {
+        addItem(new TextItem(getFragment(), "pwd_delete").setTitle(getString(R.string.pwd_delete)).setSubtitle(getString(R.string.pwd_delete_a)).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
 
                 PatternLockUtils.clearPattern(context);
+                SPHepler.getInstance().setInt("lock",0);
                 Utils.showSnackbar(toolbar,getString(R.string.pwd_toast),null);
 
 
 
             }
         }));
+    }
+
+    private void addQuestion(){
+        addItem(new DividerItem(getFragment()));
+
+
+        addItem(new TextItem(getFragment(), "pwd_question").setTitle(getString(R.string.pwd_ques)).setSubtitle(getString(R.string.pwd_ques_a)).setOnclick(new TextItem.OnClickListener() {
+            @Override
+            public void onClick(TextItem v) {
+
+
+
+
+
+            }
+        }));
+
     }
 }

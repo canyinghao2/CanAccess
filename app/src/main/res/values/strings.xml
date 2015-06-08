@@ -134,11 +134,16 @@
 
     <string name="pwd_manage">密码管理</string>
     <string name="pwd_switch">密码开关</string>
+    <string name="pwd_switch_a">此处可设置进入软件时是否需要密码</string>
     <string name="pwd_edit">修改密码</string>
+    <string name="pwd_edit_a">此处可以修改密码</string>
     <string name="pwd_delete">删除密码</string>
+    <string name="pwd_delete_a">此处可以删除密码</string>
     <string name="pwd_toast">删除密码成功</string>
     <string name="pwd_forget">忘记密码？回答问题便能解锁</string>
     <string name="pwd_question">最后使用此软件是什么时候？</string>
+    <string name="pwd_ques">设置问题</string>
+    <string name="pwd_ques_a">忘记密码后可通过此问题重置密码</string>
 
 
 
