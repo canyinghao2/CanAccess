@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.canyinghao.canaccess.R;
+
 
 public class BaseActivity extends AppCompatActivity {
     public AppCompatActivity context;
+
 
 
     @Override
@@ -65,5 +68,21 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         context=null;
+    }
+
+
+
+
+    public void onBackPressed(boolean flag){
+
+        super.onBackPressed();
+        overridePendingTransition(R.anim.activity_switch_push_left_in,
+                R.anim.activity_switch_push_left_out);
+    }
+
+
+    public void  finish(boolean flag){
+        overridePendingTransition(R.anim.activity_switch_push_left_in,
+                R.anim.activity_switch_push_left_out);
     }
 }

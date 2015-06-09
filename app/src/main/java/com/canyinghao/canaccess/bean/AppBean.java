@@ -22,9 +22,9 @@ import android.os.Parcelable;
 
 public class AppBean implements Parcelable {
     int id;
-	private String packageName, label;
-	private int type;
-    private Drawable icon;
+	public String packageName, label;
+	public int type;
+    public Drawable icon;
 
     public AppBean(Drawable icon, int type, String label, String packageName) {
         this.icon = icon;
@@ -37,37 +37,6 @@ public class AppBean implements Parcelable {
     public AppBean() {
     }
 
-    public Drawable getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Drawable icon) {
-        this.icon = icon;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
 
 
     @Override

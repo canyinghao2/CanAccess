@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.view.CustomNoRemindDialog;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
@@ -36,7 +37,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         setToolbar(R.mipmap.ic_arrow_back_white,"","",new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                IntentHelper.getInstance().finish(context);
             }
         },null);
 
@@ -55,8 +56,78 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         addIgnoreText();
 
         addPhoneStaut();
-
+        addHeadset();
+        addTimeControl();
         addTest();
+
+
+    }
+
+    private void addHeadset() {
+        addItem(new DividerItem(getFragment()));
+
+        final CheckboxItem notify9=   new SwitcherItem(getFragment(), "set_notify9").setTitle(getText(R.string.set_notify9).toString()).setSubtitle(getText(R.string.set_notify9a).toString());
+        addItem(notify9);
+        notify9.setOnCheckedChangeListener(new CheckboxItem.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChange(CheckboxItem item, boolean isChecked) {
+                if (isChecked){
+                    SPHepler.getInstance().setInt("set_notify9",1);
+                }else{
+                    SPHepler.getInstance().setInt("set_notify9",0);
+                }
+            }
+        });
+        int set_notify1= SPHepler.getInstance().getInt("set_notify9");
+        if (set_notify1==0){
+            notify9.updateChecked(false);
+
+        }else{
+            notify9.updateChecked(true);
+        }
+    }
+
+
+    private void addTimeControl() {
+        addItem(new DividerItem(getFragment()));
+
+        final TextItem notify10=   new TextItem(getFragment(), "set_notify10").setTitle(getText(R.string.set_notify10).toString()).setSubtitle(getText(R.string.set_notify10a).toString());
+        addItem(notify10);
+
+        notify10.setOnclick(new TextItem.OnClickListener() {
+            @Override
+            public void onClick(TextItem item) {
+
+                new CustomNoRemindDialog(context, new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View arg0) {
+
+
+                        SPHepler.getInstance().setInt("set_notify10",1);
+
+                        int start_time= SPHepler.getInstance().getInt("start_time");
+                        int end_time = SPHepler.getInstance().getInt("end_time");
+
+                        notify10.updateSubTitle(start_time + getString(R.string.houre)+getString(R.string.sub) + end_time
+                                + getString(R.string.houre));
+
+
+                    }
+                }, new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View arg0) {
+                        SPHepler.getInstance().setInt("set_notify10",0);
+                        notify10.updateSubTitle(getString(R.string.set_notify10a));
+                    }
+                }).show();
+
+
+
+            }
+        });
+
 
 
     }
@@ -156,7 +227,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         addItem(new TextItem(getFragment(), "set_notify6").setTitle(getText(R.string.set_notify6).toString()).setSubtitle(getText(R.string.set_notify6a).toString()).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
-                IntentHelper.getInstance().showIntent(context,IgnoreTextActivity.class);
+                IntentHelper.getInstance().showIntent(context,IgnoreTextActivity.class,true);
 
             }
         }));

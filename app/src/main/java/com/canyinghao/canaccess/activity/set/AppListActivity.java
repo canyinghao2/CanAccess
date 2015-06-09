@@ -13,6 +13,7 @@ import com.canyinghao.canaccess.activity.BaseActivity;
 import com.canyinghao.canaccess.adapter.AppListAdapter;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.view.ToolListView;
+import com.canyinghao.canhelper.IntentHelper;
 import com.lidroid.xutils.exception.DbException;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class AppListActivity extends BaseActivity {
         setToolbar(view.toolbar, R.mipmap.ic_arrow_back_white, "", "", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                IntentHelper.getInstance().finish(context);
             }
         }, null);
 
@@ -98,7 +99,7 @@ public class AppListActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                         for (AppBean bean : list) {
-                            bean.setType(0);
+                            bean.type=0;
 
 
                         }
@@ -137,7 +138,7 @@ public class AppListActivity extends BaseActivity {
                         }
 
                         for (AppBean bean : list) {
-                            bean.setType(1);
+                            bean.type=1;
 
 
                         }
@@ -214,7 +215,7 @@ public class AppListActivity extends BaseActivity {
         inst:
         for (ApplicationInfo appInfo : packMan.getInstalledApplications(0)) {
             for (AppBean app : apps) {
-                if (app.getPackageName().equals(appInfo.packageName)) {
+                if (app.packageName.equals(appInfo.packageName)) {
                     continue inst;
                 }
             }
@@ -247,7 +248,7 @@ public class AppListActivity extends BaseActivity {
                     for (AppBean bean1 : apps) {
 
 
-                        bean1.setType(1);
+                        bean1.type=1;
 
                     }
 
@@ -261,8 +262,8 @@ public class AppListActivity extends BaseActivity {
 
                     for (AppBean bean1 : apps) {
 
-                        if (bean.getPackageName().equals(bean1.getPackageName())) {
-                            bean1.setType(1);
+                        if (bean.packageName.equals(bean1.packageName)) {
+                            bean1.type=1;
                             break;
 
                         }

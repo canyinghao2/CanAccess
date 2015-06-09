@@ -35,7 +35,8 @@ public class SetActivity extends MaterialSettingsActivity {
         setToolbar(R.mipmap.ic_arrow_back_white,"","",new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             onBackPressed();
+             IntentHelper.getInstance().finish(context);
+
 
             }
         },null);
@@ -67,7 +68,7 @@ public class SetActivity extends MaterialSettingsActivity {
             @Override
             public void onClick(TextItem v) {
 
-                startActivity(new Intent(context,AppListActivity.class));
+                IntentHelper.getInstance().showIntent(context,AppListActivity.class,true);
             }
         }));
     }
@@ -123,10 +124,10 @@ public class SetActivity extends MaterialSettingsActivity {
             public void onClick(TextItem v) {
 
                 if (PatternLockUtils.hasPattern(context)){
-                    IntentHelper.getInstance().showIntent(context,PwdConfirmActivity.class,new String[]{"class"},new Serializable[]{SetPwdActivity.class});
+                    IntentHelper.getInstance().showIntent(context,PwdConfirmActivity.class,new String[]{"class"},new Serializable[]{SetPwdActivity.class},true);
                 }else{
 
-                    IntentHelper.getInstance().showIntent(context,SetPwdActivity.class);
+                    IntentHelper.getInstance().showIntent(context,SetPwdActivity.class,true);
                 }
 
 
@@ -183,7 +184,7 @@ public class SetActivity extends MaterialSettingsActivity {
             public void onClick(TextItem v) {
 
 
-                IntentHelper.getInstance().showIntent(SetActivity.this,SetNotifyActivity.class);
+                IntentHelper.getInstance().showIntent(SetActivity.this,SetNotifyActivity.class,true);
 
             }
         }));

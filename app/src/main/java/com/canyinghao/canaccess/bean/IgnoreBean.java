@@ -11,33 +11,11 @@ import java.util.Date;
 public class IgnoreBean implements Parcelable {
 
          int id;
-    private String title;
-    private String text;
-    private Date date=new Date();
+    public String title;
+    public String text;
+    public Date date=new Date();
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
+ 
 
 
     @Override
@@ -55,7 +33,7 @@ public class IgnoreBean implements Parcelable {
     public IgnoreBean() {
     }
 
-    private IgnoreBean(Parcel in) {
+    public IgnoreBean(Parcel in) {
         this.title = in.readString();
         this.text = in.readString();
         long tmpDate = in.readLong();

@@ -1,10 +1,10 @@
 package com.canyinghao.canhelper;
 
-import java.io.Serializable;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+
+import java.io.Serializable;
 
 /**
  * 传值、跳转工具类
@@ -36,7 +36,17 @@ public class IntentHelper {
 	 * @param c
 	 */
 	public void showIntent(final Context context, final Class c) {
-		showIntent(context, c, null, null);
+		showIntent(context, c, null, null,false);
+	}
+
+    /**
+	 * 页面跳转
+	 *
+	 * @param context
+	 * @param c
+	 */
+	public void showIntent(final Context context, final Class c,boolean flag) {
+		showIntent(context, c, null, null,flag);
 	}
 
 	/**
@@ -48,7 +58,7 @@ public class IntentHelper {
 	 * @param values
 	 */
 	public void showIntent(final Context context, final Class c, String[] keys,
-			Serializable[] values) {
+			Serializable[] values,boolean flag) {
 		Intent intent = new Intent();
 		intent.setClass(context, c);
 		if (null != keys) {
@@ -60,10 +70,11 @@ public class IntentHelper {
 		}
 
 		context.startActivity(intent);
-		// 跳转动画
-		// context.overridePendingTransition(
-		// R.anim.appear_top_left_in,
-		// R.anim.disappear_bottom_right_out);
+        if (flag&&context instanceof Activity){
+            ((Activity)context).overridePendingTransition(R.anim.activity_switch_push_left_in,
+                    R.anim.activity_switch_push_left_out);
+        }
+
 
 	}
 
@@ -94,8 +105,8 @@ public class IntentHelper {
 	 */
 	public void finish(Activity activity) {
 		activity.finish();
-		// activity.overridePendingTransition(R.anim.appear_bottom_right_in,
-		// R.anim.disappear_top_left_out);
+        activity.overridePendingTransition(R.anim.activity_switch_push_left_in,
+                R.anim.activity_switch_push_left_out);
 
 	}
 }

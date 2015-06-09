@@ -190,9 +190,9 @@ public class AllList1Fragment extends BaseFragment {
 
             for (EventBean bean : list) {
 
-                String pkg = bean.getPackageName();
+                String pkg = bean.packageName;
                 ApplicationInfo info = context.getPackageManager().getApplicationInfo(pkg, 0);
-                bean.setIcon(info.loadIcon(context.getPackageManager()));
+                bean.icon=info.loadIcon(context.getPackageManager());
 
             }
 

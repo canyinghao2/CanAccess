@@ -80,14 +80,14 @@ public class ListAdapter
     public void onBindViewHolder(final RecyclerView.ViewHolder holde, final int position) {
         final ViewHolder holder = (ViewHolder) holde;
         final EventBean bean = mValues.get(position);
-        holder.title.setText(bean.getLabel());
-        holder.text1.setText(bean.getEventTypeStr());
-        String text=bean.getText();
+        holder.title.setText(bean.label);
+        holder.text1.setText(bean.eventTypeStr);
+        String text=bean.text;
         if (TextUtils.isEmpty(text)){
-            text=bean.getClassName();
+            text=bean.className;
         }
         holder.text2.setText(text);
-        holder.text3.setText(bean.getEventTimeStr());
+        holder.text3.setText(bean.eventTimeStr);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +99,7 @@ public class ListAdapter
             }
         });
 
-        holder.avatar.setImageDrawable(bean.getIcon());
+        holder.avatar.setImageDrawable(bean.icon);
 
     }
 

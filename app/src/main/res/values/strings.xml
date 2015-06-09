@@ -87,6 +87,10 @@
 
     <string name="set_notify8">测试</string>
     <string name="set_notify8a">一会儿通知栏将会收到一条通知</string>
+    <string name="set_notify9">耳机监听</string>
+    <string name="set_notify9a">插入耳机开启提醒，拔出耳机暂停提醒</string>
+    <string name="set_notify10">设置屏蔽的时段</string>
+    <string name="set_notify10a">未设置时段</string>
     <string name="play_mode">播放模式</string>
     <string name="phone_stauts">状态</string>
     <string name="instance_market">请先安装应用市场</string>
@@ -124,6 +128,8 @@
     <string name="ignore_empty">内容不能为空</string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
+    <string name="houre">点</string>
+    <string name="sub">-</string>
 
     <array name="ignore_array">
         <item>删除</item>
@@ -144,6 +150,17 @@
     <string name="pwd_question">最后使用此软件是什么时候？</string>
     <string name="pwd_ques">设置问题</string>
     <string name="pwd_ques_a">忘记密码后可通过此问题重置密码</string>
+    <string name="answer_error">回答错误</string>
+
+
+    <string name="ques">问题</string>
+    <string name="answer">答案</string>
+
+    <string name="ques_date">格式:xxxx-xx-xx</string>
+
+
+
+
 
 
 

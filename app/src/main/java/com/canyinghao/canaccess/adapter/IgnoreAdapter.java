@@ -50,8 +50,8 @@ public class IgnoreAdapter extends NewBaseAdapter {
         final IgnoreBean bean = (IgnoreBean) list.get(position);
          holder.avatar.setVisibility(View.GONE);
         holder.cb.setVisibility(View.GONE);
-        holder.title.setText(bean.getTitle());
-        holder.text1.setText(bean.getText());
+        holder.title.setText(bean.title);
+        holder.text1.setText(bean.text);
 
 
         holder.view.setOnClickListener(new View.OnClickListener() {

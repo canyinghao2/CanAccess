@@ -17,6 +17,7 @@ import com.canyinghao.canaccess.adapter.IgnoreAdapter;
 import com.canyinghao.canaccess.bean.IgnoreBean;
 import com.canyinghao.canaccess.utils.Utils;
 import com.canyinghao.canaccess.view.ToolListView;
+import com.canyinghao.canhelper.IntentHelper;
 import com.lidroid.xutils.exception.DbException;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class IgnoreTextActivity extends BaseActivity {
         setToolbar(view.toolbar, R.mipmap.ic_arrow_back_white, "", "", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                IntentHelper.getInstance().finish(context);
             }
         }, null);
 
@@ -99,8 +100,8 @@ public class IgnoreTextActivity extends BaseActivity {
         final EditText et2 = textinput2.getEditText();
 
         if (bean != null) {
-            et1.setText(bean.getTitle());
-            et2.setText(bean.getText());
+            et1.setText(bean.title);
+            et2.setText(bean.text);
         }else{
             bean=new IgnoreBean();
         }
@@ -135,8 +136,8 @@ public class IgnoreTextActivity extends BaseActivity {
                     Utils.showSnackbar(view, getString(R.string.ignore_empty), null);
                 } else {
 
-                    finalBean.setTitle(str1);
-                    finalBean.setText(str2);
+                    finalBean.title=str1;
+                    finalBean.text=str2;
 
 
                     try {

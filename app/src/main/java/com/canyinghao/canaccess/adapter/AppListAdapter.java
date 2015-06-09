@@ -48,10 +48,10 @@ public class AppListAdapter extends NewBaseAdapter {
         final ViewHolder holder= (ViewHolder) holde;
 
         final AppBean bean = (AppBean) list.get(position);
-         holder.avatar.setImageDrawable(bean.getIcon());
-        holder.title.setText(bean.getLabel());
-        holder.text1.setText(bean.getPackageName());
-        if (bean.getType()!=0){
+         holder.avatar.setImageDrawable(bean.icon);
+        holder.title.setText(bean.label);
+        holder.text1.setText(bean.packageName);
+        if (bean.type!=0){
 
             holder.cb.setChecked(true);
 
@@ -69,11 +69,11 @@ public class AppListAdapter extends NewBaseAdapter {
             public void onClick(View view) {
                 if (holder.cb.isChecked()){
                     holder.cb.setChecked(false);
-                    bean.setType(0);
+                    bean.type=0;
                     deleteItem(bean);
                 }else{
                     holder.cb.setChecked(true);
-                    bean.setType(1);
+                    bean.type=1;
                     saveItem(bean);
                 }
 
@@ -93,10 +93,10 @@ public class AppListAdapter extends NewBaseAdapter {
             @Override
             public void onClick(View view) {
                 if (holder.cb.isChecked()){
-                    bean.setType(1);
+                    bean.type=1;
                     saveItem(bean);
                 }else{
-                    bean.setType(0);
+                    bean.type=0;
                     deleteItem(bean);
                 }
             }
@@ -109,7 +109,7 @@ public class AppListAdapter extends NewBaseAdapter {
 
     private void deleteItem(AppBean bean) {
         try {
-            App.getInstance().getDbUtils().delete(AppBean.class, WhereBuilder.b("packageName", "=", bean.getPackageName()));
+            App.getInstance().getDbUtils().delete(AppBean.class, WhereBuilder.b("packageName", "=", bean.packageName));
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -117,7 +117,7 @@ public class AppListAdapter extends NewBaseAdapter {
 
     private void saveItem(AppBean bean) {
         try {
-          long count=  App.getInstance().getDbUtils().count(Selector.from(AppBean.class).where("packageName", "=", bean.getPackageName()));
+          long count=  App.getInstance().getDbUtils().count(Selector.from(AppBean.class).where("packageName", "=", bean.packageName));
 
             if (count==0){
                 App.getInstance().getDbUtils().saveBindingId(bean);

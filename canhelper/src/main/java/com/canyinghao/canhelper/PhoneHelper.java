@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
@@ -579,6 +580,45 @@ public class PhoneHelper {
 		Builder builder = getNotifyBuilder("", "", "", null, smallIcon,
 				contentclass,null,Notification.DEFAULT_ALL).setContent(remoteViews);
 		manager.notify(notifyId, builder.build());
-	}
+
+
+    }
+
+    /**
+     * 跳转到应用市场
+     * @param context
+     */
+    public void gotoMarket(Context context) {
+        try {
+            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            show("请先安装应用市场");
+        }
+    }
+
+
+    /**
+     * Retrieves application's version number from the manifest
+     *
+     * @return
+     */
+    public String getVersion() {
+        String version = "0.0.0";
+
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(
+                    context.getPackageName(), 0);
+            version = packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return version;
+    }
+
 
 }

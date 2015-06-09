@@ -1,6 +1,5 @@
 package com.kenumir.materialsettings;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ public abstract class MaterialSettingsItem {
 	protected MaterialSettingsFragment mMaterialSettings;
 	protected String name;
 
+    protected  View v;
 	public MaterialSettingsItem(MaterialSettingsFragment ctx, String name) {
 		this.mContext = ctx;
 		//if (ctx instanceof MaterialSettingsFragment)
@@ -33,12 +33,22 @@ public abstract class MaterialSettingsItem {
 
 	public View getView(ViewGroup parent) {
 		if (getViewResource() > 0) {
-			View v = initView(parent, getViewResource());
+			 v = initView(parent, getViewResource());
 			setupView(v);
+
 			return v;
 		} else
 			return null;
 	}
+
+   public void  setVisibility(int visibility){
+       if (v!=null){
+           v.setVisibility(visibility);
+       }
+
+
+   }
+
 
 	public void setMaterialSettings(MaterialSettingsFragment m) {
 		mMaterialSettings = m;

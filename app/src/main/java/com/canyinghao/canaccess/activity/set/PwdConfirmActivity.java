@@ -21,6 +21,7 @@ import com.canyinghao.canaccess.activity.MainActivity;
 import com.canyinghao.canaccess.utils.PatternLockUtils;
 import com.canyinghao.canaccess.utils.PreferenceContract;
 import com.canyinghao.canaccess.utils.PreferenceUtils;
+import com.canyinghao.canaccess.utils.Utils;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.SPHepler;
 
@@ -44,7 +45,7 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
         if (SPHepler.getInstance().getInt("lock") != 1 && cls == null) {
 
             IntentHelper.getInstance().showIntent(this, MainActivity.class);
-            finish();
+            IntentHelper.getInstance().finish(this);
         }
 
 
@@ -80,14 +81,14 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
     @Override
     public void onConfirmed() {
         if (cls != null) {
-            IntentHelper.getInstance().showIntent(this, cls);
+            IntentHelper.getInstance().showIntent(this, cls,true);
         } else {
 
-            IntentHelper.getInstance().showIntent(this, MainActivity.class);
+            IntentHelper.getInstance().showIntent(this, MainActivity.class,true);
 
         }
 
-        finish();
+        IntentHelper.getInstance().finish(this);
     }
 
 
@@ -95,11 +96,25 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        View v = LayoutInflater.from(this).inflate(R.layout.dialog_ignore, null);
-        AppCompatTextView tv= (AppCompatTextView) v.findViewById(R.id.title);
+        final View v = LayoutInflater.from(this).inflate(R.layout.dialog_ignore, null);
+        AppCompatTextView tv = (AppCompatTextView) v.findViewById(R.id.title);
         final TextInputLayout textinput1 = (TextInputLayout) v.findViewById(R.id.textInput1);
         final TextInputLayout textinput2 = (TextInputLayout) v.findViewById(R.id.textInput2);
-        textinput1.setHint(getString(R.string.pwd_question));
+
+
+        String ques = SPHepler.getInstance().getString("ques");
+        String answer = SPHepler.getInstance().getString("answer");
+        textinput1.setHint(getString(R.string.answer));
+        if (TextUtils.isEmpty(ques)) {
+
+            ques = getString(R.string.pwd_question);
+            answer = SPHepler.getInstance().getString("date_answer");
+            textinput1.setHint(getString(R.string.ques_date));
+        }
+
+        tv.setText(ques);
+
+
 
 
         textinput2.setVisibility(View.GONE);
@@ -108,28 +123,37 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
         final EditText et1 = textinput1.getEditText();
 
 
-        tv.setText(getString(R.string.pwd_forget));
+
 
         et1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b && TextUtils.isEmpty(et1.getText().toString())) {
                     textinput1.setError(getString(R.string.ignore_empty));
+                }else{
+
+                    Utils.showSnackbar(view,getString(R.string.answer_error),null);
                 }
             }
         });
 
 
-
         builder.setView(v);
 
+
+        final String finalAnswer = answer;
         builder.setPositiveButton(getString(R.string.sure), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                if (true){
-                    onConfirmed();
-                }
+
+                    if (finalAnswer.toLowerCase().equals(et1.getText().toString().toLowerCase())) {
+                        onConfirmed();
+                    }else{
+
+                        Utils.showSnackbar(v,getString(R.string.answer_error),null);
+                    }
+
 
 
             }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/community_white_round_shape"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="请选择时段"
+        android:textAppearance="?attr/textAppearanceSearchResultTitle"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.canyinghao.canaccess.view.wheel.WheelVerticalView
+            android:id="@+id/start_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:unselectedAlpha="0.5"
+            app:visibleItems="4" />
+
+        <com.canyinghao.canaccess.view.wheel.WheelVerticalView
+            android:id="@+id/end_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:unselectedAlpha="0.5"
+            app:visibleItems="4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+
+        <TextView
+            android:id="@+id/dialog_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+
+
+            android:gravity="center"
+
+            android:padding="10dp"
+            android:text="取消"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@android:color/tertiary_text_dark"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/dialog_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+
+
+            android:gravity="center"
+
+            android:padding="10dp"
+            android:text="确定"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@android:color/tertiary_text_dark"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

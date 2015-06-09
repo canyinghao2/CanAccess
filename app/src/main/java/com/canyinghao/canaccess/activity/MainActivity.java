@@ -1,6 +1,5 @@
 package com.canyinghao.canaccess.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -13,8 +12,12 @@ import com.canyinghao.canaccess.activity.set.SetActivity;
 import com.canyinghao.canaccess.fragment.AllFragment;
 import com.canyinghao.canaccess.fragment.BaseFragment;
 import com.canyinghao.canaccess.fragment.NotifyFragment;
+import com.canyinghao.canhelper.DateHelper;
+import com.canyinghao.canhelper.IntentHelper;
+import com.canyinghao.canhelper.SPHepler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -54,6 +57,11 @@ public class MainActivity extends BaseActivity {
         setupDrawerContent(navView);
 
 
+       String date= DateHelper.getInstance().getDataString_2(new Date());
+
+        SPHepler.getInstance().setString("date_answer",date);
+
+
     }
 
 
@@ -88,9 +96,10 @@ public class MainActivity extends BaseActivity {
 
     private void addFragment() {
         list = new ArrayList<>();
+
+        list.add(NotifyFragment.getInstance(null));
+        list.add(NotifyFragment.getInstance(null));
         list.add(AllFragment.getInstance(null));
-        list.add(NotifyFragment.getInstance(null));
-        list.add(NotifyFragment.getInstance(null));
         list.add(AllFragment.getInstance(null));
 
         replaceFragmet(0);
@@ -128,7 +137,9 @@ public class MainActivity extends BaseActivity {
                             case R.id.set:
 
 
-                                startActivity(new Intent(context, SetActivity.class));
+                                IntentHelper.getInstance().showIntent(context, SetActivity.class,true);
+
+
                                 break;
 
                             case R.id.about:

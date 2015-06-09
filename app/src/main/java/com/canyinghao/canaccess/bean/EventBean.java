@@ -14,143 +14,33 @@ public class EventBean implements Parcelable {
 
     int id;
 
-    private String  eventTypeStr="";
-    private int eventType;
+    public String  eventTypeStr="";
+    public int eventType;
 
 
-    private String packageName="";
-    private String label="";
-    private Drawable icon;
+    public String packageName="";
+    public String label="";
+    public Drawable icon;
 
-    private long eventTime;
-    private String eventTimeStr="";
-    private String className="";
+    public long eventTime;
+    public String eventTimeStr="";
+    public String className="";
 
-    private String text="";
+    public String text="";
 
-    private int action;
-    private String contentDescription="";
+    public int action;
+    public String contentDescription="";
 
-    private String beforeText="";
+    public String beforeText="";
 
-    private String datail="";
-
-
+    public String datail="";
 
 
-    private Date date=new Date();
 
-    public Drawable getIcon() {
-        return icon;
-    }
 
-    public void setIcon(Drawable icon) {
-        this.icon = icon;
-    }
+    public Date date=new Date();
 
-    public String getDatail() {
-        return datail;
-    }
-
-    public void setDatail(String datail) {
-        this.datail = datail;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getEventTypeStr() {
-        return eventTypeStr;
-    }
-
-    public void setEventTypeStr(String eventTypeStr) {
-        this.eventTypeStr = eventTypeStr;
-    }
-
-    public int getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(int eventType) {
-        this.eventType = eventType;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public long getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(long eventTime) {
-        this.eventTime = eventTime;
-    }
-
-    public String getEventTimeStr() {
-        return eventTimeStr;
-    }
-
-    public void setEventTimeStr(String eventTimeStr) {
-        this.eventTimeStr = eventTimeStr;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getAction() {
-        return action;
-    }
-
-    public void setAction(int action) {
-        this.action = action;
-    }
-
-    public String getContentDescription() {
-        return contentDescription;
-    }
-
-    public void setContentDescription(String contentDescription) {
-        this.contentDescription = contentDescription;
-    }
-
-    public String getBeforeText() {
-        return beforeText;
-    }
-
-    public void setBeforeText(String beforeText) {
-        this.beforeText = beforeText;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
+   
 
 
     @Override
@@ -179,7 +69,7 @@ public class EventBean implements Parcelable {
     public EventBean() {
     }
 
-    private EventBean(Parcel in) {
+    public EventBean(Parcel in) {
         this.id = in.readInt();
         this.eventTypeStr = in.readString();
         this.eventType = in.readInt();

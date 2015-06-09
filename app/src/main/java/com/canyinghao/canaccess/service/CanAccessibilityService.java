@@ -2,6 +2,9 @@ package com.canyinghao.canaccess.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothHeadset;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
@@ -18,12 +21,14 @@ import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.bean.EventBean;
 import com.canyinghao.canaccess.bean.IgnoreBean;
+import com.canyinghao.canaccess.receiver.NoisyAudioStreamReceiver;
 import com.canyinghao.canhelper.DateHelper;
 import com.canyinghao.canhelper.LogHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +46,7 @@ public class CanAccessibilityService extends AccessibilityService {
     }
 
     private TextToSpeech mTts;
-
+    NoisyAudioStreamReceiver noisyAudioStreamReceiver;
     @SuppressLint("NewApi")
     private static class AudioFocus {
         private static void abandonFocus(AudioManager audioMan) {
@@ -56,6 +61,7 @@ public class CanAccessibilityService extends AccessibilityService {
 
     @Override
     public void onCreate() {
+        addHeadSetReceiver();
         mTts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -79,21 +85,7 @@ public class CanAccessibilityService extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         LogHelper.logi("test", event.toString());
-//        存储数据
-        DbUtils utils = App.getInstance().getDbUtils();
 
-
-        EventBean bean = new EventBean();
-        bean.setAction(event.getAction());
-        bean.setPackageName(getString(event.getPackageName()));
-        bean.setBeforeText(getString(event.getBeforeText()));
-        bean.setClassName(getString(event.getClassName()));
-        bean.setEventTime(new Date().getTime());
-        bean.setEventType(event.getEventType());
-        bean.setEventTimeStr(DateHelper.getInstance().getDataString_1(new Date()));
-        bean.setEventTypeStr(AccessibilityEvent.eventTypeToString(event.getEventType()));
-
-        bean.setDatail(event.toString());
         StringBuilder notifyMsg = new StringBuilder();
         if (!event.getText().isEmpty()) {
             for (CharSequence subText : event.getText()) {
@@ -101,7 +93,26 @@ public class CanAccessibilityService extends AccessibilityService {
 
             }
         }
-        bean.setText(notifyMsg.toString());
+        if (TextUtils.isEmpty(notifyMsg.toString())){
+            return;
+        }
+//        存储数据
+        DbUtils utils = App.getInstance().getDbUtils();
+
+
+        EventBean bean = new EventBean();
+        bean.action=event.getAction();
+        bean.packageName=getString(event.getPackageName());
+        bean.beforeText=getString(event.getBeforeText());
+        bean.className=getString(event.getClassName());
+        bean.eventTime=new Date().getTime();
+        bean.eventType=event.getEventType();
+        bean.eventTimeStr=DateHelper.getInstance().getDataString_1(new Date());
+        bean.eventTypeStr=AccessibilityEvent.eventTypeToString(event.getEventType());
+
+        bean.datail=event.toString();
+
+        bean.text=notifyMsg.toString();
         findAppLabelIcon(bean);
 
         try {
@@ -164,7 +175,47 @@ public class CanAccessibilityService extends AccessibilityService {
      */
     private void spreak(AccessibilityEvent event, EventBean bean) {
 
-        if (TextUtils.isEmpty(bean.getText())){
+
+
+
+
+       int notify_9= SPHepler.getInstance().getInt("set_notify9");
+      int headset= SPHepler.getInstance().getInt("headset");
+        if (notify_9==1&&headset==0){
+            return;
+        }
+
+        int notify_10= SPHepler.getInstance().getInt("set_notify10");
+
+        int start_time = SPHepler.getInstance().getInt("start_time");
+        int end_time = SPHepler.getInstance().getInt("end_time");
+        Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+            boolean isOpen = true;
+            if (notify_10 == 1 ) {
+                if (start_time == end_time) {
+                    isOpen = false;
+
+                } else if (start_time < end_time) {
+
+                    if (hour >= start_time && hour < end_time) {
+                        isOpen = false;
+                    } else {
+                        isOpen = true;
+                    }
+
+                } else {
+
+                    if (hour >= start_time || hour < end_time) {
+                        isOpen = false;
+                    } else {
+                        isOpen = true;
+                    }
+
+                }
+            }
+
+        if (!isOpen){
             return;
         }
 
@@ -181,7 +232,7 @@ public class CanAccessibilityService extends AccessibilityService {
             if (igList != null && !igList.isEmpty()) {
                 for (IgnoreBean bean1 : igList) {
 
-                    if (bean.getText().toLowerCase().contains(bean1.getText().toLowerCase())) {
+                    if (bean.text.toLowerCase().contains(bean1.text.toLowerCase())) {
                         return;
                     }
                 }
@@ -197,7 +248,7 @@ public class CanAccessibilityService extends AccessibilityService {
             if (list != null && !list.isEmpty()) {
                 for (AppBean bean1 : list) {
 
-                    if (bean1.getPackageName().equals(bean.getPackageName())) {
+                    if (bean1.packageName.equals(bean.packageName)) {
                         return;
                     }
                 }
@@ -223,7 +274,7 @@ public class CanAccessibilityService extends AccessibilityService {
         ttsParams.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
                 Integer.toString(SPHepler.getInstance().getInt("set_notify4")));
 
-        mTts.speak(bean.getLabel() + bean.getText(), TextToSpeech.QUEUE_ADD, ttsParams);
+        mTts.speak(bean.label + bean.text, TextToSpeech.QUEUE_ADD, ttsParams);
     }
 
     @Override
@@ -244,9 +295,9 @@ public class CanAccessibilityService extends AccessibilityService {
 
 
         try {
-            ApplicationInfo info = getPackageManager().getApplicationInfo(bean.getPackageName(), 0);
+            ApplicationInfo info = getPackageManager().getApplicationInfo(bean.packageName, 0);
             String lable = String.valueOf(info.loadLabel(getPackageManager()));
-            bean.setLabel(lable);
+            bean.label=lable;
 
 
         } catch (PackageManager.NameNotFoundException e) {
@@ -271,7 +322,7 @@ public class CanAccessibilityService extends AccessibilityService {
             if (list != null && !list.isEmpty()) {
                 for (AppBean bean : list) {
 
-                    if (pkg.equals(bean.getPackageName())) {
+                    if (pkg.equals(bean.packageName)) {
                         return true;
                     }
                 }
@@ -428,8 +479,26 @@ public class CanAccessibilityService extends AccessibilityService {
         }, 10000);
 
 
+
+
     }
 
+    private void addHeadSetReceiver() {
+       noisyAudioStreamReceiver = new NoisyAudioStreamReceiver();
+        IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+        filter.addAction(Intent.ACTION_HEADSET_PLUG);
+        filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
 
+        registerReceiver(noisyAudioStreamReceiver, filter);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (noisyAudioStreamReceiver!=null){
+
+            unregisterReceiver(noisyAudioStreamReceiver);
+        }
+    }
 }

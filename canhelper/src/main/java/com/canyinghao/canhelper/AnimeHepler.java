@@ -1,16 +1,21 @@
 package com.canyinghao.canhelper;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -18,13 +23,12 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.AbsListView;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.FrameLayout.LayoutParams;
 
 /**
  * 动画工具类
@@ -282,6 +286,53 @@ public class AnimeHepler {
 		anim.start();
 
 	}
+
+
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void alphaSeletor(final View v, MotionEvent event){
+
+
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                v.setAlpha(0.8f);
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+
+                v.setAlpha(1.0f);
+                break;
+
+            default:
+                break;
+        }
+
+
+
+
+    }
+
+    /**
+     * 可以给view一个OnTouch监听，模拟selector效果
+     * @return
+     */
+    public View.OnTouchListener getOnTouchSelectorListener(){
+        View.OnTouchListener listener=new View.OnTouchListener() {
+
+            @SuppressLint("ClickableViewAccessibility") @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                alphaSeletor(v, event);
+
+                return false;
+            }
+        };
+
+        return listener;
+
+
+    }
 
 	/**
 	 * 旋转动画，旋转后保留最后的状态

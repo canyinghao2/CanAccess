@@ -2,8 +2,6 @@ package com.canyinghao.canaccess;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 
 import com.canyinghao.canhelper.CanHelper;
 import com.canyinghao.canhelper.FileHelper;
@@ -125,25 +123,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
     }
 
 
-    /**
-     * Retrieves application's version number from the manifest
-     *
-     * @return
-     */
-    public String getVersion() {
-        String version = "0.0.0";
 
-        PackageManager packageManager = getPackageManager();
-        try {
-            PackageInfo packageInfo = packageManager.getPackageInfo(
-                    getPackageName(), 0);
-            version = packageInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return version;
-    }
 
 
 

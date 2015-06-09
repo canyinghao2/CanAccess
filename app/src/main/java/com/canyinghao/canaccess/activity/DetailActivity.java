@@ -65,7 +65,7 @@ public class DetailActivity extends BaseActivity {
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(bean.getLabel());
+        collapsingToolbar.setTitle(bean.label);
 
         loadBackdrop();
     }
@@ -76,7 +76,7 @@ public class DetailActivity extends BaseActivity {
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
         try {
             Drawable icon = context.getPackageManager().getApplicationIcon(bean
-                    .getPackageName());
+                    .packageName);
             imageView.setImageDrawable(icon);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
