@@ -132,7 +132,7 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
                     textinput1.setError(getString(R.string.ignore_empty));
                 }else{
 
-                    Utils.showSnackbar(view,getString(R.string.answer_error),null);
+                    Utils.showSnackbar(view,getString(R.string.answer_error),"",null);
                 }
             }
         });
@@ -151,7 +151,7 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
                         onConfirmed();
                     }else{
 
-                        Utils.showSnackbar(v,getString(R.string.answer_error),null);
+                        Utils.showSnackbar(v,getString(R.string.answer_error),"",null);
                     }
 
 

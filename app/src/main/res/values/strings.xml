@@ -89,13 +89,38 @@
     <string name="set_notify8a">一会儿通知栏将会收到一条通知</string>
     <string name="set_notify9">耳机监听</string>
     <string name="set_notify9a">插入耳机开启提醒，拔出耳机暂停提醒</string>
-    <string name="set_notify10">设置屏蔽的时段</string>
+    <string name="set_notify10">免打扰时段</string>
     <string name="set_notify10a">未设置时段</string>
     <string name="play_mode">播放模式</string>
     <string name="phone_stauts">状态</string>
     <string name="instance_market">请先安装应用市场</string>
 
 
+
+    <string name="set_all1">所有记录开启</string>
+    <string name="set_all1a">选中此项开启所有记录</string>
+    <string name="set_all2">应用列表</string>
+    <string name="set_all2a">选中的应用才开启记录</string>
+
+
+    <string name="set_trash1">自动回收清空开启</string>
+    <string name="set_trash1a">选中此项开启自动回收清理</string>
+    <string name="set_trash2">回收类型</string>
+    <string name="set_trash2a">全部的记录</string>
+    <string name="set_trash2a1">删除的记录</string>
+
+    <string name="set_trash3">回收清空时间</string>
+    <string name="set_trash3a">7天</string>
+
+
+    <string name="day">天</string>
+    <array name="trash_time">
+        <item >7天</item>
+        <item >14天</item>
+        <item >30天</item>
+
+
+    </array>
 
     <array name="play_mode_array">
         <item >听筒播放</item>
@@ -157,6 +182,18 @@
     <string name="answer">答案</string>
 
     <string name="ques_date">格式:xxxx-xx-xx</string>
+
+    <string name="is_delete">是否删除</string>
+    <string name="this_delete">删除此条记录？</string>
+    <string name="delete_success">删除成功</string>
+
+
+    <string name="wifi_success">WIFI连接成功</string>
+    <string name="mob_success">移动网络连接成功</string>
+    <string name="wifi_unconnect">WIFI断开连接</string>
+    <string name="net_unconnect">网络断开</string>
+
+
 
 
 

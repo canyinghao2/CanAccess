@@ -14,6 +14,7 @@ import com.canyinghao.canaccess.adapter.AppListAdapter;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.view.ToolListView;
 import com.canyinghao.canhelper.IntentHelper;
+import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
 
 import java.util.ArrayList;
@@ -35,12 +36,21 @@ public class AppListActivity extends BaseActivity {
     private List<AppBean> list;
 
     boolean isAll;
+    int flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         view = new ToolListView(context);
         setContentView(view);
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra("all")) {
+            flag = 1;
+        }
+
+
         list = new ArrayList<>();
         adapter = new AppListAdapter(context, list);
         view.recyclerView.setAdapter(adapter);
@@ -60,15 +70,14 @@ public class AppListActivity extends BaseActivity {
                     selectNo();
 
 
-
-                    isAll=false;
+                    isAll = false;
 
                 } else {
 
 
                     selectAll();
 
-                    isAll=true;
+                    isAll = true;
                 }
 
 
@@ -99,7 +108,7 @@ public class AppListActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                         for (AppBean bean : list) {
-                            bean.type=0;
+                            bean.type = 0;
 
 
                         }
@@ -138,7 +147,7 @@ public class AppListActivity extends BaseActivity {
                         }
 
                         for (AppBean bean : list) {
-                            bean.type=1;
+                            bean.type = 1;
 
 
                         }
@@ -226,7 +235,7 @@ public class AppListActivity extends BaseActivity {
                 Intent intent = packMan
                         .getLaunchIntentForPackage(appInfo.packageName);
                 if (appInfo.icon != 0 & intent != null) {
-                    AppBean app = new AppBean(appInfo.loadIcon(packMan), 0, String.valueOf(appInfo.loadLabel(packMan)), appInfo.packageName);
+                    AppBean app = new AppBean(appInfo.loadIcon(packMan), 0, String.valueOf(appInfo.loadLabel(packMan)), appInfo.packageName, flag);
                     apps.add(app);
 
                 }
@@ -239,7 +248,7 @@ public class AppListActivity extends BaseActivity {
 
 
         try {
-            List<AppBean> list = App.getInstance().getDbUtils().findAll(AppBean.class);
+            List<AppBean> list = App.getInstance().getDbUtils().findAll(Selector.from(AppBean.class).where("flag", "=", flag));
 
 
             if (list != null && !list.isEmpty()) {
@@ -248,7 +257,7 @@ public class AppListActivity extends BaseActivity {
                     for (AppBean bean1 : apps) {
 
 
-                        bean1.type=1;
+                        bean1.type = 1;
 
                     }
 
@@ -263,7 +272,7 @@ public class AppListActivity extends BaseActivity {
                     for (AppBean bean1 : apps) {
 
                         if (bean.packageName.equals(bean1.packageName)) {
-                            bean1.type=1;
+                            bean1.type = 1;
                             break;
 
                         }

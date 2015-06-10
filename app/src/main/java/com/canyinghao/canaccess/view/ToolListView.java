@@ -53,7 +53,7 @@ public class ToolListView extends FrameLayout {
     private void initView() {
 
         View v = LayoutInflater.from(getContext()).inflate(
-                R.layout.tool_list_view, this);
+                R.layout.view_tool_list, this);
         ButterKnife.inject(this);
 
 

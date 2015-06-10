@@ -133,7 +133,7 @@ public class IgnoreTextActivity extends BaseActivity {
                 String str2 = et2.getText().toString();
                 if (TextUtils.isEmpty(str1) || TextUtils.isEmpty(str2)) {
 
-                    Utils.showSnackbar(view, getString(R.string.ignore_empty), null);
+                    Utils.showSnackbar(view, getString(R.string.ignore_empty),"", null);
                 } else {
 
                     finalBean.title=str1;

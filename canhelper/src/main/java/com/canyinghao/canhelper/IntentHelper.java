@@ -105,8 +105,8 @@ public class IntentHelper {
 	 */
 	public void finish(Activity activity) {
 		activity.finish();
-        activity.overridePendingTransition(R.anim.activity_switch_push_left_in,
-                R.anim.activity_switch_push_left_out);
+        activity.overridePendingTransition(R.anim.activity_switch_push_right_in,R.anim.activity_switch_push_right_out
+        );
 
 	}
 }

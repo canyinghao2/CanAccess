@@ -49,7 +49,7 @@ import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class AllList1Fragment extends BaseFragment {
+public class AllListFragment extends BaseFragment {
     public static final String TYPE = "type";
     public static int today = 0;
     public static int yesterday = 1;
@@ -62,10 +62,10 @@ public class AllList1Fragment extends BaseFragment {
     @InjectView(R.id.recyclerview)
     RecyclerViewEmptySupport recyclerview;
 
-    public static AllList1Fragment getInstance(int type) {
+    public static AllListFragment getInstance(int type) {
 
 
-        AllList1Fragment fragment = new AllList1Fragment();
+        AllListFragment fragment = new AllListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(TYPE, type);
         fragment.setArguments(bundle);
@@ -114,8 +114,6 @@ public class AllList1Fragment extends BaseFragment {
                     }
 
 
-
-
                 }
         );
 
@@ -155,44 +153,34 @@ public class AllList1Fragment extends BaseFragment {
             long l1 = getTodayLong();
             long l2 = getYesterdayLong();
 
-            LogHelper.loge(l1+"getTodayLong()");
-            LogHelper.loge(l2+"getYesterdayLong()");
+            LogHelper.loge(l1 + "getTodayLong()");
+            LogHelper.loge(l2 + "getYesterdayLong()");
 
-            switch (type){
+            switch (type) {
 
                 case 0:
 
 
-
-
-
-                    list = dbUtils.findAll(Selector.from(EventBean.class).where("eventTime",">",l1).orderBy("eventTime", true).limit(1000));
+                    list = dbUtils.findAll(Selector.from(EventBean.class).where("eventTime", ">", l1).and("flag", "=", 0).orderBy("eventTime", true).limit(1000));
 
                     break;
                 case 1:
 
 
-
-                    list = dbUtils.findAll(Selector.from(EventBean.class).where("eventTime", ">", l2).and("eventTime", "<", l1).orderBy("eventTime", true).limit(1000));
+                    list = dbUtils.findAll(Selector.from(EventBean.class).where("eventTime", ">", l2).and("eventTime", "<", l1).and("flag", "=", 0).orderBy("eventTime", true).limit(1000));
                     break;
                 case 2:
-                    list = dbUtils.findAll(Selector.from(EventBean.class).where("eventTime", "<", l2).orderBy("eventTime", true).limit(1000));
+                    list = dbUtils.findAll(Selector.from(EventBean.class).where("eventTime", "<", l2).and("flag", "=", 0).orderBy("eventTime", true).limit(1000));
                     break;
 
             }
-
-
-
-
-
-
 
 
             for (EventBean bean : list) {
 
                 String pkg = bean.packageName;
                 ApplicationInfo info = context.getPackageManager().getApplicationInfo(pkg, 0);
-                bean.icon=info.loadIcon(context.getPackageManager());
+                bean.icon = info.loadIcon(context.getPackageManager());
 
             }
 
@@ -205,21 +193,22 @@ public class AllList1Fragment extends BaseFragment {
     }
 
     private long getYesterdayLong() {
-        Calendar c=    Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
         c.add(Calendar.DAY_OF_MONTH, -1);
-        c.set(Calendar.HOUR_OF_DAY,0);
-        c.set(Calendar.MINUTE,0);
-        c.set(Calendar.SECOND,0);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
         return c.getTimeInMillis();
     }
 
     private long getTodayLong() {
-        Calendar ca=     Calendar.getInstance();
-        ca.set(Calendar.HOUR_OF_DAY,0);
-        ca.set(Calendar.MINUTE,0);
-        ca.set(Calendar.SECOND,0);
+        Calendar ca = Calendar.getInstance();
+        ca.set(Calendar.HOUR_OF_DAY, 0);
+        ca.set(Calendar.MINUTE, 0);
+        ca.set(Calendar.SECOND, 0);
         return ca.getTimeInMillis();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

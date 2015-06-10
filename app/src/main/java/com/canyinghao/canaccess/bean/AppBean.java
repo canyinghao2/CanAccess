@@ -25,12 +25,14 @@ public class AppBean implements Parcelable {
 	public String packageName, label;
 	public int type;
     public Drawable icon;
+    public int flag;
 
-    public AppBean(Drawable icon, int type, String label, String packageName) {
+    public AppBean(Drawable icon, int type, String label, String packageName,int flag) {
         this.icon = icon;
         this.type=type;
         this.label = label;
         this.packageName = packageName;
+        this.flag=flag;
     }
 
 
@@ -50,7 +52,7 @@ public class AppBean implements Parcelable {
         dest.writeString(this.packageName);
         dest.writeString(this.label);
         dest.writeInt(this.type);
-
+        dest.writeInt(this.flag);
     }
 
     private AppBean(Parcel in) {
@@ -58,6 +60,7 @@ public class AppBean implements Parcelable {
         this.packageName = in.readString();
         this.label = in.readString();
         this.type = in.readInt();
+        this.flag=in.readInt();
 
     }
 

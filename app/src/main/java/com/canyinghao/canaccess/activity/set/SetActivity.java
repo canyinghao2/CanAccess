@@ -145,7 +145,7 @@ public class SetActivity extends MaterialSettingsActivity {
         addItem(new TextItem(getFragment(), "set5").setTitle(getText(R.string.set5).toString()).setSubtitle(getText(R.string.set5a).toString()).setIcon(R.mipmap.ic_delete_grey600).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
-                Toast.makeText(SetActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                IntentHelper.getInstance().showIntent(context,SetTrashActivity.class,true);
 
 
             }
@@ -158,7 +158,8 @@ public class SetActivity extends MaterialSettingsActivity {
         addItem(new TextItem(getFragment(), "set4").setTitle(getText(R.string.set4).toString()).setSubtitle(getText(R.string.set4a).toString()).setIcon(R.mipmap.ic_dashboard_grey600).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
-                Toast.makeText(SetActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+
+                IntentHelper.getInstance().showIntent(context,SetAllActivity.class,true);
             }
         }));
     }

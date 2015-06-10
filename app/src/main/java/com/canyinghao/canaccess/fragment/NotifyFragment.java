@@ -49,17 +49,20 @@ import rx.schedulers.Schedulers;
 
 public class NotifyFragment extends BaseFragment {
 
-
+    public static final String TYPE="type";
 
     @InjectView(R.id.toolListView)
     ToolListView toolListView;
 
     List<EventBean> list;
+    int flag;
 
-    public static NotifyFragment getInstance(Bundle bundle) {
+    public static NotifyFragment getInstance(int type) {
 
 
         NotifyFragment fragment = new NotifyFragment();
+        Bundle bundle=new Bundle();
+        bundle.putInt(TYPE,type);
         fragment.setArguments(bundle);
 
 
@@ -76,7 +79,16 @@ public class NotifyFragment extends BaseFragment {
 
 
         ButterKnife.inject(this, v);
-        toolListView. recyclerView.setLayoutManager(new LinearLayoutManager(toolListView.recyclerView.getContext()));
+        toolListView.recyclerView.setLayoutManager(new LinearLayoutManager(toolListView.recyclerView.getContext()));
+
+      Bundle bundle=  getArguments();
+       flag= bundle.getInt(TYPE);
+
+
+
+
+
+
         initView();
         observable();
 
@@ -84,8 +96,6 @@ public class NotifyFragment extends BaseFragment {
     }
 
     private void initView() {
-
-
 
 
         setToolbar(toolListView.toolbar, R.mipmap.ic_menu_white, "", "", new View.OnClickListener() {
@@ -109,14 +119,14 @@ public class NotifyFragment extends BaseFragment {
                         DbUtils dbUtils = App.getInstance().getDbUtils();
 
                         try {
-                            list = dbUtils.findAll(Selector.from(EventBean.class).where("eventType","=", AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED).and("text","!=","").orderBy("eventTime",true).limit(1000));
+                            list = dbUtils.findAll(Selector.from(EventBean.class).where("eventType", "=", AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED).and("text", "!=", "").and("flag", "=", flag).orderBy("eventTime", true).limit(1000));
 
 
                             for (EventBean bean : list) {
 
                                 String pkg = bean.packageName;
                                 ApplicationInfo info = context.getPackageManager().getApplicationInfo(pkg, 0);
-                                bean.icon=info.loadIcon(context.getPackageManager());
+                                bean.icon = info.loadIcon(context.getPackageManager());
 
                             }
 
@@ -143,17 +153,17 @@ public class NotifyFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
-                toolListView. recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                toolListView.recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
             }
 
             @Override
             public void onNext(List<EventBean> EventBeans) {
 
 
-                toolListView. recyclerView.setAdapter(new ListAdapter(context,
+                toolListView.recyclerView.setAdapter(new ListAdapter(context,
                         list));
 
-                toolListView. recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                toolListView.recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
 
 
             }

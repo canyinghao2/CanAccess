@@ -1,6 +1,8 @@
 package com.canyinghao.canaccess.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -10,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.activity.BaseActivity;
 import com.canyinghao.canaccess.activity.DetailActivity;
 import com.canyinghao.canaccess.bean.EventBean;
+import com.canyinghao.canaccess.utils.Utils;
+import com.lidroid.xutils.exception.DbException;
 
 import java.util.List;
 
@@ -30,6 +35,7 @@ public class ListAdapter
     private int mBackground;
     private List<EventBean> mValues;
 
+    private boolean isClick;
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
@@ -70,7 +76,7 @@ public class ListAdapter
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item, parent, false);
+                .inflate(R.layout.item_list, parent, false);
         view.setBackgroundResource(mBackground);
         return new ViewHolder(view);
     }
@@ -87,6 +93,7 @@ public class ListAdapter
             text=bean.className;
         }
         holder.text2.setText(text);
+
         holder.text3.setText(bean.eventTimeStr);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +107,61 @@ public class ListAdapter
         });
 
         holder.avatar.setImageDrawable(bean.icon);
+
+        holder.view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(context);
+                builder.setTitle(R.string.is_delete);
+                builder.setMessage(R.string.this_delete);
+                builder.setPositiveButton(R.string.sure,new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        list.remove(position);
+                        notifyItemRemoved(position);
+                        holder. view.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!isClick){
+                                    bean.flag=1;
+                                    try {
+                                        App.getInstance().getDbUtils().saveOrUpdate(bean);
+                                    } catch (DbException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                }
+                                notifyDataSetChanged();
+                            }
+                        },2000);
+
+                        Utils.showSnackbar(holder. view,context.getString(R.string.delete_success),context.getString(R.string.cancel),new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                isClick=true;
+                                list.add(position,bean);
+                                notifyItemInserted(position);
+                                holder. view.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        notifyDataSetChanged();
+                                    }
+                                },500);
+                            }
+                        });
+                    }
+                });
+
+                builder.setNegativeButton(R.string.cancel,null);
+
+                builder.show();
+
+
+                return false;
+            }
+        });
 
     }
 

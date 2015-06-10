@@ -133,9 +133,9 @@ public class AllFragment extends BaseFragment {
 
        String[] strs= getResources().getStringArray(R.array.time_title);
 
-        adapter.addFragment(AllList1Fragment.getInstance(0), strs[0]);
-        adapter.addFragment(AllList1Fragment.getInstance(1), strs[1]);
-        adapter.addFragment(AllList1Fragment.getInstance(2), strs[2]);
+        adapter.addFragment(AllListFragment.getInstance(0), strs[0]);
+        adapter.addFragment(AllListFragment.getInstance(1), strs[1]);
+        adapter.addFragment(AllListFragment.getInstance(2), strs[2]);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
     }

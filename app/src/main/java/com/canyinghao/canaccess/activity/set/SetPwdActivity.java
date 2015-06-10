@@ -120,7 +120,7 @@ public class SetPwdActivity extends MaterialSettingsActivity {
                 PatternLockUtils.clearPattern(context);
                 SPHepler.getInstance().setInt("lock", 0);
                 deleteItem.setVisibility(View.GONE);
-                Utils.showSnackbar(toolbar, getString(R.string.pwd_toast), null);
+                Utils.showSnackbar(toolbar, getString(R.string.pwd_toast),"", null);
 
 
             }
@@ -198,7 +198,7 @@ public class SetPwdActivity extends MaterialSettingsActivity {
                 String str2 = et2.getText().toString();
                 if (TextUtils.isEmpty(str1) || TextUtils.isEmpty(str2)) {
 
-                    Utils.showSnackbar(toolbar, getString(R.string.ignore_empty), null);
+                    Utils.showSnackbar(toolbar, getString(R.string.ignore_empty), "",null);
                 } else {
 
                     SPHepler.getInstance().setString("ques", str1);

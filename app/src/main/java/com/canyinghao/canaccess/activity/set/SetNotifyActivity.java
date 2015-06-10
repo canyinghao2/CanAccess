@@ -15,7 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.canyinghao.canaccess.R;
-import com.canyinghao.canaccess.view.CustomNoRemindDialog;
+import com.canyinghao.canaccess.view.NoRemindDialog;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
@@ -98,7 +98,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
             @Override
             public void onClick(TextItem item) {
 
-                new CustomNoRemindDialog(context, new View.OnClickListener() {
+                new NoRemindDialog(context, new View.OnClickListener() {
 
                     @Override
                     public void onClick(View arg0) {

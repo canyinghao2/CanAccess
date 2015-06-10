@@ -8,6 +8,8 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
@@ -21,7 +23,7 @@ import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.bean.EventBean;
 import com.canyinghao.canaccess.bean.IgnoreBean;
-import com.canyinghao.canaccess.receiver.NoisyAudioStreamReceiver;
+import com.canyinghao.canaccess.receiver.PhoneChangedReceiver;
 import com.canyinghao.canhelper.DateHelper;
 import com.canyinghao.canhelper.LogHelper;
 import com.canyinghao.canhelper.SPHepler;
@@ -46,7 +48,7 @@ public class CanAccessibilityService extends AccessibilityService {
     }
 
     private TextToSpeech mTts;
-    NoisyAudioStreamReceiver noisyAudioStreamReceiver;
+    PhoneChangedReceiver receiver;
     @SuppressLint("NewApi")
     private static class AudioFocus {
         private static void abandonFocus(AudioManager audioMan) {
@@ -101,7 +103,7 @@ public class CanAccessibilityService extends AccessibilityService {
 
 
         EventBean bean = new EventBean();
-        bean.action=event.getAction();
+
         bean.packageName=getString(event.getPackageName());
         bean.beforeText=getString(event.getBeforeText());
         bean.className=getString(event.getClassName());
@@ -484,21 +486,22 @@ public class CanAccessibilityService extends AccessibilityService {
     }
 
     private void addHeadSetReceiver() {
-       noisyAudioStreamReceiver = new NoisyAudioStreamReceiver();
+        receiver = new PhoneChangedReceiver();
         IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
         filter.addAction(Intent.ACTION_HEADSET_PLUG);
         filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
-
-        registerReceiver(noisyAudioStreamReceiver, filter);
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(receiver, filter);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        if (noisyAudioStreamReceiver!=null){
+        if (receiver!=null){
 
-            unregisterReceiver(noisyAudioStreamReceiver);
+            unregisterReceiver(receiver);
         }
     }
 }

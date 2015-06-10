@@ -1,12 +1,17 @@
 package com.canyinghao.canaccess.receiver;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 
+import com.canyinghao.canaccess.R;
 import com.canyinghao.canhelper.PhoneHelper;
 import com.canyinghao.canhelper.SPHepler;
 
@@ -27,7 +32,7 @@ public class PhoneChangedReceiver extends BroadcastReceiver {
             switch (wifiState) {
                 case WifiManager.WIFI_STATE_DISABLED:
 
-                    PhoneHelper.getInstance().show("WIFI_STATE_DISABLED");
+                    PhoneHelper.getInstance().show(context.getString(R.string.wifi_unconnect));
 
                     break;
                 case WifiManager.WIFI_STATE_DISABLING:
@@ -37,7 +42,7 @@ public class PhoneChangedReceiver extends BroadcastReceiver {
                     break;
                 case WifiManager.WIFI_STATE_ENABLED:
 
-                    PhoneHelper.getInstance().show("WIFI_STATE_ENABLED");
+                    PhoneHelper.getInstance().show(context.getString(R.string.wifi_success));
 
                     break;
                 case WifiManager.WIFI_STATE_ENABLING:
@@ -53,21 +58,73 @@ public class PhoneChangedReceiver extends BroadcastReceiver {
         if (gprs==0&&intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)){
 
             ConnectivityManager connectMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mobNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-            NetworkInfo wifiNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-            if (!mobNetInfo.isConnected() && !wifiNetInfo.isConnected()) {// unconnect network
 
-                PhoneHelper.getInstance().show("mobNetInfo_STATE_ENABLED");
-            } else {// connect network
+            NetworkInfo  netInfo= connectMgr.getActiveNetworkInfo();
 
-                PhoneHelper.getInstance().show("mobNetInfo_STATE_ENABLED");
+            if(netInfo != null && netInfo.isAvailable()) {
+
+                /////////////网络连接
+                String name = netInfo.getTypeName();
+
+                if(netInfo.getType()==ConnectivityManager.TYPE_WIFI){
+                    /////WiFi网络
+                    PhoneHelper.getInstance().show(context.getString(R.string.wifi_success));
+                }else if(netInfo.getType()==ConnectivityManager.TYPE_ETHERNET){
+                    /////有线网络
+
+                }else if(netInfo.getType()==ConnectivityManager.TYPE_MOBILE){
+                    /////////3g网络
+                    PhoneHelper.getInstance().show(context.getString(R.string.mob_success));
+                }
+            } else {
+                ////////网络断开
+                PhoneHelper.getInstance().show(context.getString(R.string.net_unconnect));
             }
 
         }
 
 
 
+
+        String action=intent.getAction();
+        if (action.equals(Intent.ACTION_HEADSET_PLUG)) {
+            int state = intent.getIntExtra("state", -1);
+            switch (state) {
+                case 0:
+                    //拔出耳机
+
+                    SPHepler.getInstance().setInt("headset",0);
+
+                    break;
+                case 1:
+                    //插耳机自动播放
+                    SPHepler.getInstance().setInt("headset",1);
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+
+        if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(action)){
+
+
+            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+            if(BluetoothProfile.STATE_DISCONNECTED == adapter.getProfileConnectionState(BluetoothProfile.HEADSET)) {
+                //Bluetooth headset is now disconnected
+
+                SPHepler.getInstance().setInt("headset",0);
+
+            }
+        }
+
+
+        //只监听拔出耳机
+        if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(action)) {
+            SPHepler.getInstance().setInt("headset",0);
+        }
 
 
 

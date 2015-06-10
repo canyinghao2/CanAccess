@@ -37,7 +37,7 @@ public class AppListAdapter extends NewBaseAdapter {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_app_item, parent, false);
+                .inflate(R.layout.item_list_app, parent, false);
         view.setBackgroundResource(background);
 
         return new ViewHolder(view);

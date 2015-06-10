@@ -4,8 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 /**
  * Created by yangjian on 15/6/6.
  */
@@ -28,7 +26,7 @@ public class EventBean implements Parcelable {
 
     public String text="";
 
-    public int action;
+    public int flag;
     public String contentDescription="";
 
     public String beforeText="";
@@ -38,7 +36,7 @@ public class EventBean implements Parcelable {
 
 
 
-    public Date date=new Date();
+
 
    
 
@@ -59,11 +57,11 @@ public class EventBean implements Parcelable {
         dest.writeString(this.eventTimeStr);
         dest.writeString(this.className);
         dest.writeString(this.text);
-        dest.writeInt(this.action);
+        dest.writeInt(this.flag);
         dest.writeString(this.contentDescription);
         dest.writeString(this.beforeText);
         dest.writeString(this.datail);
-        dest.writeLong(date != null ? date.getTime() : -1);
+
     }
 
     public EventBean() {
@@ -79,12 +77,12 @@ public class EventBean implements Parcelable {
         this.eventTimeStr = in.readString();
         this.className = in.readString();
         this.text = in.readString();
-        this.action = in.readInt();
+        this.flag = in.readInt();
         this.contentDescription = in.readString();
         this.beforeText = in.readString();
         this.datail = in.readString();
-        long tmpDate = in.readLong();
-        this.date = tmpDate == -1 ? null : new Date(tmpDate);
+
+
     }
 
     public static final Parcelable.Creator<EventBean> CREATOR = new Parcelable.Creator<EventBean>() {

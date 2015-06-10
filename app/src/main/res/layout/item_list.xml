@@ -44,7 +44,8 @@
 
                 android:layout_marginTop="@dimen/top_margin_small"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceListItemSmall"/>
+                android:textAppearance="?attr/textAppearanceListItemSmall"
+                android:visibility="gone"/>
 
         <TextView
             android:id="@+id/text2"

@@ -30,11 +30,13 @@ public class Utils {
     }
 
 
-    public static void showSnackbar(View v, String message, View.OnClickListener listener) {
+    public static void showSnackbar(View v, String message,String actionText, View.OnClickListener listener) {
 
         Snackbar.make(v, message, Snackbar.LENGTH_SHORT)
-                .setAction("Action", listener).show();
+                .setAction(actionText, listener).show();
+
     }
+
 
 
     public static String setAllComponentsName(Object f, int value) {

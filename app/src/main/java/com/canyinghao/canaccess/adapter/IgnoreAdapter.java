@@ -11,10 +11,13 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.activity.set.IgnoreTextActivity;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.bean.IgnoreBean;
+import com.canyinghao.canaccess.utils.Utils;
+import com.lidroid.xutils.exception.DbException;
 
 import java.util.List;
 
@@ -27,6 +30,8 @@ import butterknife.InjectView;
 public class IgnoreAdapter extends NewBaseAdapter {
 
 
+    private boolean isClick;
+
     public IgnoreAdapter(Context context, List list) {
         super(context, list);
 
@@ -37,7 +42,7 @@ public class IgnoreAdapter extends NewBaseAdapter {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_app_item, parent, false);
+                .inflate(R.layout.item_list_app, parent, false);
         view.setBackgroundResource(background);
 
         return new ViewHolder(view);
@@ -45,10 +50,10 @@ public class IgnoreAdapter extends NewBaseAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holde, final int position) {
-        final ViewHolder holder= (ViewHolder) holde;
+        final ViewHolder holder = (ViewHolder) holde;
 
         final IgnoreBean bean = (IgnoreBean) list.get(position);
-         holder.avatar.setVisibility(View.GONE);
+        holder.avatar.setVisibility(View.GONE);
         holder.cb.setVisibility(View.GONE);
         holder.title.setText(bean.title);
         holder.text1.setText(bean.text);
@@ -57,12 +62,12 @@ public class IgnoreAdapter extends NewBaseAdapter {
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                AlertDialog.Builder builder= new AlertDialog.Builder(context);
-                builder.setItems(context.getResources().getStringArray(R.array.ignore_array),new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setItems(context.getResources().getStringArray(R.array.ignore_array), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        switch (i){
+                        switch (i) {
 
 
                             case 0:
@@ -71,24 +76,51 @@ public class IgnoreAdapter extends NewBaseAdapter {
                                 view.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
+                                        if (!isClick){
+
+                                            try {
+                                                App.getInstance().getDbUtils().delete(bean);
+                                            } catch (DbException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
                                         notifyDataSetChanged();
                                     }
-                                },500);
-
-                                break;
-                            case  1:
-
-                              IgnoreTextActivity activity= (IgnoreTextActivity) context;
-
-                                activity.showEditDialog(bean);
-
-                                break;
-                        }
-
-                    }
-                });
+                                }, 2000);
 
 
+
+                                Utils.showSnackbar(holder. view,context.getString(R.string.delete_success),context.getString(R.string.cancel),new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        list.add(position,bean);
+                                        notifyItemInserted(position);
+                                        isClick=true;
+                                        holder. view.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+
+
+                                                notifyDataSetChanged();
+                                            }
+                                        },500);
+                                    }
+                                });
+
+
+                                         break;
+                                         case 1:
+
+                                         IgnoreTextActivity activity = (IgnoreTextActivity) context;
+
+                                         activity.showEditDialog(bean);
+
+                                         break;
+                                     }
+
+                                 }
+                        });
 
 
                 builder.show();
@@ -98,14 +130,7 @@ public class IgnoreAdapter extends NewBaseAdapter {
         });
 
 
-
-
-
-
-
     }
-
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -120,9 +145,10 @@ public class IgnoreAdapter extends NewBaseAdapter {
         @InjectView(R.id.cb)
         CheckBox cb;
         View view;
+
         public ViewHolder(View view) {
             super(view);
-            this.view=view;
+            this.view = view;
             ButterKnife.inject(this, view);
 
 

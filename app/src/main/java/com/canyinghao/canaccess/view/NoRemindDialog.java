@@ -13,13 +13,13 @@ import com.canyinghao.canaccess.view.wheel.ArrayWheelAdapter;
 import com.canyinghao.canaccess.view.wheel.WheelVerticalView;
 import com.canyinghao.canhelper.SPHepler;
 
-public class CustomNoRemindDialog extends Dialog {
+public class NoRemindDialog extends Dialog {
 
 	View.OnClickListener leftclick;
 	View.OnClickListener rightclick;
 
-	public CustomNoRemindDialog(final Context context,
-			View.OnClickListener leftclick, View.OnClickListener rightclick) {
+	public NoRemindDialog(final Context context,
+                          View.OnClickListener leftclick, View.OnClickListener rightclick) {
 		super(context, R.style.CustomDialog);
 
 		this.leftclick = leftclick;
@@ -31,7 +31,7 @@ public class CustomNoRemindDialog extends Dialog {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.community_custom_no_remind_dialog);
+		setContentView(R.layout.dialog_custom_no_remind);
 		getWindow().setBackgroundDrawable(new BitmapDrawable());
 		setCanceledOnTouchOutside(true);
 
