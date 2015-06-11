@@ -60,8 +60,8 @@ public class AppListActivity extends BaseActivity {
                 IntentHelper.getInstance().finish(context);
             }
         }, null);
-
-
+        view.backdrop.setImageResource(R.drawable.bg2);
+        view.floatButton.setImageResource(R.mipmap.ic_done_white);
         view.floatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -19,6 +19,8 @@ public class BaseFragment extends Fragment {
     public BaseActivity context;
 
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub

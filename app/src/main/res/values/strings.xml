@@ -199,6 +199,20 @@
 
 
 
+    <string name="about_title">便捷的辅助服务工具</string>
+    <string name="about_tool">这是一款用来进行辅助服务的工具，可使用TTS进行语音提醒，并有人性化的设置，还可查看一些使用记录。界面美观，高效实用。</string>
+    <string name="about_have">版权所有</string>
+    <string name="about_mail">联系邮箱：canyinghao@hotmail.com</string>
+    <string name="about_me">canyinghao</string>
+    <string name="about_welcome">欢迎提供反馈与建议</string>
+    <string name="about_version">版本号</string>
+
+
+
+
+
+
+
 
 
 

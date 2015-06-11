@@ -109,6 +109,7 @@ public class DetailActivity extends BaseActivity {
             Drawable icon = context.getPackageManager().getApplicationIcon(bean
                     .packageName);
             backdrop.setImageDrawable(icon);
+            fab.setImageDrawable(icon);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -132,6 +133,7 @@ public class DetailActivity extends BaseActivity {
 
 
     public static void launch(BaseActivity activity, View transitionView, EventBean bean) {
+
         ActivityOptionsCompat options =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                         activity, transitionView, EXTRA_NAME);

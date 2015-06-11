@@ -82,6 +82,7 @@ public class AllListFragment extends BaseFragment {
                 R.layout.fragment_list, container, false);
         ButterKnife.inject(this, view);
 
+
         type = getArguments().getInt(TYPE);
 
         recyclerview.setLayoutManager(new LinearLayoutManager(recyclerview.getContext()));

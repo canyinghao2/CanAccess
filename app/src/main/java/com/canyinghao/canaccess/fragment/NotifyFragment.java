@@ -19,7 +19,6 @@ package com.canyinghao.canaccess.fragment;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -29,6 +28,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.activity.BaseActivity;
 import com.canyinghao.canaccess.activity.MainActivity;
 import com.canyinghao.canaccess.adapter.ListAdapter;
 import com.canyinghao.canaccess.bean.EventBean;
@@ -49,7 +49,7 @@ import rx.schedulers.Schedulers;
 
 public class NotifyFragment extends BaseFragment {
 
-    public static final String TYPE="type";
+    public static final String TYPE = "type";
 
     @InjectView(R.id.toolListView)
     ToolListView toolListView;
@@ -61,8 +61,8 @@ public class NotifyFragment extends BaseFragment {
 
 
         NotifyFragment fragment = new NotifyFragment();
-        Bundle bundle=new Bundle();
-        bundle.putInt(TYPE,type);
+        Bundle bundle = new Bundle();
+        bundle.putInt(TYPE, type);
         fragment.setArguments(bundle);
 
 
@@ -71,7 +71,7 @@ public class NotifyFragment extends BaseFragment {
     }
 
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(
@@ -81,12 +81,9 @@ public class NotifyFragment extends BaseFragment {
         ButterKnife.inject(this, v);
         toolListView.recyclerView.setLayoutManager(new LinearLayoutManager(toolListView.recyclerView.getContext()));
 
-      Bundle bundle=  getArguments();
-       flag= bundle.getInt(TYPE);
-
-
-
-
+        ((BaseActivity)getActivity()).setSupportActionBar(toolListView.toolbar);
+        Bundle bundle = getArguments();
+        flag = bundle.getInt(TYPE);
 
 
         initView();
@@ -104,7 +101,7 @@ public class NotifyFragment extends BaseFragment {
                 ((MainActivity) context).drawerLayout.openDrawer(GravityCompat.START);
             }
         }, null);
-
+        toolListView.backdrop.setImageResource(R.drawable.bg1);
 
     }
 

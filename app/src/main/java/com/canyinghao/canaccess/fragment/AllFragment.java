@@ -81,10 +81,7 @@ public class AllFragment extends BaseFragment {
 
 
 
-
         initView();
-
-
 
 
         return v;
@@ -92,7 +89,6 @@ public class AllFragment extends BaseFragment {
 
 
     public void initView() {
-
 
 
         if (viewPager != null) {
@@ -116,8 +112,7 @@ public class AllFragment extends BaseFragment {
         setToolbar(toolBar, R.mipmap.ic_menu_white, "", "", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)context).drawerLayout.openDrawer(GravityCompat.START);
-
+                ((MainActivity) context).drawerLayout.openDrawer(GravityCompat.START);
 
 
             }
@@ -125,13 +120,10 @@ public class AllFragment extends BaseFragment {
     }
 
 
-
-
-
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
 
-       String[] strs= getResources().getStringArray(R.array.time_title);
+        String[] strs = getResources().getStringArray(R.array.time_title);
 
         adapter.addFragment(AllListFragment.getInstance(0), strs[0]);
         adapter.addFragment(AllListFragment.getInstance(1), strs[1]);

@@ -29,6 +29,7 @@
         <activity android:name=".activity.set.PwdSetActivity" />
 
         <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.set.AboutActivity" />
         <activity
             android:name=".activity.set.SetActivity"
             android:label="Setting"

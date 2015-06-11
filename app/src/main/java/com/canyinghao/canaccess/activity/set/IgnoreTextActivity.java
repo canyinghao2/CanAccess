@@ -46,7 +46,9 @@ public class IgnoreTextActivity extends BaseActivity {
                 IntentHelper.getInstance().finish(context);
             }
         }, null);
+        view.backdrop.setImageResource(R.drawable.bg2);
 
+        view.floatButton.setImageResource(R.mipmap.ic_add_white);
         view.floatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

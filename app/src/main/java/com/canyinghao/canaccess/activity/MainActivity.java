@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.activity.set.AboutActivity;
 import com.canyinghao.canaccess.activity.set.SetActivity;
 import com.canyinghao.canaccess.bean.EventBean;
 import com.canyinghao.canaccess.fragment.AllFragment;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity {
 
         addFragment();
         setupDrawerContent(navView);
+
 
         String date = DateHelper.getInstance().getDataString_2(new Date());
 
@@ -108,10 +110,15 @@ public class MainActivity extends BaseActivity {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        BaseFragment baseFragment = list.get(p);
 
-        transaction.replace(R.id.frame, list.get(p));
+
+
+        transaction.replace(R.id.frame, baseFragment);
 
         transaction.commit();
+
+
     }
 
 
@@ -130,6 +137,8 @@ public class MainActivity extends BaseActivity {
 
 
     private void setupDrawerContent(NavigationView navigationView) {
+
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -162,6 +171,8 @@ public class MainActivity extends BaseActivity {
                                 break;
 
                             case R.id.about:
+
+                                IntentHelper.getInstance().showIntent(context, AboutActivity.class, true);
                                 break;
 
                         }
