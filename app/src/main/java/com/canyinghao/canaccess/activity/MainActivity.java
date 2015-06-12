@@ -148,18 +148,22 @@ public class MainActivity extends BaseActivity {
 
                             case R.id.rd_notify:
                                 replaceFragmet(0);
+                                drawerLayout.closeDrawers();
                                 break;
 
                             case R.id.rd_action:
                                 replaceFragmet(1);
+                                drawerLayout.closeDrawers();
                                 break;
                             case R.id.rd_all:
 
                                 replaceFragmet(2);
+                                drawerLayout.closeDrawers();
                                 break;
 
                             case R.id.rd_trash:
                                 replaceFragmet(3);
+                                drawerLayout.closeDrawers();
                                 break;
 
                             case R.id.set:
@@ -179,7 +183,7 @@ public class MainActivity extends BaseActivity {
 
 
                         menuItem.setChecked(true);
-                        drawerLayout.closeDrawers();
+
 
                         return true;
                     }

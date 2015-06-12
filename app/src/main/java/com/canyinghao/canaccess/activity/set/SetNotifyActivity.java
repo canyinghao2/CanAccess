@@ -37,7 +37,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         setToolbar(R.mipmap.ic_arrow_back_white,"","",new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IntentHelper.getInstance().finish(context);
+                onBackPressed();
             }
         },null);
 
@@ -59,6 +59,8 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         addHeadset();
         addTimeControl();
         addTest();
+
+
 
 
     }
@@ -402,6 +404,11 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
         return false;
     }
 
+
+    @Override
+    public void onBackPressed() {
+       IntentHelper.getInstance().finish(this);
+    }
 
 
 }

@@ -1,7 +1,9 @@
 package com.canyinghao.canaccess.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -13,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.canyinghao.canaccess.App;
+import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
-import com.canyinghao.canaccess.activity.BaseActivity;
 import com.canyinghao.canaccess.activity.DetailActivity;
 import com.canyinghao.canaccess.bean.EventBean;
 import com.canyinghao.canaccess.utils.Utils;
@@ -99,10 +101,16 @@ public class ListAdapter
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                 notifyItemMoved(position,position+1);
-//                notifyItemRemoved(position);
 
-                DetailActivity.launch((BaseActivity) context, holder.avatar, bean);
+
+
+                Intent intent=new Intent(context,DetailActivity.class);
+
+                intent.putExtra(Constant.start,bean);
+                Utils.startSceneTransition((Activity)context,holder.avatar,intent, R.id.backdrop,Constant.start);
+
+
+
             }
         });
 

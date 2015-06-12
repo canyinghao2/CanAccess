@@ -16,6 +16,7 @@
 
 package com.canyinghao.canaccess.fragment;
 
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -27,11 +28,14 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.canyinghao.canaccess.App;
+import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.activity.BaseActivity;
 import com.canyinghao.canaccess.activity.MainActivity;
+import com.canyinghao.canaccess.activity.SearchActivity;
 import com.canyinghao.canaccess.adapter.ListAdapter;
 import com.canyinghao.canaccess.bean.EventBean;
+import com.canyinghao.canaccess.utils.Utils;
 import com.canyinghao.canaccess.view.ToolListView;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
@@ -102,6 +106,14 @@ public class NotifyFragment extends BaseFragment {
             }
         }, null);
         toolListView.backdrop.setImageResource(R.drawable.bg1);
+
+        toolListView.floatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=   new Intent(context, SearchActivity.class);
+                Utils.startSceneTransition(context,view,intent, R.id.appBar,Constant.start);
+            }
+        });
 
     }
 

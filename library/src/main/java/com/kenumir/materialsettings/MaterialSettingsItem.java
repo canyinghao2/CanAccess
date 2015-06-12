@@ -15,7 +15,7 @@ public abstract class MaterialSettingsItem {
 	protected MaterialSettingsFragment mMaterialSettings;
 	protected String name;
 
-    protected  View v;
+    public   View v;
 	public MaterialSettingsItem(MaterialSettingsFragment ctx, String name) {
 		this.mContext = ctx;
 		//if (ctx instanceof MaterialSettingsFragment)

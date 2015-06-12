@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.service.CanAccessibilityService;
 import com.canyinghao.canaccess.utils.PatternLockUtils;
+import com.canyinghao.canaccess.utils.Utils;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.PhoneHelper;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
@@ -184,8 +186,10 @@ public class SetActivity extends MaterialSettingsActivity {
             @Override
             public void onClick(TextItem v) {
 
+                Intent intent=   new Intent(SetActivity.this,SetNotifyActivity.class);
 
-                IntentHelper.getInstance().showIntent(SetActivity.this,SetNotifyActivity.class,true);
+               Utils. startSceneTransition(context,getItem("set2").v,intent,R.id.toolbar, Constant.start);
+//                IntentHelper.getInstance().showIntent(SetActivity.this,SetNotifyActivity.class,true);
 
             }
         }));

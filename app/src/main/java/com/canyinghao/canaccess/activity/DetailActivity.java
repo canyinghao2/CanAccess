@@ -19,28 +19,29 @@ package com.canyinghao.canaccess.activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.bean.EventBean;
+import com.canyinghao.canaccess.utils.Utils;
+import com.kale.activityoptions.transition.TransitionCompat;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class DetailActivity extends BaseActivity {
 
-    public static final String EXTRA_NAME = "detail_name";
+
     EventBean bean;
     @InjectView(R.id.backdrop)
     ImageView backdrop;
@@ -71,25 +72,30 @@ public class DetailActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_detail);
         ButterKnife.inject(this);
         bean = new EventBean();
 
 
         Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_NAME)) {
-            bean = intent.getParcelableExtra(EXTRA_NAME);
+        if (intent.hasExtra(Constant.start)) {
+            bean = intent.getParcelableExtra(Constant.start);
         }
 
 
 
-        ViewCompat.setTransitionName(backdrop, EXTRA_NAME);
+
+
 
         setToolbar(toolbar, R.mipmap.ic_arrow_back_white, "", "", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+               onBackPressed();
 
             }
         }, null);
@@ -100,6 +106,8 @@ public class DetailActivity extends BaseActivity {
         loadBackdrop();
 
         setDetail();
+
+        Utils.startTransitionName(this,R.layout.activity_detail,backdrop);
     }
 
 
@@ -132,15 +140,12 @@ public class DetailActivity extends BaseActivity {
     }
 
 
-    public static void launch(BaseActivity activity, View transitionView, EventBean bean) {
-
-        ActivityOptionsCompat options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        activity, transitionView, EXTRA_NAME);
-        Intent intent = new Intent(activity, DetailActivity.class);
-        intent.putExtra(EXTRA_NAME, bean);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    @Override
+    public void onBackPressed() {
+        if (Build.VERSION.SDK_INT>20){
+            super.onBackPressed();
+        }else{
+            TransitionCompat.finishAfterTransition(this);
+        }
     }
-
-
 }

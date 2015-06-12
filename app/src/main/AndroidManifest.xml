@@ -22,7 +22,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.DetailActivity" />
+        <activity android:name=".activity.DetailActivity"
+            android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".activity.SearchActivity"
+            android:theme="@style/TranslucentTheme"/>
         <activity android:name=".activity.set.AppListActivity" />
         <activity android:name=".activity.set.IgnoreTextActivity" />
 

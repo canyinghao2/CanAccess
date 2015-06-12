@@ -8,6 +8,7 @@ public class Constant {
 
 public  static  final  String ERROR="error";
 public  static  final  String TAG="TAG";
+public  static  final  String start="start";
 
 
 

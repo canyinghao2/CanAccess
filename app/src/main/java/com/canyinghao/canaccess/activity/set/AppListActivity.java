@@ -52,7 +52,7 @@ public class AppListActivity extends BaseActivity {
 
 
         list = new ArrayList<>();
-        adapter = new AppListAdapter(context, list);
+        adapter = new AppListAdapter(context, list,flag);
         view.recyclerView.setAdapter(adapter);
         setToolbar(view.toolbar, R.mipmap.ic_arrow_back_white, "", "", new View.OnClickListener() {
             @Override
@@ -248,7 +248,7 @@ public class AppListActivity extends BaseActivity {
 
 
         try {
-            List<AppBean> list = App.getInstance().getDbUtils().findAll(Selector.from(AppBean.class).where("flag", "=", flag));
+            List<AppBean> list = App.getInstance().getDbUtils().findAll(Selector.from(AppBean.class));
 
 
             if (list != null && !list.isEmpty()) {

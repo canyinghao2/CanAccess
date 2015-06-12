@@ -26,10 +26,12 @@ import butterknife.InjectView;
  */
 public class AppListAdapter extends NewBaseAdapter {
 
+    private int type;
 
-    public AppListAdapter(Context context, List list) {
+    public AppListAdapter(Context context, List list,int type) {
         super(context, list);
 
+        this.type=type;
 
     }
 
@@ -62,45 +64,66 @@ public class AppListAdapter extends NewBaseAdapter {
 
         }
 
+        if (type==0){
+
+            holder.cb.setVisibility(View.VISIBLE);
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.cb.isChecked()){
+                        holder.cb.setChecked(false);
+                        bean.type=0;
+                        deleteItem(bean);
+                    }else{
+                        holder.cb.setChecked(true);
+                        bean.type=1;
+                        saveItem(bean);
+                    }
 
 
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.cb.isChecked()){
-                    holder.cb.setChecked(false);
-                    bean.type=0;
-                    deleteItem(bean);
-                }else{
-                    holder.cb.setChecked(true);
-                    bean.type=1;
-                    saveItem(bean);
+
+
                 }
-
-//                list.remove(position);
-//                notifyItemRemoved(position);
-////                notifyDataSetChanged();
-
-
-            }
-        });
+            });
 
 
 
 
 
-        holder.cb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.cb.isChecked()){
-                    bean.type=1;
-                    saveItem(bean);
-                }else{
-                    bean.type=0;
-                    deleteItem(bean);
+            holder.cb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.cb.isChecked()){
+                        bean.type=1;
+                        saveItem(bean);
+                    }else{
+                        bean.type=0;
+                        deleteItem(bean);
+                    }
                 }
-            }
-        });
+            });
+
+        }else{
+
+
+
+            holder.cb.setVisibility(View.GONE);
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+
+
+
+
+                }
+            });
+
+        }
+
+
+
 
 
 
