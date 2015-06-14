@@ -16,7 +16,6 @@
 
 package com.canyinghao.canaccess.fragment;
 
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -28,15 +27,13 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.canyinghao.canaccess.App;
-import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
-import com.canyinghao.canaccess.activity.BaseActivity;
 import com.canyinghao.canaccess.activity.MainActivity;
 import com.canyinghao.canaccess.activity.SearchActivity;
 import com.canyinghao.canaccess.adapter.ListAdapter;
 import com.canyinghao.canaccess.bean.EventBean;
-import com.canyinghao.canaccess.utils.Utils;
 import com.canyinghao.canaccess.view.ToolListView;
+import com.canyinghao.canhelper.IntentHelper;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
@@ -85,8 +82,9 @@ public class NotifyFragment extends BaseFragment {
         ButterKnife.inject(this, v);
         toolListView.recyclerView.setLayoutManager(new LinearLayoutManager(toolListView.recyclerView.getContext()));
 
-        ((BaseActivity)getActivity()).setSupportActionBar(toolListView.toolbar);
+
         Bundle bundle = getArguments();
+
         flag = bundle.getInt(TYPE);
 
 
@@ -105,13 +103,14 @@ public class NotifyFragment extends BaseFragment {
                 ((MainActivity) context).drawerLayout.openDrawer(GravityCompat.START);
             }
         }, null);
-        toolListView.backdrop.setImageResource(R.drawable.bg1);
+        toolListView.backdrop.setImageResource(R.drawable.bg2);
 
         toolListView.floatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=   new Intent(context, SearchActivity.class);
-                Utils.startSceneTransition(context,view,intent, R.id.appBar,Constant.start);
+
+
+                IntentHelper.getInstance().showIntent(context,SearchActivity.class);
             }
         });
 
@@ -128,7 +127,14 @@ public class NotifyFragment extends BaseFragment {
                         DbUtils dbUtils = App.getInstance().getDbUtils();
 
                         try {
-                            list = dbUtils.findAll(Selector.from(EventBean.class).where("eventType", "=", AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED).and("text", "!=", "").and("flag", "=", flag).orderBy("eventTime", true).limit(1000));
+
+                            if (flag==0){
+                                list = dbUtils.findAll(Selector.from(EventBean.class).where("eventType", "=", AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED).and("text", "!=", "").and("flag", "=", flag).orderBy("eventTime", true).limit(1000));
+                            }else{
+
+                                list = dbUtils.findAll(Selector.from(EventBean.class).where("text", "!=", "").and("flag", "=", flag).orderBy("eventTime", true).limit(1000));
+                            }
+
 
 
                             for (EventBean bean : list) {
@@ -162,17 +168,18 @@ public class NotifyFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
-                toolListView.recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                toolListView.recyclerView.setEmptyViewImage(R.mipmap.icon_empty, null, null);
             }
 
             @Override
             public void onNext(List<EventBean> EventBeans) {
 
+                ListAdapter adapter=   new ListAdapter(context,
+                        list);
+                adapter.flag=flag;
+                toolListView.recyclerView.setAdapter(adapter);
 
-                toolListView.recyclerView.setAdapter(new ListAdapter(context,
-                        list));
-
-                toolListView.recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                toolListView.recyclerView.setEmptyViewImage(R.mipmap.icon_empty, null, null);
 
 
             }

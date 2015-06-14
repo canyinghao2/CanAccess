@@ -23,15 +23,21 @@
         </activity>
 
         <activity android:name=".activity.DetailActivity"
-            android:theme="@style/TranslucentTheme"/>
+
+            android:theme="@style/TranslucentTheme"
+           />
         <activity android:name=".activity.SearchActivity"
-            android:theme="@style/TranslucentTheme"/>
+
+           android:label="@string/search"
+            android:theme="@style/TranslucentTheme"
+            />
         <activity android:name=".activity.set.AppListActivity" />
         <activity android:name=".activity.set.IgnoreTextActivity" />
 
         <activity android:name=".activity.set.PwdSetActivity" />
 
         <activity android:name=".activity.MainActivity" />
+
         <activity android:name=".activity.set.AboutActivity" />
         <activity
             android:name=".activity.set.SetActivity"
@@ -44,6 +50,10 @@
         <activity
             android:name=".activity.set.SetAllActivity"
             android:label="AllSetting"
+            android:theme="@style/MaterialSettingsTheme" />
+        <activity
+            android:name=".activity.set.SetActionActivity"
+            android:label="ActionSetting"
             android:theme="@style/MaterialSettingsTheme" />
 
         <activity

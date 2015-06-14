@@ -36,6 +36,7 @@ public class BaseFragment extends Fragment {
 
     public void setToolbar(final Toolbar toolbar,int icon,String title,String subTitle,View.OnClickListener navigation,Toolbar.OnMenuItemClickListener menuItemClickListener){
         context.setSupportActionBar(toolbar);
+
         toolbar.setNavigationIcon(icon);
         toolbar.setTitle(title);
         toolbar.setSubtitle(subTitle);

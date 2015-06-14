@@ -51,6 +51,7 @@ public class RecyclerViewEmptySupport extends RecyclerView {
 
     public RecyclerViewEmptySupport(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+
     }
 
     @Override

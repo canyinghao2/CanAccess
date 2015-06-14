@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -38,6 +39,8 @@ public class ListAdapter
     private List<EventBean> mValues;
 
     private boolean isClick;
+    public int flag;
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
@@ -90,9 +93,9 @@ public class ListAdapter
         final EventBean bean = mValues.get(position);
         holder.title.setText(bean.label);
         holder.text1.setText(bean.eventTypeStr);
-        String text=bean.text;
-        if (TextUtils.isEmpty(text)){
-            text=bean.className;
+        String text = bean.text;
+        if (TextUtils.isEmpty(text)) {
+            text = bean.className;
         }
         holder.text2.setText(text);
 
@@ -103,12 +106,10 @@ public class ListAdapter
             public void onClick(View v) {
 
 
+                Intent intent = new Intent(context, DetailActivity.class);
 
-                Intent intent=new Intent(context,DetailActivity.class);
-
-                intent.putExtra(Constant.start,bean);
-                Utils.startSceneTransition((Activity)context,holder.avatar,intent, R.id.backdrop,Constant.start);
-
+                intent.putExtra(Constant.start, bean);
+                Utils.startSceneTransition((Activity) context, holder.avatar, intent, R.id.backdrop, Constant.start);
 
 
             }
@@ -120,19 +121,39 @@ public class ListAdapter
             @Override
             public boolean onLongClick(View view) {
 
-                AlertDialog.Builder builder= new AlertDialog.Builder(context);
-                builder.setTitle(R.string.is_delete);
-                builder.setMessage(R.string.this_delete);
-                builder.setPositiveButton(R.string.sure,new DialogInterface.OnClickListener() {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                if (flag == 0) {
+
+                    builder.setTitle(R.string.is_delete);
+
+
+                    builder.setMessage(R.string.this_delete);
+
+                } else {
+
+                    builder.setTitle(R.string.is_restore);
+
+
+                    builder.setMessage(R.string.this_restore);
+
+                }
+
+                builder.setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         list.remove(position);
                         notifyItemRemoved(position);
-                        holder. view.postDelayed(new Runnable() {
+                        notifyDataSetChanged();
+                        new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if (!isClick){
-                                    bean.flag=1;
+                                if (!isClick) {
+                                    if (flag == 0) {
+                                        bean.flag = 1;
+                                    } else {
+                                        bean.flag = 0;
+                                    }
                                     try {
                                         App.getInstance().getDbUtils().saveOrUpdate(bean);
                                     } catch (DbException e) {
@@ -143,26 +164,24 @@ public class ListAdapter
                                 }
                                 notifyDataSetChanged();
                             }
-                        },2000);
-
-                        Utils.showSnackbar(holder. view,context.getString(R.string.delete_success),context.getString(R.string.cancel),new View.OnClickListener() {
+                        }, 2000);
+                        int strId = R.string.delete_success;
+                        if (flag != 0) {
+                            strId = R.string.restore_success;
+                        }
+                        Utils.showSnackbar(holder.view, context.getString(strId), context.getString(R.string.cancel), new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                isClick=true;
-                                list.add(position,bean);
+                                isClick = true;
+                                list.add(position, bean);
                                 notifyItemInserted(position);
-                                holder. view.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        notifyDataSetChanged();
-                                    }
-                                },500);
+                                notifyDataSetChanged();
                             }
                         });
                     }
                 });
 
-                builder.setNegativeButton(R.string.cancel,null);
+                builder.setNegativeButton(R.string.cancel, null);
 
                 builder.show();
 

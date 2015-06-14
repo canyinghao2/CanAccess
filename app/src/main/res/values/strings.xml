@@ -1,220 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <resources>
-    <string name="app_name">CanAccess</string>
 
-  <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
-    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
-    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
-    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
-    the big cheese.</string>
-    <string name="checkin">Checkin</string>
-    <string name="menu_settings">Settings</string>
-    <string name="accessibility_service_description">Settings</string>
-    <string name="acc_service_name">canaccess辅助</string>
+    <string name="app_name">CanAccess</string>
+    <string name="menu_settings">setting</string>
+    <string name="accessibility_service_description">Open this service, will be able to use the intelligent voice remind service, also can carry on the record to the operation of the application and management.</string>
+    <string name="acc_service_name">CanAccess</string>
     <string name="can">can</string>
     <string name="fail_text">can/faillog.txt</string>
     <string name="error">error</string>
+    <string name="clear_cache">Clear Cache</string>
+    <string name="clear_data">Clear Data</string>
+    <string name="installer">installer</string>
+    <string name="next">next</string>
+    <string name="open">open</string>
+    <string name="notify_record">Notify Record</string>
+    <string name="action_record">Action Record</string>
+    <string name="all_record">All Record</string>
+    <string name="trash">trash</string>
+    <string name="setting">setting</string>
+    <string name="about">about</string>
+    <string name="other">other</string>
+    <string name="set_notify">set_notify</string>
+    <string name="headeritem1">Ancillary services</string>
+    <string name="headeritem2">Service setting</string>
+    <string name="headeritem3">other</string>
+    <string name="set1">Set the ancillary services</string>
+    <string name="set1a">This software need to open and allow ancillary services</string>
+    <string name="set2">Voice notification Settings</string>
+    <string name="set2a">Here to voice notification Settings</string>
+    <string name="set3">Action record set</string>
+    <string name="set3a">Here can be set up the action recording</string>
+    <string name="set4">All the records set</string>
+    <string name="set4a">Here can be set for all records</string>
+    <string name="set5">The recycle bin set</string>
+    <string name="set5a">Here can be set to the recycle bin</string>
+    <string name="set6">useful</string>
+    <string name="set6a">Rating to the app store</string>
+    <string name="set7">not good</string>
+    <string name="set7a">Quickly unload</string>
+    <string name="set_lock">Combination lock</string>
+    <string name="set_locka">Set the combination lock, the need when entering the password confirmation</string>
+    <string name="header_notify1">Basic setup</string>
+    <string name="set_notify1">Open voice notification</string>
+    <string name="set_notify1a">Select the open voice notification</string>
+    <string name="set_notify2">The application list</string>
+    <string name="set_notify2a">The selected applications will not be reminded not to record at all</string>
+    <string name="set_notify3">TTS Settings</string>
+    <string name="set_notify3a">Open the Android Text-To-Speech settings.</string>
+    <string name="set_notify4">TTS Audio Stream</string>
+    <string name="set_notify4_">speakers</string>
+    <string name="set_notify4a">Choose the phone voice or speakers</string>
+    <string name="set_notify5">Speak Toasts</string>
+    <string name="set_notify5a">Also speak toast notifications</string>
+    <string name="set_notify6">Ignore the voice notification field</string>
+    <string name="set_notify6a">Please enter the ignore the field of broadcast voice</string>
+    <string name="set_notify7">Choose listening state of mobile phones</string>
+    <string name="set_notify7a">Please select what phone state changes need to be prompt</string>
+    <string name="header_notify2">Other Settings</string>
+    <string name="set_notify8">test</string>
+    <string name="set_notify8a">A notification bar will receive a notification</string>
+    <string name="set_notify9">Headphones listening</string>
+    <string name="set_notify9a">Remind an earphone open remind, pull out the headphones suspended</string>
+    <string name="set_notify10">Do not disturb period</string>
+    <string name="set_notify10a">Not set period of time</string>
+    <string name="set_notify11">Do not tip application name</string>
+    <string name="set_notify11a">When the broadcast voice remind do not remind application name</string>
+    <string name="play_mode">Play mode</string>
+    <string name="phone_stauts">state</string>
+    <string name="instance_market">Please install the application market</string>
+    <string name="set_all1">All the records on</string>
+    <string name="set_all1a">Select the open all the records</string>
+    <string name="set_all2">According to the application to check the record</string>
+    <string name="set_all2a">Click on the application, check the record of the application</string>
+    <string name="set_trash1">Recycling empty open automatically</string>
+    <string name="set_trash1a">Select the open automatic recycling cleaning</string>
+    <string name="set_trash2">Recycling type</string>
+    <string name="set_trash2a">All of the records</string>
+    <string name="set_trash2a1">Delete the record</string>
+    <string name="set_trash3">Recycling empty time</string>
+    <string name="set_trash3a">7day</string>
+    <string name="set_trash4">A key to empty</string>
+    <string name="set_trash4a">To empty all records</string>
+    <string name="trash_success">Empty the success</string>
+    <string name="day">day</string>
+    <string name="ignore_title">Please input to block field</string>
+    <string name="ignore_hint1">Please enter a title</string>
+    <string name="ignore_hint2">Please enter the content</string>
+    <string name="ignore_empty">Content cannot be empty</string>
+    <string name="cancel">cancel</string>
+    <string name="sure">sure</string>
+    <string name="houre">hours</string>
+    <string name="sub">-</string>
+    <string name="pwd_manage">Password management</string>
+    <string name="pwd_switch">Password switch</string>
+    <string name="pwd_switch_a">Whether can be installed into the software need a password here</string>
+    <string name="pwd_edit">Change the password</string>
+    <string name="pwd_edit_a">Here you can change the password</string>
+    <string name="pwd_delete">Remove the password</string>
+    <string name="pwd_delete_a">Here you can delete the password</string>
+    <string name="pwd_toast">Delete the password successfully</string>
+    <string name="pwd_forget">Forgot password? To answer the question can be unlocked</string>
+    <string name="pwd_question">The use of this software is what time?</string>
+    <string name="pwd_ques">Problems setting up the</string>
+    <string name="pwd_ques_a">Forgot password to reset the password by this problem</string>
+    <string name="answer_error">Wrong answer</string>
+    <string name="ques">The question</string>
+    <string name="answer">The answer</string>
+    <string name="ques_date">format:xxxx-xx-xx</string>
+    <string name="is_delete">Whether or not to delete</string>
+    <string name="this_delete">Delete this record？</string>
+    <string name="delete_success">Delete the success</string>
+    <string name="is_restore">Whether to restore</string>
+    <string name="this_restore">Restore this record？</string>
+    <string name="restore_success">Restore success</string>
+    <string name="wifi_success">WIFI connection is successful</string>
+    <string name="mob_success">Mobile network connection is successful</string>
+    <string name="wifi_unconnect">WIFI disconnected</string>
+    <string name="net_unconnect">Network disconnection</string>
+    <string name="about_title">Ancillary services convenient tools</string>
+    <string name="about_tool">This is the tool that is used for auxiliary services, the TTS can be used for voice reminder, and a personalized Settings, still can see some use record. Interface aesthetics, efficient and practical.</string>
+    <string name="about_have">All rights reserved</string>
+    <string name="about_mail">email：canyinghao@hotmail.com</string>
+    <string name="about_me">canyinghao</string>
+    <string name="about_welcome">Welcome to provide feedback and Suggestions</string>
+    <string name="about_version">version</string>
+    <string name="search">search</string>
+    <string name="search_hint">Please enter the keywords</string>
+    <string name="appName">appName</string>
+    <string name="packageName">packageName</string>
+    <string name="eventTime">eventTime</string>
+    <string name="eventType">eventType</string>
+    <string name="className">className</string>
+    <string name="text">text</string>
+    <string name="detail">detail</string>
 
 
-
-
-    <string name="notify_record">通知记录</string>
-    <string name="action_record">动作记录</string>
-    <string name="all_record">所有记录</string>
-    <string name="trash">回收站</string>
-    <string name="setting">设置</string>
-    <string name="about">关于</string>
-    <string name="other">其它</string>
-
-
-    <string name="set_notify">语音通知设置</string>
-
-
-    <array name="time_title" >
-
-        <item>今天</item>
-        <item>昨天</item>
-        <item>两天前</item>
-
-
-
-    </array>
-
-    <string name="headeritem1">检查辅助服务</string>
-    <string name="headeritem2">服务设置</string>
-    <string name="headeritem3">其它</string>
-    <string name="set1">设置辅助服务</string>
-    <string name="set1a">此软件需要打开并允许辅助服务运行</string>
-    <string name="set2">语音通知设置</string>
-    <string name="set2a">此处可对语音通知进行设置</string>
-    <string name="set3">动作录制设置</string>
-    <string name="set3a">此处可对动作录制进行设置</string>
-    <string name="set4">所有记录设置</string>
-    <string name="set4a">此处可对所有记录进行设置</string>
-    <string name="set5">回收站设置</string>
-    <string name="set5a">此处可对回收站进行设置</string>
-    <string name="set6">很好用</string>
-    <string name="set6a">前往软件商店进行评分</string>
-    <string name="set7">不好用</string>
-    <string name="set7a">快速卸载</string>g>
-    <string name="set_lock">密码锁</string>g>
-    <string name="set_locka">设置密码锁，进入时需要密码确认</string>
-
-
-
-
-
-
-    <string name="header_notify1">基本设置</string>
-    <string name="set_notify1">语音通知开启</string>
-    <string name="set_notify1a">选中此项开启语音通知</string>
-    <string name="set_notify2">应用列表</string>
-    <string name="set_notify2a">选中的应用的将不提醒不记录</string>
-    <string name="set_notify3">TTS设置</string>
-    <string name="set_notify3a">选择安装的TTS语音引擎</string>
-    <string name="set_notify4">听筒播放</string>
-    <string name="set_notify4_">扬声器播放</string>
-    <string name="set_notify4a">选择听筒播放语音还是扬声器播放</string>
-    <string name="set_notify5">播放Toast弹出消息</string>
-    <string name="set_notify5a">选择是否播放Toast弹出消息</string>
-    <string name="set_notify6">忽略语音通知的字段</string>
-    <string name="set_notify6a">请输入忽略播放语音的字段</string>
-    <string name="set_notify7">选择监听的手机状态</string>
-    <string name="set_notify7a">请选择哪些手机状态的变更需要提示</string>
-    <string name="header_notify2">其它设置</string>
-
-    <string name="set_notify8">测试</string>
-    <string name="set_notify8a">一会儿通知栏将会收到一条通知</string>
-    <string name="set_notify9">耳机监听</string>
-    <string name="set_notify9a">插入耳机开启提醒，拔出耳机暂停提醒</string>
-    <string name="set_notify10">免打扰时段</string>
-    <string name="set_notify10a">未设置时段</string>
-    <string name="play_mode">播放模式</string>
-    <string name="phone_stauts">状态</string>
-    <string name="instance_market">请先安装应用市场</string>
-
-
-
-    <string name="set_all1">所有记录开启</string>
-    <string name="set_all1a">选中此项开启所有记录</string>
-    <string name="set_all2">应用列表</string>
-    <string name="set_all2a">选中的应用才开启记录</string>
-
-
-    <string name="set_trash1">自动回收清空开启</string>
-    <string name="set_trash1a">选中此项开启自动回收清理</string>
-    <string name="set_trash2">回收类型</string>
-    <string name="set_trash2a">全部的记录</string>
-    <string name="set_trash2a1">删除的记录</string>
-
-    <string name="set_trash3">回收清空时间</string>
-    <string name="set_trash3a">7天</string>
-
-
-    <string name="day">天</string>
     <array name="trash_time">
-        <item >7天</item>
-        <item >14天</item>
-        <item >30天</item>
+        <item>7day</item>
+        <item>14day</item>
+        <item>30day</item>
 
 
     </array>
 
     <array name="play_mode_array">
-        <item >听筒播放</item>
-        <item >扬声器播放</item>
+        <item>The receiver play</item>
+        <item>speakers</item>
 
 
     </array>
     <array name="phone_stauts_array">
-        <item >WIFI</item>
-        <item >移动数据</item>
+        <item>WIFI</item>
+        <item>gprs</item>
 
 
     </array>
 
     <array name="notify_test">
-        <item >测试</item>
-        <item >这是一个语音通知测试</item>
-        <item >success</item>
-        <item >这虽然是一个语音通知测试，但是我还是多写了几个字</item>
-
-
+        <item>test</item>
+        <item>This is a voice call test</item>
+        <item>success</item>
+        <item>Although this is a speech to inform test, but I still write a few words</item>
 
 
     </array>
-
-
-    <string name="ignore_title">请输入要屏蔽的字段</string>
-    <string name="ignore_hint1">请输入标题</string>
-    <string name="ignore_hint2">请输入内容</string>
-    <string name="ignore_empty">内容不能为空</string>
-    <string name="cancel">取消</string>
-    <string name="sure">确定</string>
-    <string name="houre">点</string>
-    <string name="sub">-</string>
 
     <array name="ignore_array">
-        <item>删除</item>
-        <item>编辑</item>
+        <item>delete</item>
+        <item>edit</item>
 
     </array>
 
 
-    <string name="pwd_manage">密码管理</string>
-    <string name="pwd_switch">密码开关</string>
-    <string name="pwd_switch_a">此处可设置进入软件时是否需要密码</string>
-    <string name="pwd_edit">修改密码</string>
-    <string name="pwd_edit_a">此处可以修改密码</string>
-    <string name="pwd_delete">删除密码</string>
-    <string name="pwd_delete_a">此处可以删除密码</string>
-    <string name="pwd_toast">删除密码成功</string>
-    <string name="pwd_forget">忘记密码？回答问题便能解锁</string>
-    <string name="pwd_question">最后使用此软件是什么时候？</string>
-    <string name="pwd_ques">设置问题</string>
-    <string name="pwd_ques_a">忘记密码后可通过此问题重置密码</string>
-    <string name="answer_error">回答错误</string>
+    <array name="time_title">
+
+        <item>today</item>
+        <item>Yesterday</item>
+        <item>Two days ago</item>
 
 
-    <string name="ques">问题</string>
-    <string name="answer">答案</string>
-
-    <string name="ques_date">格式:xxxx-xx-xx</string>
-
-    <string name="is_delete">是否删除</string>
-    <string name="this_delete">删除此条记录？</string>
-    <string name="delete_success">删除成功</string>
-
-
-    <string name="wifi_success">WIFI连接成功</string>
-    <string name="mob_success">移动网络连接成功</string>
-    <string name="wifi_unconnect">WIFI断开连接</string>
-    <string name="net_unconnect">网络断开</string>
-
-
-
-
-
-
-
-    <string name="about_title">便捷的辅助服务工具</string>
-    <string name="about_tool">这是一款用来进行辅助服务的工具，可使用TTS进行语音提醒，并有人性化的设置，还可查看一些使用记录。界面美观，高效实用。</string>
-    <string name="about_have">版权所有</string>
-    <string name="about_mail">联系邮箱：canyinghao@hotmail.com</string>
-    <string name="about_me">canyinghao</string>
-    <string name="about_welcome">欢迎提供反馈与建议</string>
-    <string name="about_version">版本号</string>
-
-
-
-
-
-
-
-
-
-
+    </array>
 
 </resources>

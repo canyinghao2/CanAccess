@@ -65,7 +65,7 @@ public class IgnoreTextActivity extends BaseActivity {
 
         adapterNotify();
 
-        view.recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+        view.recyclerView.setEmptyViewImage(R.mipmap.icon_empty, null, null);
 
 
     }
@@ -156,5 +156,10 @@ public class IgnoreTextActivity extends BaseActivity {
         });
         builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(context);
     }
 }

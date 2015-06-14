@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
@@ -42,7 +43,7 @@ public class Utils {
     public static void showSnackbar(View v, String message,String actionText, View.OnClickListener listener) {
 
         Snackbar.make(v, message, Snackbar.LENGTH_SHORT)
-                .setAction(actionText, listener).show();
+                .setAction(actionText, listener).setActionTextColor(Color.WHITE).show();
 
     }
 

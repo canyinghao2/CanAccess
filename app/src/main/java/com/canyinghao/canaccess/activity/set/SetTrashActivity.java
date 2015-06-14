@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.bean.AppBean;
+import com.canyinghao.canaccess.bean.EventBean;
+import com.canyinghao.canaccess.bean.IgnoreBean;
+import com.canyinghao.canaccess.utils.Utils;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
@@ -17,6 +22,7 @@ import com.kenumir.materialsettings.items.SwitcherItem;
 import com.kenumir.materialsettings.items.TextItem;
 import com.kenumir.materialsettings.storage.PreferencesStorageInterface;
 import com.kenumir.materialsettings.storage.StorageInterface;
+import com.lidroid.xutils.exception.DbException;
 
 public class SetTrashActivity extends MaterialSettingsActivity {
 
@@ -44,7 +50,7 @@ public class SetTrashActivity extends MaterialSettingsActivity {
         addType();
 
         addTime();
-
+        addClear();
 
         for (int i = 0; i < 9; i++) {
 
@@ -55,6 +61,29 @@ public class SetTrashActivity extends MaterialSettingsActivity {
 
         }
 
+    }
+
+    private void addClear() {
+        addItem(new DividerItem(getFragment()));
+        final TextItem trash4=  new TextItem(getFragment(), "set_trash4").setTitle(getText(R.string.set_trash4).toString()).setSubtitle(getText(R.string.set_trash4a).toString());
+        addItem(trash4);
+        trash4.setOnclick(new TextItem.OnClickListener() {
+            @Override
+            public void onClick(TextItem item) {
+
+                try {
+                    App.getInstance().getDbUtils().deleteAll(AppBean.class);
+                    App.getInstance().getDbUtils().deleteAll(EventBean.class);
+                    App.getInstance().getDbUtils().deleteAll(IgnoreBean.class);
+
+                    Utils.showSnackbar(toolbar,getString(R.string.trash_success),"",null);
+
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     /**
@@ -213,7 +242,10 @@ public class SetTrashActivity extends MaterialSettingsActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(this);
+    }
 
 
 }

@@ -1,10 +1,12 @@
 package com.canyinghao.canaccess.activity.set;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.service.CanAccessibilityService;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
@@ -16,7 +18,7 @@ import com.kenumir.materialsettings.items.TextItem;
 import com.kenumir.materialsettings.storage.PreferencesStorageInterface;
 import com.kenumir.materialsettings.storage.StorageInterface;
 
-public class SetAllActivity extends MaterialSettingsActivity {
+public class SetActionActivity extends MaterialSettingsActivity {
 
     private static final int SDK_VERSION = Build.VERSION.SDK_INT;
 
@@ -88,10 +90,26 @@ public class SetAllActivity extends MaterialSettingsActivity {
             @Override
             public void onClick(TextItem v) {
 
-                IntentHelper.getInstance().showIntent(context,AppListActivity.class,new String[]{"all"},new String[]{"all"},true);
+                CanAccessibilityService.INVOKE_TYPE = CanAccessibilityService.TYPE_OPEN_ACCESS;
+                startActivity(getAccessibilityIntent());
+
+
+
             }
         }));
     }
+
+    private Intent getAccessibilityIntent() {
+        Intent intent = new Intent();
+        if (Build.VERSION.SDK_INT > 4) {
+            intent.setAction(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        } else if (Build.VERSION.SDK_INT== 4) {
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.setClassName("com.android.settings", "com.android.settings.AccessibilitySettings");
+        }
+        return intent;
+    }
+
 
     @Override
     public StorageInterface initStorageInterface() {

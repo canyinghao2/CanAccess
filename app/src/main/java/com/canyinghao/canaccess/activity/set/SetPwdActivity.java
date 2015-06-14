@@ -224,4 +224,9 @@ public class SetPwdActivity extends MaterialSettingsActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(this);
+    }
 }

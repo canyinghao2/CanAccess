@@ -66,5 +66,12 @@ public class ToolListView extends FrameLayout {
 
 
 
+  public void   removeFAB(){
+
+      mainContent.removeView(floatButton);
+
+    }
+
+
 
 }

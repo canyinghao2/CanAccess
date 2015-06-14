@@ -55,6 +55,12 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 
         addIgnoreText();
 
+
+        addIgnoreAPPName();
+
+
+
+
         addPhoneStaut();
         addHeadset();
         addTimeControl();
@@ -63,6 +69,32 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 
 
 
+    }
+
+    private void addIgnoreAPPName() {
+        addItem(new DividerItem(getFragment()));
+
+        final CheckboxItem notify11=   new SwitcherItem(getFragment(), "set_notify11").setTitle(getText(R.string.set_notify11).toString()).setSubtitle(getText(R.string.set_notify11a).toString());
+
+        addItem(notify11);
+
+        notify11.setOnCheckedChangeListener(new CheckboxItem.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChange(CheckboxItem item, boolean isChecked) {
+                if (isChecked){
+                    SPHepler.getInstance().setInt("set_notify11",1);
+                }else{
+                    SPHepler.getInstance().setInt("set_notify11",0);
+                }
+            }
+        });
+        int set_notify11= SPHepler.getInstance().getInt("set_notify11");
+        if (set_notify11==0){
+            notify11.updateChecked(false);
+
+        }else{
+            notify11.updateChecked(true);
+        }
     }
 
     private void addHeadset() {
@@ -195,7 +227,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
                 AlertDialog.Builder builder= new AlertDialog.Builder(context);
 
                 builder.setTitle(R.string.phone_stauts);
-                int set_notify4= SPHepler.getInstance().getInt("set_notify7");
+
 
                 builder.setMultiChoiceItems(R.array.phone_stauts_array,bs,new DialogInterface.OnMultiChoiceClickListener() {
                     @Override

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">最後的輔助</string>
+	<string name="menu_settings">設置</string>
+	<string name="accessibility_service_description">開啟此服務，將可以使用智慧的語音提醒服務還能對一些應用的操作進行記錄與管理。</string>
+	<string name="acc_service_name">最後的輔助</string>
+	<string name="can">can</string>
+	<string name="fail_text">can/faillog.txt</string>
+	<string name="error">error</string>
+	<string name="clear_cache">清除緩存</string>
+	<string name="clear_data">清除數據</string>
+	<string name="installer">安裝</string>
+	<string name="next">下一步</string>
+	<string name="open">打開</string>
+	<string name="notify_record">通知記錄</string>
+	<string name="action_record">動作記錄</string>
+	<string name="all_record">所有記錄</string>
+	<string name="trash">回收站</string>
+	<string name="setting">設置</string>
+	<string name="about">關於</string>
+	<string name="other">其它</string>
+	<string name="set_notify">語音通知設置</string>
+	<string name="headeritem1">檢查輔助服務</string>
+	<string name="headeritem2">服務設置</string>
+	<string name="headeritem3">其它</string>
+	<string name="set1">設置輔助服務</string>
+	<string name="set1a">此軟體需要打開並允許輔助服務運行</string>
+	<string name="set2">語音通知設置</string>
+	<string name="set2a">此處可對語音通知進行設置</string>
+	<string name="set3">動作錄製設置</string>
+	<string name="set3a">此處可對動作錄製進行設置</string>
+	<string name="set4">所有記錄設置</string>
+	<string name="set4a">此處可對所有記錄進行設置</string>
+	<string name="set5">回收站設置</string>
+	<string name="set5a">此處可對回收站進行設置</string>
+	<string name="set6">很好用</string>
+	<string name="set6a">前往軟體商店進行評分</string>
+	<string name="set7">不好用</string>
+	<string name="set7a">快速卸載</string>
+	<string name="set_lock">密碼鎖</string>
+	<string name="set_locka">設置密碼鎖進入時需要密碼確認</string>
+	<string name="header_notify1">基本設置</string>
+	<string name="set_notify1">語音通知開啟</string>
+	<string name="set_notify1a">選中此項開啟語音通知</string>
+	<string name="set_notify2">應用清單</string>
+	<string name="set_notify2a">選中的應用的將不提醒不記錄</string>
+	<string name="set_notify3">TTS設置</string>
+	<string name="set_notify3a">選擇安裝的TTS語音引擎</string>
+	<string name="set_notify4">聽筒播放</string>
+	<string name="set_notify4_">揚聲器播放</string>
+	<string name="set_notify4a">選擇聽筒播放語音還是揚聲器播放</string>
+	<string name="set_notify5">播放Toast彈出消息</string>
+	<string name="set_notify5a">選擇是否播放Toast彈出消息</string>
+	<string name="set_notify6">忽略語音通知的欄位</string>
+	<string name="set_notify6a">請輸入忽略播放語音的欄位</string>
+	<string name="set_notify7">選擇監聽的手機狀態</string>
+	<string name="set_notify7a">請選擇哪些手機狀態的變更需要提示</string>
+	<string name="header_notify2">其它設置</string>
+	<string name="set_notify8">測試</string>
+	<string name="set_notify8a">一會兒通知列將會收到一條通知</string>
+	<string name="set_notify9">耳機監聽</string>
+	<string name="set_notify9a">插入耳機開啟提醒拔出耳機暫停提醒</string>
+	<string name="set_notify10">免打擾時段</string>
+	<string name="set_notify10a">未設置時段</string>
+	<string name="set_notify11">不提示應用名</string>
+	<string name="set_notify11a">播放語音提醒時不提醒應用名</string>
+	<string name="play_mode">播放模式</string>
+	<string name="phone_stauts">面膜狀態</string>
+	<string name="instance_market">請先安裝應用市場</string>
+	<string name="set_all1">所有記錄開啟</string>
+	<string name="set_all1a">選中此項開啟所有記錄</string>
+	<string name="set_all2">按應用查看記錄</string>
+	<string name="set_all2a">點擊應用查看該應用的記錄</string>
+	<string name="set_trash1">自動回收清空開啟</string>
+	<string name="set_trash1a">選中此項開啟自動回收清理</string>
+	<string name="set_trash2">回收類型</string>
+	<string name="set_trash2a">全部的記錄</string>
+	<string name="set_trash2a1">刪除的記錄</string>
+	<string name="set_trash3">回收清空時間</string>
+	<string name="set_trash3a">7天</string>
+	<string name="set_trash4">一鍵清空</string>
+	<string name="set_trash4a">清空所有記錄</string>
+	<string name="trash_success">清空成功</string>
+	<string name="day">天</string>
+	<string name="ignore_title">請輸入要遮罩的欄位</string>
+	<string name="ignore_hint1">請輸入標題</string>
+	<string name="ignore_hint2">請輸入內容</string>
+	<string name="ignore_empty">內容不能為空</string>
+	<string name="cancel">取消</string>
+	<string name="sure">確定</string>
+	<string name="houre">點</string>
+	<string name="sub">-</string>
+	<string name="pwd_manage">密碼管理</string>
+	<string name="pwd_switch">密碼開關</string>
+	<string name="pwd_switch_a">此處可設置進入軟體時是否需要密碼</string>
+	<string name="pwd_edit">修改密碼</string>
+	<string name="pwd_edit_a">此處可以修改密碼</string>
+	<string name="pwd_delete">刪除密碼</string>
+	<string name="pwd_delete_a">此處可以刪除密碼</string>
+	<string name="pwd_toast">刪除密碼成功</string>
+	<string name="pwd_forget">忘記密碼? 回答問題便能解鎖</string>
+	<string name="pwd_question">最後使用此軟體是什麼時候?</string>
+	<string name="pwd_ques">設置問題</string>
+	<string name="pwd_ques_a">忘記密碼後可通過此問題重置密碼</string>
+	<string name="answer_error">回答錯誤</string>
+	<string name="ques">問題</string>
+	<string name="answer">答案</string>
+	<string name="ques_date">格式:xxxx-xx-xx</string>
+	<string name="is_delete">是否刪除</string>
+	<string name="this_delete">刪除此條記錄?</string>
+	<string name="delete_success">刪除成功</string>
+	<string name="is_restore">是否恢復</string>
+	<string name="this_restore">恢復此條記錄?</string>
+	<string name="restore_success">恢復成功</string>
+	<string name="wifi_success">WIFI連接成功</string>
+	<string name="mob_success">移動網路連接成功</string>
+	<string name="wifi_unconnect">WIFI斷開連接</string>
+	<string name="net_unconnect">網路斷開</string>
+	<string name="about_title">便捷的輔助服務工具</string>
+	<string name="about_tool">這是一款用來進行輔助服務的工具、 可使用TTS進行語音提醒、 並有人性化的設置、 還可查看一些使用記錄。介面美觀高效實用。</string>
+	<string name="about_have">版權所有</string>
+	<string name="about_mail">聯繫郵箱:canyinghao@hotmail.com</string>
+	<string name="about_me">canyinghao</string>
+	<string name="about_welcome">歡迎提供回饋與建議</string>
+	<string name="about_version">版本號</string>
+	<string name="search">搜索</string>
+	<string name="search_hint">請輸入關鍵字</string>
+
+
+    <array name="ignore_array">
+        <item>刪除</item>
+        <item>編輯</item>
+
+    </array>
+
+
+    <array name="trash_time">
+        <item>7天</item>
+        <item>14天</item>
+        <item>30天</item>
+
+
+    </array>
+
+    <array name="play_mode_array">
+        <item>聽筒播放</item>
+        <item>揚聲器播放</item>
+
+
+    </array>
+    <array name="phone_stauts_array">
+        <item>WIFI</item>
+        <item>移動數據</item>
+
+
+    </array>
+
+    <array name="notify_test">
+        <item>測試</item>
+        <item>這是一個語音通知測試</item>
+        <item>success</item>
+        <item>這雖然是一個語音通知測試，但我還是多寫了幾個字</item>
+
+
+    </array>
+
+    <array name="time_title">
+
+        <item>今天</item>
+        <item>昨天</item>
+        <item>兩天前</item>
+
+
+    </array>
+
+
+    <string name="appName">應用名</string>
+    <string name="packageName">包名</string>
+    <string name="eventTime">時間</string>
+    <string name="eventType">事件名</string>
+    <string name="className">類名</string>
+    <string name="text">內容</string>
+    <string name="detail">詳細</string>
+
+</resources>

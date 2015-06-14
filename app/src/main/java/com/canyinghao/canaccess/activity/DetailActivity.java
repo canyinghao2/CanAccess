@@ -34,6 +34,7 @@ import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.bean.EventBean;
 import com.canyinghao.canaccess.utils.Utils;
+import com.canyinghao.canhelper.IntentHelper;
 import com.kale.activityoptions.transition.TransitionCompat;
 
 import butterknife.ButterKnife;
@@ -108,6 +109,13 @@ public class DetailActivity extends BaseActivity {
         setDetail();
 
         Utils.startTransitionName(this,R.layout.activity_detail,backdrop);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentHelper.getInstance().showIntent(context, SearchActivity.class,new String[]{Constant.start},new String[]{bean.packageName},true);
+            }
+        });
     }
 
 

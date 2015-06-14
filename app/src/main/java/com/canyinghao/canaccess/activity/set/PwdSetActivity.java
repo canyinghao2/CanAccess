@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.canyinghao.canaccess.utils.PatternLockUtils;
+import com.canyinghao.canhelper.IntentHelper;
 
 import java.util.List;
 
@@ -38,5 +39,13 @@ public class PwdSetActivity extends me.zhanghai.patternlock.SetPatternActivity {
     @Override
     protected void onSetPattern(List<PatternView.Cell> pattern) {
         PatternLockUtils.setPattern(pattern, this);
+    }
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(this);
     }
 }

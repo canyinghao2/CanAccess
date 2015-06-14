@@ -5,13 +5,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.service.CanAccessibilityService;
 import com.canyinghao.canaccess.utils.PatternLockUtils;
-import com.canyinghao.canaccess.utils.Utils;
 import com.canyinghao.canhelper.IntentHelper;
 import com.canyinghao.canhelper.PhoneHelper;
 import com.kenumir.materialsettings.MaterialSettingsActivity;
@@ -46,7 +43,7 @@ public class SetActivity extends MaterialSettingsActivity {
 
         addNotify();
 
-        addAction();
+//        addAction();
 
         addAll();
         addTrash();
@@ -172,7 +169,7 @@ public class SetActivity extends MaterialSettingsActivity {
         addItem(new TextItem(getFragment(), "set3").setTitle(getText(R.string.set3).toString()).setSubtitle(getText(R.string.set3a).toString()).setIcon(R.mipmap.ic_videocam_grey600).setOnclick(new TextItem.OnClickListener() {
             @Override
             public void onClick(TextItem v) {
-                Toast.makeText(SetActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                IntentHelper.getInstance().showIntent(context,SetActionActivity.class,true);
             }
         }));
     }
@@ -186,10 +183,8 @@ public class SetActivity extends MaterialSettingsActivity {
             @Override
             public void onClick(TextItem v) {
 
-                Intent intent=   new Intent(SetActivity.this,SetNotifyActivity.class);
 
-               Utils. startSceneTransition(context,getItem("set2").v,intent,R.id.toolbar, Constant.start);
-//                IntentHelper.getInstance().showIntent(SetActivity.this,SetNotifyActivity.class,true);
+                IntentHelper.getInstance().showIntent(SetActivity.this,SetNotifyActivity.class,true);
 
             }
         }));
@@ -226,7 +221,8 @@ public class SetActivity extends MaterialSettingsActivity {
     }
 
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(context);
+    }
 }

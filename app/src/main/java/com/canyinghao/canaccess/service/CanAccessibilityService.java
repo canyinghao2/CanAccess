@@ -17,9 +17,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
-import android.widget.Toast;
 
 import com.canyinghao.canaccess.App;
+import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.bean.AppBean;
 import com.canyinghao.canaccess.bean.EventBean;
 import com.canyinghao.canaccess.bean.IgnoreBean;
@@ -28,6 +28,7 @@ import com.canyinghao.canhelper.DateHelper;
 import com.canyinghao.canhelper.LogHelper;
 import com.canyinghao.canhelper.SPHepler;
 import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
 
 import java.util.Calendar;
@@ -42,24 +43,18 @@ public class CanAccessibilityService extends AccessibilityService {
     public static final int TYPE_CLEAN_APP = 1;
     public static final int TYPE_INSTALL_APP = 2;
     public static final int TYPE_UNINSTALL_APP = 3;
+    public static final int TYPE_OPEN_ACCESS = 4;
 
     public static void reset() {
         INVOKE_TYPE = 0;
     }
 
+    public static   boolean isWifiUse=false;
+
     private TextToSpeech mTts;
     PhoneChangedReceiver receiver;
-    @SuppressLint("NewApi")
-    private static class AudioFocus {
-        private static void abandonFocus(AudioManager audioMan) {
-            audioMan.abandonAudioFocus(null);
-        }
 
-        private static void requestFocus(AudioManager audioMan) {
-            audioMan.requestAudioFocus(null, AudioManager.STREAM_MUSIC,
-                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
-        }
-    }
+
 
     @Override
     public void onCreate() {
@@ -69,18 +64,21 @@ public class CanAccessibilityService extends AccessibilityService {
             public void onInit(int status) {
                 if (status == TextToSpeech.ERROR) {
 
-                    Toast.makeText(getApplicationContext(), "TTS init fail", Toast.LENGTH_LONG).show();
                     return;
                 }
-                mTts.setOnUtteranceCompletedListener(new TextToSpeech.OnUtteranceCompletedListener() {
-                    @Override
-                    public void onUtteranceCompleted(String utteranceId) {
 
-                    }
-                });
 
             }
         });
+
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                isWifiUse=true;
+            }
+        },10000);
         super.onCreate();
     }
 
@@ -95,26 +93,43 @@ public class CanAccessibilityService extends AccessibilityService {
 
             }
         }
-        if (TextUtils.isEmpty(notifyMsg.toString())){
+        if (TextUtils.isEmpty(notifyMsg.toString())) {
             return;
         }
+
+        if (event.getEventType() != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED && event.getPackageName().equals(getPackageName())) {
+            return;
+        }
+
+
 //        存储数据
         DbUtils utils = App.getInstance().getDbUtils();
 
 
+        try {
+            long count = utils.count(Selector.from(AppBean.class).where("packageName", "=", event.getPackageName()));
+            if (count > 0) {
+                return;
+            }
+
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+
+
         EventBean bean = new EventBean();
 
-        bean.packageName=getString(event.getPackageName());
-        bean.beforeText=getString(event.getBeforeText());
-        bean.className=getString(event.getClassName());
-        bean.eventTime=new Date().getTime();
-        bean.eventType=event.getEventType();
-        bean.eventTimeStr=DateHelper.getInstance().getDataString_1(new Date());
-        bean.eventTypeStr=AccessibilityEvent.eventTypeToString(event.getEventType());
+        bean.packageName = getString(event.getPackageName());
+        bean.beforeText = getString(event.getBeforeText());
+        bean.className = getString(event.getClassName());
+        bean.eventTime = new Date().getTime();
+        bean.eventType = event.getEventType();
+        bean.eventTimeStr = DateHelper.getInstance().getDataString_1(new Date());
+        bean.eventTypeStr = AccessibilityEvent.eventTypeToString(event.getEventType());
 
-        bean.datail=event.toString();
+        bean.datail = event.toString();
 
-        bean.text=notifyMsg.toString();
+        bean.text = notifyMsg.toString();
         findAppLabelIcon(bean);
 
         try {
@@ -142,6 +157,11 @@ public class CanAccessibilityService extends AccessibilityService {
                     break;
                 case TYPE_UNINSTALL_APP:
                     processUninstallApplication(event);
+                    break;
+                case TYPE_OPEN_ACCESS:
+
+                    openAccess(event);
+
                     break;
                 default:
                     break;
@@ -178,58 +198,51 @@ public class CanAccessibilityService extends AccessibilityService {
     private void spreak(AccessibilityEvent event, EventBean bean) {
 
 
-
-
-
-       int notify_9= SPHepler.getInstance().getInt("set_notify9");
-      int headset= SPHepler.getInstance().getInt("headset");
-        if (notify_9==1&&headset==0){
+        int notify_9 = SPHepler.getInstance().getInt("set_notify9");
+        int headset = SPHepler.getInstance().getInt("headset");
+        if (notify_9 == 1 && headset == 0) {
             return;
         }
 
-        int notify_10= SPHepler.getInstance().getInt("set_notify10");
+        int notify_10 = SPHepler.getInstance().getInt("set_notify10");
 
         int start_time = SPHepler.getInstance().getInt("start_time");
         int end_time = SPHepler.getInstance().getInt("end_time");
         Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
-            boolean isOpen = true;
-            if (notify_10 == 1 ) {
-                if (start_time == end_time) {
+        boolean isOpen = true;
+        if (notify_10 == 1) {
+            if (start_time == end_time) {
+                isOpen = false;
+
+            } else if (start_time < end_time) {
+
+                if (hour >= start_time && hour < end_time) {
                     isOpen = false;
-
-                } else if (start_time < end_time) {
-
-                    if (hour >= start_time && hour < end_time) {
-                        isOpen = false;
-                    } else {
-                        isOpen = true;
-                    }
-
                 } else {
-
-                    if (hour >= start_time || hour < end_time) {
-                        isOpen = false;
-                    } else {
-                        isOpen = true;
-                    }
-
+                    isOpen = true;
                 }
-            }
 
-        if (!isOpen){
-            return;
+            } else {
+
+                if (hour >= start_time || hour < end_time) {
+                    isOpen = false;
+                } else {
+                    isOpen = true;
+                }
+
+            }
         }
 
-
-
-
+        if (!isOpen) {
+            return;
+        }
 
 
         try {
 //            忽略的字段
 
-          List<IgnoreBean> igList=  App.getInstance().getDbUtils().findAll(IgnoreBean.class);
+            List<IgnoreBean> igList = App.getInstance().getDbUtils().findAll(IgnoreBean.class);
 
             if (igList != null && !igList.isEmpty()) {
                 for (IgnoreBean bean1 : igList) {
@@ -239,9 +252,6 @@ public class CanAccessibilityService extends AccessibilityService {
                     }
                 }
             }
-
-
-
 
 
             //        不播放选择列表中的
@@ -276,7 +286,15 @@ public class CanAccessibilityService extends AccessibilityService {
         ttsParams.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
                 Integer.toString(SPHepler.getInstance().getInt("set_notify4")));
 
-        mTts.speak(bean.label + bean.text, TextToSpeech.QUEUE_ADD, ttsParams);
+         String speakStr=bean.label + bean.text;
+       if(SPHepler.getInstance().getInt("set_notify11")!=0){
+
+           speakStr=bean.text;
+       }
+
+
+
+        mTts.speak(speakStr, TextToSpeech.QUEUE_ADD, ttsParams);
     }
 
     @Override
@@ -299,7 +317,7 @@ public class CanAccessibilityService extends AccessibilityService {
         try {
             ApplicationInfo info = getPackageManager().getApplicationInfo(bean.packageName, 0);
             String lable = String.valueOf(info.loadLabel(getPackageManager()));
-            bean.label=lable;
+            bean.label = lable;
 
 
         } catch (PackageManager.NameNotFoundException e) {
@@ -309,33 +327,6 @@ public class CanAccessibilityService extends AccessibilityService {
 
     }
 
-    /**
-     * 是否不提醒
-     *
-     * @param pkg
-     * @return
-     */
-    private boolean filterAppInfo(String pkg) {
-        try {
-
-
-            List<AppBean> list = App.getInstance().getDbUtils().findAll(AppBean.class);
-
-            if (list != null && !list.isEmpty()) {
-                for (AppBean bean : list) {
-
-                    if (pkg.equals(bean.packageName)) {
-                        return true;
-                    }
-                }
-
-            }
-
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     private String getString(Object ob) {
 
@@ -359,7 +350,7 @@ public class CanAccessibilityService extends AccessibilityService {
 
             if (event.getPackageName().equals("com.android.packageinstaller")) {
                 resetApplication();
-                List<AccessibilityNodeInfo> ok_nodes = event.getSource().findAccessibilityNodeInfosByText("确定");
+                List<AccessibilityNodeInfo> ok_nodes = event.getSource().findAccessibilityNodeInfosByText(getString(R.string.sure));
                 if (ok_nodes != null && !ok_nodes.isEmpty()) {
                     AccessibilityNodeInfo node;
                     for (int i = 0; i < ok_nodes.size(); i++) {
@@ -387,7 +378,7 @@ public class CanAccessibilityService extends AccessibilityService {
 
             if (event.getPackageName().equals("com.android.packageinstaller")) {
                 resetApplication();
-                List<AccessibilityNodeInfo> unintall_nodes = event.getSource().findAccessibilityNodeInfosByText("安装");
+                List<AccessibilityNodeInfo> unintall_nodes = event.getSource().findAccessibilityNodeInfosByText(getString(R.string.installer));
 
                 if (unintall_nodes != null && !unintall_nodes.isEmpty()) {
                     AccessibilityNodeInfo node;
@@ -399,7 +390,7 @@ public class CanAccessibilityService extends AccessibilityService {
                     }
                 }
 
-                List<AccessibilityNodeInfo> next_nodes = event.getSource().findAccessibilityNodeInfosByText("下一步");
+                List<AccessibilityNodeInfo> next_nodes = event.getSource().findAccessibilityNodeInfosByText(getString(R.string.next));
                 if (next_nodes != null && !next_nodes.isEmpty()) {
                     AccessibilityNodeInfo node;
                     for (int i = 0; i < next_nodes.size(); i++) {
@@ -410,7 +401,7 @@ public class CanAccessibilityService extends AccessibilityService {
                     }
                 }
 
-                List<AccessibilityNodeInfo> ok_nodes = event.getSource().findAccessibilityNodeInfosByText("打开");
+                List<AccessibilityNodeInfo> ok_nodes = event.getSource().findAccessibilityNodeInfosByText(getString(R.string.open));
                 if (ok_nodes != null && !ok_nodes.isEmpty()) {
                     AccessibilityNodeInfo node;
                     for (int i = 0; i < ok_nodes.size(); i++) {
@@ -435,10 +426,10 @@ public class CanAccessibilityService extends AccessibilityService {
     private void processCleanApplication(AccessibilityEvent event) {
 
         if (event.getSource() != null) {
-            resetApplication();
+
             if (event.getPackageName().equals("com.android.settings")) {
                 resetApplication();
-                List<AccessibilityNodeInfo> stop_nodes = event.getSource().findAccessibilityNodeInfosByText("清除数据");
+                List<AccessibilityNodeInfo> stop_nodes = event.getSource().findAccessibilityNodeInfosByText(getString(R.string.clear_data));
                 if (stop_nodes != null && !stop_nodes.isEmpty()) {
                     AccessibilityNodeInfo node;
                     for (int i = 0; i < stop_nodes.size(); i++) {
@@ -451,7 +442,7 @@ public class CanAccessibilityService extends AccessibilityService {
                     }
                 }
 
-                List<AccessibilityNodeInfo> ok_nodes = event.getSource().findAccessibilityNodeInfosByText("清除缓存");
+                List<AccessibilityNodeInfo> ok_nodes = event.getSource().findAccessibilityNodeInfosByText(getString(R.string.clear_cache));
                 if (ok_nodes != null && !ok_nodes.isEmpty()) {
                     AccessibilityNodeInfo node;
                     for (int i = 0; i < ok_nodes.size(); i++) {
@@ -468,6 +459,50 @@ public class CanAccessibilityService extends AccessibilityService {
     }
 
 
+
+
+
+
+
+    private void clickSure(AccessibilityEvent event,String packName,String btnStr,int action) {
+        if (event.getSource() != null) {
+            if (event.getPackageName().equals(packName)) {
+
+
+                List<AccessibilityNodeInfo> ok_nodes = event.getSource().findAccessibilityNodeInfosByText(btnStr);
+
+
+
+                if (ok_nodes != null && !ok_nodes.isEmpty()) {
+                    AccessibilityNodeInfo node;
+                    for (int i = 0; i < ok_nodes.size(); i++) {
+                        node = ok_nodes.get(i);
+
+
+                        node.performAction(action);
+
+
+
+                    }
+
+                }
+
+
+            }
+
+
+        }
+
+
+    }
+
+    private void openAccess(final AccessibilityEvent event) {
+        clickSure(event,"com.android.settings","canaccess",AccessibilityNodeInfo.ACTION_CLICK);
+
+
+    }
+
+
     /**
      * 卸载后重置状态
      */
@@ -475,12 +510,10 @@ public class CanAccessibilityService extends AccessibilityService {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                INVOKE_TYPE = 0;
+                reset();
 
             }
         }, 10000);
-
-
 
 
     }
@@ -499,7 +532,7 @@ public class CanAccessibilityService extends AccessibilityService {
     public void onDestroy() {
         super.onDestroy();
 
-        if (receiver!=null){
+        if (receiver != null) {
 
             unregisterReceiver(receiver);
         }

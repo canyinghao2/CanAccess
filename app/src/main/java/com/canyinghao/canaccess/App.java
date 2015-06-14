@@ -1,15 +1,11 @@
 package com.canyinghao.canaccess;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.canyinghao.canhelper.CanHelper;
 import com.canyinghao.canhelper.FileHelper;
 import com.canyinghao.canhelper.LogHelper;
-import com.github.anrwatchdog.ANRWatchDog;
 import com.lidroid.xutils.DbUtils;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,20 +14,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import butterknife.ButterKnife;
-
 public class App extends Application implements Thread.UncaughtExceptionHandler {
 
 	private static App app;
 
 
 
-    public static RefWatcher getRefWatcher(Context context) {
-        App application = (App) context.getApplicationContext();
-        return application.refWatcher;
-    }
 
-    private RefWatcher refWatcher;
+
+//    private RefWatcher refWatcher;
 
 
 	@Override
@@ -43,24 +34,18 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
 
 		app = this;
-        refWatcher = LeakCanary.install(this);
+//        refWatcher = LeakCanary.install(this);
 
-		ButterKnife.setDebug(BuildConfig.DEBUG);
+		LogHelper.DEBUG= BuildConfig.DEBUG;
 
 
 
-		ANRWatchDog anrWatchDog = new ANRWatchDog(2000);
-		anrWatchDog.start();
+//		ANRWatchDog anrWatchDog = new ANRWatchDog(2000);
+//		anrWatchDog.start();
         CanHelper.init(this);
 
 
-		File file = new File(FileHelper.getInstance().getExternalStorePath(),
-				getText(R.string.can).toString());
 
-		
-		if (!file.exists()) {
-			file.mkdirs();
-		}
 		Thread.setDefaultUncaughtExceptionHandler(this);
 
 	}
@@ -82,7 +67,11 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 		LogHelper.loge(Constant.ERROR, eStr);
 		try {
 			File file = new File(FileHelper.getInstance()
-					.getExternalStorePath(), getText(R.string.fail_text).toString());
+					.getExternalStorePath(), getString(R.string.fail_text));
+            LogHelper.loge(Constant.ERROR, file.getAbsolutePath());
+            if (!file.getParentFile().exists()){
+                file.getParentFile().mkdirs();
+            }
 			FileOutputStream f = new FileOutputStream(file);
 			f.write(eStr.getBytes());
 			f.close();
@@ -117,7 +106,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
     public DbUtils getDbUtils() {
         if (null == dbUtils) {
-            dbUtils = DbUtils.create(this,getText(R.string.can).toString());
+            dbUtils = DbUtils.create(this,getString(R.string.can));
         }
         return dbUtils;
     }

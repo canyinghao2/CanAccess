@@ -48,11 +48,13 @@ public class AppListActivity extends BaseActivity {
 
         if (intent.hasExtra("all")) {
             flag = 1;
+
+            view.removeFAB();
         }
 
 
         list = new ArrayList<>();
-        adapter = new AppListAdapter(context, list,flag);
+        adapter = new AppListAdapter(context, list, flag);
         view.recyclerView.setAdapter(adapter);
         setToolbar(view.toolbar, R.mipmap.ic_arrow_back_white, "", "", new View.OnClickListener() {
             @Override
@@ -196,7 +198,7 @@ public class AppListActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
-                view.recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                view.recyclerView.setEmptyViewImage(R.mipmap.icon_empty, null, null);
             }
 
             @Override
@@ -206,7 +208,7 @@ public class AppListActivity extends BaseActivity {
                 list.addAll(appBeans);
                 adapter.notifyDataSetChanged();
 
-                view.recyclerView.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                view.recyclerView.setEmptyViewImage(R.mipmap.icon_empty, null, null);
 
             }
         });
@@ -290,5 +292,10 @@ public class AppListActivity extends BaseActivity {
 
         return apps;
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(context);
     }
 }

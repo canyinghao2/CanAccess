@@ -129,7 +129,7 @@ public class AllListFragment extends BaseFragment {
             @Override
             public void onError(Throwable e) {
 
-                recyclerview.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                recyclerview.setEmptyViewImage(R.mipmap.icon_empty, null, null);
 
             }
 
@@ -140,7 +140,7 @@ public class AllListFragment extends BaseFragment {
                 recyclerview.setAdapter(new ListAdapter(context,
                         list));
 
-                recyclerview.setEmptyViewImage(R.mipmap.ic_launcher, null, null);
+                recyclerview.setEmptyViewImage(R.mipmap.icon_empty, null, null);
 
 
             }

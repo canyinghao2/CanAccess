@@ -75,7 +75,7 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
 
     @Override
     public void onCancel() {
-        super.onCancel();
+        IntentHelper.getInstance().finish(this);
     }
 
     @Override
@@ -160,6 +160,11 @@ public class PwdConfirmActivity extends me.zhanghai.patternlock.ConfirmPatternAc
         });
         builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(this);
     }
 }
 

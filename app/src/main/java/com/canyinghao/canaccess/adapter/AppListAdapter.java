@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.canyinghao.canaccess.App;
+import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.activity.SearchActivity;
 import com.canyinghao.canaccess.bean.AppBean;
+import com.canyinghao.canhelper.IntentHelper;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
@@ -113,6 +116,7 @@ public class AppListAdapter extends NewBaseAdapter {
                 public void onClick(View view) {
 
 
+                    IntentHelper.getInstance().showIntent(context, SearchActivity.class,new String[]{Constant.start},new String[]{bean.packageName},true);
 
 
 

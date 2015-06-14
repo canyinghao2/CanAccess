@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 
 import com.canyinghao.canaccess.R;
+import com.canyinghao.canaccess.service.CanAccessibilityService;
 import com.canyinghao.canhelper.PhoneHelper;
 import com.canyinghao.canhelper.SPHepler;
 
@@ -21,13 +22,16 @@ import com.canyinghao.canhelper.SPHepler;
 public class PhoneChangedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        if (!CanAccessibilityService.isWifiUse){
+            return;
+        }
         int wifi=  SPHepler.getInstance().getInt("set_notify7_a");
         int gprs=  SPHepler.getInstance().getInt("set_notify7_b");
 
 
         if (wifi==0&&WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction())) {// 这个监听wifi的打开与关闭，与wifi的连接无关
             int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
+
 
             switch (wifiState) {
                 case WifiManager.WIFI_STATE_DISABLED:

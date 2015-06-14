@@ -58,4 +58,9 @@ public class AboutActivity extends BaseActivity {
         tvHave.setText(getString(R.string.about_have) +
                 "2015"+ getString(R.string.sub)+DateHelper.getInstance().getCurrentYear());
     }
+
+    @Override
+    public void onBackPressed() {
+        IntentHelper.getInstance().finish(context);
+    }
 }

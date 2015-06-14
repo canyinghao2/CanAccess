@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">CanAccess</string>
+	<string name="menu_settings">setting</string>
+	<string name="accessibility_service_description">Open this service, will be able to use the intelligent voice remind service, also can carry on the record to the operation of the application and management.</string>
+	<string name="acc_service_name">CanAccess</string>
+	<string name="can">can</string>
+	<string name="fail_text">can/faillog.txt</string>
+	<string name="error">error</string>
+	<string name="clear_cache">Clear Cache</string>
+	<string name="clear_data">Clear Data</string>
+	<string name="installer">installer</string>
+	<string name="next">next</string>
+	<string name="open">open</string>
+	<string name="notify_record">Notify Record</string>
+	<string name="action_record">Action Record</string>
+	<string name="all_record">All Record</string>
+	<string name="trash">trash</string>
+	<string name="setting">setting</string>
+	<string name="about">about</string>
+	<string name="other">other</string>
+	<string name="set_notify">set_notify</string>
+	<string name="headeritem1">Ancillary services</string>
+	<string name="headeritem2">Service setting</string>
+	<string name="headeritem3">other</string>
+	<string name="set1">Set the ancillary services</string>
+	<string name="set1a">This software need to open and allow ancillary services</string>
+	<string name="set2">Voice notification Settings</string>
+	<string name="set2a">Here to voice notification Settings</string>
+	<string name="set3">Action record set</string>
+	<string name="set3a">Here can be set up the action recording</string>
+	<string name="set4">All the records set</string>
+	<string name="set4a">Here can be set for all records</string>
+	<string name="set5">The recycle bin set</string>
+	<string name="set5a">Here can be set to the recycle bin</string>
+	<string name="set6">useful</string>
+	<string name="set6a">Rating to the app store</string>
+	<string name="set7">not good</string>
+	<string name="set7a">Quickly unload</string>
+	<string name="set_lock">Combination lock</string>
+	<string name="set_locka">Set the combination lock, the need when entering the password confirmation</string>
+	<string name="header_notify1">Basic setup</string>
+	<string name="set_notify1">Open voice notification</string>
+	<string name="set_notify1a">Select the open voice notification</string>
+	<string name="set_notify2">The application list</string>
+	<string name="set_notify2a">The selected applications will not be reminded not to record at all</string>
+	<string name="set_notify3">TTS Settings</string>
+	<string name="set_notify3a">Open the Android Text-To-Speech settings.</string>
+	<string name="set_notify4">TTS Audio Stream</string>
+	<string name="set_notify4_">speakers</string>
+	<string name="set_notify4a">Choose the phone voice or speakers</string>
+	<string name="set_notify5">Speak Toasts</string>
+	<string name="set_notify5a">Also speak toast notifications</string>
+	<string name="set_notify6">Ignore the voice notification field</string>
+	<string name="set_notify6a">Please enter the ignore the field of broadcast voice</string>
+	<string name="set_notify7">Choose listening state of mobile phones</string>
+	<string name="set_notify7a">Please select what phone state changes need to be prompt</string>
+	<string name="header_notify2">Other Settings</string>
+	<string name="set_notify8">test</string>
+	<string name="set_notify8a">A notification bar will receive a notification</string>
+	<string name="set_notify9">Headphones listening</string>
+	<string name="set_notify9a">Remind an earphone open remind, pull out the headphones suspended</string>
+	<string name="set_notify10">Do not disturb period</string>
+	<string name="set_notify10a">Not set period of time</string>
+	<string name="set_notify11">Do not tip application name</string>
+	<string name="set_notify11a">When the broadcast voice remind do not remind application name</string>
+	<string name="play_mode">Play mode</string>
+	<string name="phone_stauts">state</string>
+	<string name="instance_market">Please install the application market</string>
+	<string name="set_all1">All the records on</string>
+	<string name="set_all1a">Select the open all the records</string>
+	<string name="set_all2">According to the application to check the record</string>
+	<string name="set_all2a">Click on the application, check the record of the application</string>
+	<string name="set_trash1">Recycling empty open automatically</string>
+	<string name="set_trash1a">Select the open automatic recycling cleaning</string>
+	<string name="set_trash2">Recycling type</string>
+	<string name="set_trash2a">All of the records</string>
+	<string name="set_trash2a1">Delete the record</string>
+	<string name="set_trash3">Recycling empty time</string>
+	<string name="set_trash3a">7day</string>
+	<string name="set_trash4">A key to empty</string>
+	<string name="set_trash4a">To empty all records</string>
+	<string name="trash_success">Empty the success</string>
+	<string name="day">day</string>
+	<string name="ignore_title">Please input to block field</string>
+	<string name="ignore_hint1">Please enter a title</string>
+	<string name="ignore_hint2">Please enter the content</string>
+	<string name="ignore_empty">Content cannot be empty</string>
+	<string name="cancel">cancel</string>
+	<string name="sure">OK</string>
+	<string name="houre">hours</string>
+	<string name="sub">-</string>
+	<string name="pwd_manage">Password management</string>
+	<string name="pwd_switch">Password switch</string>
+	<string name="pwd_switch_a">Whether can be installed into the software need a password here</string>
+	<string name="pwd_edit">Change the password</string>
+	<string name="pwd_edit_a">Here you can change the password</string>
+	<string name="pwd_delete">Remove the password</string>
+	<string name="pwd_delete_a">Here you can delete the password</string>
+	<string name="pwd_toast">Delete the password successfully</string>
+	<string name="pwd_forget">Forgot password? To answer the question can be unlocked</string>
+	<string name="pwd_question">The use of this software is what time?</string>
+	<string name="pwd_ques">Problems setting up the</string>
+	<string name="pwd_ques_a">Forgot password to reset the password by this problem</string>
+	<string name="answer_error">Wrong answer</string>
+	<string name="ques">The question</string>
+	<string name="answer">The answer</string>
+	<string name="ques_date">format:xxxx-xx-xx</string>
+	<string name="is_delete">Whether or not to delete</string>
+	<string name="this_delete">Delete this record？</string>
+	<string name="delete_success">Delete the success</string>
+	<string name="is_restore">Whether to restore</string>
+	<string name="this_restore">Restore this record？</string>
+	<string name="restore_success">Restore success</string>
+	<string name="wifi_success">WIFI connection is successful</string>
+	<string name="mob_success">Mobile network connection is successful</string>
+	<string name="wifi_unconnect">WIFI disconnected</string>
+	<string name="net_unconnect">Network disconnection</string>
+	<string name="about_title">Ancillary services convenient tools</string>
+	<string name="about_tool">This is the tool that is used for auxiliary services, the TTS can be used for voice reminder, and a personalized Settings, still can see some use record. Interface aesthetics, efficient and practical.</string>
+	<string name="about_have">All rights reserved</string>
+	<string name="about_mail">email：canyinghao@hotmail.com</string>
+	<string name="about_me">canyinghao</string>
+	<string name="about_welcome">Welcome to provide feedback and Suggestions</string>
+	<string name="about_version">version</string>
+	<string name="search">search</string>
+	<string name="search_hint">Please enter the keywords</string>
+	<string name="appName">appName</string>
+	<string name="packageName">packageName</string>
+	<string name="eventTime">eventTime</string>
+	<string name="eventType">eventType</string>
+	<string name="className">className</string>
+	<string name="text">text</string>
+	<string name="detail">detail</string>
+
+
+    <array name="trash_time">
+        <item>7day</item>
+        <item>14day</item>
+        <item>30day</item>
+
+
+    </array>
+
+    <array name="play_mode_array">
+        <item>The receiver play</item>
+        <item>speakers</item>
+
+
+    </array>
+    <array name="phone_stauts_array">
+        <item>WIFI</item>
+        <item>gprs</item>
+
+
+    </array>
+
+    <array name="notify_test">
+        <item>test</item>
+        <item>This is a voice call test</item>
+        <item>success</item>
+        <item>Although this is a speech to inform test, but I still write a few words</item>
+
+
+    </array>
+
+    <array name="ignore_array">
+        <item>delete</item>
+        <item>edit</item>
+
+    </array>
+
+
+    <array name="time_title">
+
+        <item>today</item>
+        <item>Yesterday</item>
+        <item>Two days ago</item>
+
+
+    </array>
+
+</resources>

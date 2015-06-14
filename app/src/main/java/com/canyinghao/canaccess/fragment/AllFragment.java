@@ -21,7 +21,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -35,6 +34,8 @@ import android.view.ViewGroup;
 
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.activity.MainActivity;
+import com.canyinghao.canaccess.activity.SearchActivity;
+import com.canyinghao.canhelper.IntentHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,8 +100,8 @@ public class AllFragment extends BaseFragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                IntentHelper.getInstance().showIntent(context, SearchActivity.class,true);
 
 
             }

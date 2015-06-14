@@ -5,7 +5,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
@@ -33,13 +32,10 @@ import butterknife.InjectView;
 public class MainActivity extends BaseActivity {
 
 
-    @InjectView(R.id.frame)
-    FrameLayout frame;
     @InjectView(R.id.nav_view)
     NavigationView navView;
     @InjectView(R.id.drawer_layout)
     public DrawerLayout drawerLayout;
-
 
     List<BaseFragment> list;
 
@@ -88,30 +84,11 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    private void showFragment(int p) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        for (int i = 0; i < list.size(); i++) {
-
-            BaseFragment fragment = list.get(i);
-
-            transaction.hide(fragment);
-
-        }
-
-        transaction.show(list.get(p));
-
-        transaction.commit();
-
-    }
-
-
     private void replaceFragmet(int p) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         BaseFragment baseFragment = list.get(p);
-
 
 
         transaction.replace(R.id.frame, baseFragment);
@@ -126,7 +103,7 @@ public class MainActivity extends BaseActivity {
         list = new ArrayList<>();
 
         list.add(NotifyFragment.getInstance(0));
-        list.add(NotifyFragment.getInstance(2));
+//        list.add(NotifyFragment.getInstance(2));
         list.add(AllFragment.getInstance(null));
         list.add(NotifyFragment.getInstance(1));
 
@@ -151,18 +128,18 @@ public class MainActivity extends BaseActivity {
                                 drawerLayout.closeDrawers();
                                 break;
 
-                            case R.id.rd_action:
-                                replaceFragmet(1);
-                                drawerLayout.closeDrawers();
-                                break;
+//                            case R.id.rd_action:
+//                                replaceFragmet(1);
+//                                drawerLayout.closeDrawers();
+//                                break;
                             case R.id.rd_all:
 
-                                replaceFragmet(2);
+                                replaceFragmet(1);
                                 drawerLayout.closeDrawers();
                                 break;
 
                             case R.id.rd_trash:
-                                replaceFragmet(3);
+                                replaceFragmet(2);
                                 drawerLayout.closeDrawers();
                                 break;
 

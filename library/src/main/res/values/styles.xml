@@ -20,7 +20,7 @@
 		<item name="colorPrimary">?msColorPrimary</item>
 		<item name="colorPrimaryDark">?msColorPrimaryDark</item>
 		<item name="colorAccent">?msColorAccent</item>
-        <item name="android:windowIsTranslucent">true</item>
+
 	</style>
 
 	<style name="MaterialSettingsThemeDark" parent="Theme.AppCompat.NoActionBar">

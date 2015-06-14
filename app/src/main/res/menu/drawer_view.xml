@@ -23,10 +23,10 @@
             android:id="@+id/rd_notify"
             android:icon="@mipmap/ic_mic_grey600"
             android:title="@string/notify_record" />
-        <item
-            android:id="@+id/rd_action"
-            android:icon="@mipmap/ic_videocam_grey600"
-            android:title="@string/action_record" />
+        <!--<item-->
+            <!--android:id="@+id/rd_action"-->
+            <!--android:icon="@mipmap/ic_videocam_grey600"-->
+            <!--android:title="@string/action_record" />-->
 
         <item
             android:id="@+id/rd_all"
