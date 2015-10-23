@@ -8,8 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.canyinghao.canaccess.App;
 import com.canyinghao.canaccess.R;
 import com.canyinghao.canaccess.activity.BaseActivity;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by yangjian on 15/6/4.
@@ -90,4 +92,11 @@ public class BaseFragment extends Fragment {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        RefWatcher refWatcher = App.getRefWatcher(getActivity());
+        refWatcher.watch(this);
+    }
 }

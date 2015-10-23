@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.canyinghao.canaccess.App;
+import com.squareup.leakcanary.RefWatcher;
+
 
 public class BaseActivity extends AppCompatActivity {
     public AppCompatActivity context;
@@ -65,7 +68,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        context=null;
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
 

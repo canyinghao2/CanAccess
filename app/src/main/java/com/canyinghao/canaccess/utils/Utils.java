@@ -16,7 +16,6 @@ import android.view.View;
 
 import com.canyinghao.canaccess.Constant;
 import com.canyinghao.canaccess.service.CanAccessibilityService;
-import com.canyinghao.canhelper.LogHelper;
 import com.kale.activityoptions.ActivityCompatICS;
 import com.kale.activityoptions.ActivityOptionsCompatICS;
 import com.kale.activityoptions.transition.TransitionCompat;
@@ -50,22 +49,22 @@ public class Utils {
 
 
     public static String setAllComponentsName(Object f, int value) {
-        // 获取f对象对应类中的所有属性域
+
         Field[] fields = f.getClass().getDeclaredFields();
         String name = "";
         for (int i = 0, len = fields.length; i < len; i++) {
-            // 对于每个属性，获取属性名
+
             String varName = fields[i].getName();
 
 
             try {
 
 
-                // 获取原来的访问控制权限
+
                 boolean accessFlag = fields[i].isAccessible();
-                // 修改访问控制权限
+
                 fields[i].setAccessible(true);
-                // 获取在对象f中属性fields[i]对应的对象中的变量
+
                 Object o = fields[i].get(f);
 
 
@@ -80,9 +79,9 @@ public class Utils {
 
                 }
 
-                // 恢复访问控制权限
+
                 fields[i].setAccessible(accessFlag);
-                LogHelper.logi("获取到：" + varName + " = " + o);
+
             } catch (IllegalArgumentException ex) {
                 ex.printStackTrace();
             } catch (IllegalAccessException ex) {
@@ -100,9 +99,8 @@ public class Utils {
 
     public static void startActivityScaleAnim(Activity activity,View view,Intent intent) {
         ActivityOptionsCompatICS options = ActivityOptionsCompatICS.makeScaleUpAnimation(view,
-                0, 0, //拉伸开始的坐标
-                view.getMeasuredWidth(), view.getMeasuredHeight());//初始的宽高
-
+                0, 0,
+                view.getMeasuredWidth(), view.getMeasuredHeight());
 
         ActivityCompatICS.startActivity(activity, intent, options.toBundle());
     }

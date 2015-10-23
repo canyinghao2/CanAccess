@@ -1,11 +1,14 @@
 package com.canyinghao.canaccess;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.canyinghao.canhelper.CanHelper;
 import com.canyinghao.canhelper.FileHelper;
 import com.canyinghao.canhelper.LogHelper;
 import com.lidroid.xutils.DbUtils;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,8 +25,13 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
 
 
-//    private RefWatcher refWatcher;
+    private RefWatcher refWatcher;
 
+
+	public static RefWatcher getRefWatcher(Context context) {
+		App application = (App) context.getApplicationContext();
+		return application.refWatcher;
+	}
 
 	@Override
 	public void onCreate() {
@@ -34,7 +42,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
 
 		app = this;
-//        refWatcher = LeakCanary.install(this);
+        refWatcher = LeakCanary.install(this);
 
 		LogHelper.DEBUG= BuildConfig.DEBUG;
 

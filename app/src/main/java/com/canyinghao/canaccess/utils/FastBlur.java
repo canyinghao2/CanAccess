@@ -51,7 +51,7 @@ public class FastBlur {
         // Radius out of range (0 < r <= 25).
         float radio = 20;
 
-        //ºËÐÄ´úÂë--------------------------------------
+
         RenderScript rs = RenderScript.create(context);
         Allocation allocation  = Allocation.createFromBitmap(rs,bmp);
         ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs,allocation.getElement());
