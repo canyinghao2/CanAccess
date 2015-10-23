@@ -1,12 +1,13 @@
 package com.canyinghao.canhelper;
 
-import java.io.File;
-import java.util.HashMap;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.text.TextUtils;
+
+import java.io.File;
+import java.util.HashMap;
 
 /**
  * 声音工具类
@@ -37,9 +38,32 @@ public class SoundHelper {
 		mediaPlayer = new MediaPlayer();
 	}
 
+
+	/**
+	 * 在application里加载声音文件
+	 * @param rawId
+	 * @return
+	 */
+	public SoundHelper putSound(int  rawId){
+		spMap.put(rawId+"", sp.load(context, rawId, 1));
+
+		return this;
+	}
+	/**
+	 * 在application里加载声音文件
+	 * @param url
+	 * @return
+	 */
+	public SoundHelper putSound(String   url){
+		spMap.put(url, sp.load(url, 1));
+
+		return this;
+	}
+
+
 	/**
 	 * 播放raw文件夹下的音频
-	 * 
+	 *
 	 * @param rawId
 	 * @param cycleNum
 	 */
@@ -48,7 +72,6 @@ public class SoundHelper {
 		playSp(rawId + "", cycleNum);
 
 	}
-
 	/**
 	 * 播放外部的音频
 	 * 
@@ -56,7 +79,7 @@ public class SoundHelper {
 	 * @param cycleNum
 	 */
 	public void playSound(String url, int cycleNum) {
-		spMap.put(url, sp.load(url, 1));
+
 		playSp(url, cycleNum);
 
 	}

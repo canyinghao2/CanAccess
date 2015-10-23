@@ -29,7 +29,7 @@ public class PhoneChangedReceiver extends BroadcastReceiver {
         int gprs=  SPHepler.getInstance().getInt("set_notify7_b");
 
 
-        if (wifi==0&&WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction())) {// Õâ¸ö¼àÌýwifiµÄ´ò¿ªÓë¹Ø±Õ£¬ÓëwifiµÄÁ¬½ÓÎÞ¹Ø
+        if (wifi==0&&WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction())) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wifiï¿½Ä´ï¿½ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½wifiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¹ï¿½
             int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
 
 
@@ -68,21 +68,21 @@ public class PhoneChangedReceiver extends BroadcastReceiver {
 
             if(netInfo != null && netInfo.isAvailable()) {
 
-                /////////////ÍøÂçÁ¬½Ó
+
                 String name = netInfo.getTypeName();
 
                 if(netInfo.getType()==ConnectivityManager.TYPE_WIFI){
-                    /////WiFiÍøÂç
+
                     PhoneHelper.getInstance().show(context.getString(R.string.wifi_success));
                 }else if(netInfo.getType()==ConnectivityManager.TYPE_ETHERNET){
-                    /////ÓÐÏßÍøÂç
+
 
                 }else if(netInfo.getType()==ConnectivityManager.TYPE_MOBILE){
-                    /////////3gÍøÂç
+
                     PhoneHelper.getInstance().show(context.getString(R.string.mob_success));
                 }
             } else {
-                ////////ÍøÂç¶Ï¿ª
+
                 PhoneHelper.getInstance().show(context.getString(R.string.net_unconnect));
             }
 
@@ -96,13 +96,13 @@ public class PhoneChangedReceiver extends BroadcastReceiver {
             int state = intent.getIntExtra("state", -1);
             switch (state) {
                 case 0:
-                    //°Î³ö¶ú»ú
+
 
                     SPHepler.getInstance().setInt("headset",0);
 
                     break;
                 case 1:
-                    //²å¶ú»ú×Ô¶¯²¥·Å
+
                     SPHepler.getInstance().setInt("headset",1);
                     break;
                 default:
@@ -125,7 +125,6 @@ public class PhoneChangedReceiver extends BroadcastReceiver {
         }
 
 
-        //Ö»¼àÌý°Î³ö¶ú»ú
         if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(action)) {
             SPHepler.getInstance().setInt("headset",0);
         }

@@ -53,9 +53,7 @@ public class SetActionActivity extends MaterialSettingsActivity {
 
     }
 
-    /**
-     * ×Ü¿ª¹Ø
-     */
+
     private void addAllSwitcher() {
         final CheckboxItem notify1=   new SwitcherItem(getFragment(), "set_all1").setTitle(getText(R.string.set_all1).toString()).setSubtitle(getText(R.string.set_all1a).toString());
         addItem(notify1);

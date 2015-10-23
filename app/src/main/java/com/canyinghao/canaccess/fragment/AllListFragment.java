@@ -87,7 +87,7 @@ public class AllListFragment extends BaseFragment {
 
         recyclerview.setLayoutManager(new LinearLayoutManager(recyclerview.getContext()));
         recyclerview.setEmptyViewProgress(null, null);
-        //设置Item增加、移除动画
+
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST);

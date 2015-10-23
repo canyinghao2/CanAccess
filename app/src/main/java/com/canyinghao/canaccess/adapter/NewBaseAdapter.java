@@ -22,14 +22,10 @@ public abstract class NewBaseAdapter extends RecyclerView.Adapter {
         super();
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, typedValue, true);
         background = typedValue.resourceId;
-        this.context=context;
-        this.list=list;
-
+        this.context = context;
+        this.list = list;
 
     }
-
-
-
 
 
     @Override
@@ -39,4 +35,6 @@ public abstract class NewBaseAdapter extends RecyclerView.Adapter {
         }
         return list.size();
     }
+
+
 }

@@ -181,6 +181,8 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 //               PhoneHelper.getInstance().showNotifyBigText(strs[0],strs[1],strs[3],builder,0);
 
 
+
+
                 NotificationManager manager = (NotificationManager) context
                         .getSystemService(Context.NOTIFICATION_SERVICE);
                 Notification notification = new Notification();
@@ -193,11 +195,11 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
                 notification.when = System.currentTimeMillis();
 
 
-              notification.setLatestEventInfo(context, strs[0], strs[3], null);
-
-               notification.flags = Notification.FLAG_AUTO_CANCEL; // t点击通知后自动消失
-
-                manager.notify(1001,notification);
+//              notification.setLatestEventInfo(context, strs[0], strs[3], null);
+//
+//               notification.flags = Notification.FLAG_AUTO_CANCEL;
+//
+//                manager.notify(1001,notification);
 
             }
         }));
@@ -330,9 +332,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
 
 
 
-    /**
-     * notify总开关
-     */
+
     private void addNotifySwitcher() {
         final CheckboxItem notify1=   new SwitcherItem(getFragment(), "set_notify1").setTitle(getText(R.string.set_notify1).toString()).setSubtitle(getText(R.string.set_notify1a).toString());
         addItem(notify1);
@@ -359,7 +359,7 @@ public class SetNotifyActivity extends MaterialSettingsActivity {
     }
 
     /**
-     * Toast开关
+     * Toast锟斤拷锟斤拷
      */
     private void addToast() {
         addItem(new DividerItem(getFragment()));

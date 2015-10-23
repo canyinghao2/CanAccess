@@ -86,9 +86,7 @@ public class SetTrashActivity extends MaterialSettingsActivity {
         });
     }
 
-    /**
-     * ×Ü¿ª¹Ø
-     */
+
     private void addTrashSwitcher() {
         final CheckboxItem notify1=   new SwitcherItem(getFragment(), "set_trash1").setTitle(getText(R.string.set_trash1).toString()).setSubtitle(getText(R.string.set_trash1a).toString());
         addItem(notify1);
